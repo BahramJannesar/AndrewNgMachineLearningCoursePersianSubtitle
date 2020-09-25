@@ -23,4 +23,4 @@ Machine Learning Quran ( قرآن )
 
 [لینک دوره](https://www.coursera.org/learn/machine-learning)
 
-
+![](https://github.com/BahramJannesar/AndrewNgMachineLearningCoursePersianSubtitle/blob/master/image/1_FGGge_GilZ_KJYaoryaxkA.png)
