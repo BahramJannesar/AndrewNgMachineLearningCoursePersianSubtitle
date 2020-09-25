@@ -1,1 +1,1 @@
-# AndrewNgMachineLearningCoursePersianSubtitle
+## به زبان فارسی Andrew Ng ترجمه زیرنویس دوره یادگیری ماشین
