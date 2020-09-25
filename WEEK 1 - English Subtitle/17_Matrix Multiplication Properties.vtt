@@ -1,0 +1,638 @@
+WEBVTT
+
+1
+00:00:00.100 --> 00:00:04.850
+Matrix multiplication is really useful,
+since you can pack a lot of computation
+
+2
+00:00:04.850 --> 00:00:08.160
+into just one matrix
+multiplication operation.
+
+3
+00:00:08.160 --> 00:00:10.880
+But you should be careful
+of how you use them.
+
+4
+00:00:10.880 --> 00:00:15.046
+In this video, I wanna tell you about
+a few properties of matrix multiplication.
+
+5
+00:00:18.286 --> 00:00:21.157
+When working with just real numbers or
+
+6
+00:00:21.157 --> 00:00:26.100
+when working with scalars,
+multiplication is commutative.
+
+7
+00:00:26.100 --> 00:00:29.990
+And what I mean by that is
+that if you take 3 times 5,
+
+8
+00:00:29.990 --> 00:00:31.690
+that is equal to 5 times 3.
+
+9
+00:00:31.690 --> 00:00:35.390
+And the ordering of this
+multiplication doesn't matter.
+
+10
+00:00:35.390 --> 00:00:38.790
+And this is called
+the commutative property
+
+11
+00:00:40.010 --> 00:00:42.260
+of multiplication of real numbers.
+
+12
+00:00:42.260 --> 00:00:44.050
+It turns out this property,
+
+13
+00:00:44.050 --> 00:00:47.410
+they can reverse the order in
+which you multiply things.
+
+14
+00:00:47.410 --> 00:00:50.410
+This is not true for
+matrix multiplication.
+
+15
+00:00:50.410 --> 00:00:53.160
+So concretely, if A and B are matrices.
+
+16
+00:00:53.160 --> 00:00:57.040
+Then in general,
+A times B is not equal to B times A.
+
+17
+00:00:57.040 --> 00:00:58.240
+So, just be careful of that.
+
+18
+00:00:58.240 --> 00:01:03.490
+Its not okay to arbitrarily reverse
+the order in which you multiply matrices.
+
+19
+00:01:03.490 --> 00:01:08.090
+Matrix multiplication in not commutative,
+is the fancy way of saying it.
+
+20
+00:01:08.090 --> 00:01:10.996
+As a concrete example,
+here are two matrices.
+
+21
+00:01:10.996 --> 00:01:13.740
+This matrix 1 1 0 0 times 0 0 2 0 and
+
+22
+00:01:13.740 --> 00:01:17.130
+if you multiply these two matrices
+you get this result on the right.
+
+23
+00:01:17.130 --> 00:01:20.510
+Now let's swap around the order
+of these two matrices.
+
+24
+00:01:20.510 --> 00:01:24.320
+So I'm gonna take this two matrices and
+just reverse them.
+
+25
+00:01:24.320 --> 00:01:26.970
+It turns out if you multiply
+these two matrices,
+
+26
+00:01:26.970 --> 00:01:30.290
+you get the second answer on the right.
+
+27
+00:01:30.290 --> 00:01:35.500
+And well clearly, right, these two
+matrices are not equal to each other.
+
+28
+00:01:36.750 --> 00:01:42.578
+So, in fact, in general if you have
+a matrix operation like A times B,
+
+29
+00:01:42.578 --> 00:01:47.540
+if A is an m by n matrix,
+
+30
+00:01:47.540 --> 00:01:52.490
+and B is an n by m matrix,
+just as an example.
+
+31
+00:01:52.490 --> 00:01:56.440
+Then, it turns out that
+the matrix A times B,
+
+32
+00:01:58.000 --> 00:02:03.270
+right, is going to be an m by m matrix.
+
+33
+00:02:03.270 --> 00:02:09.641
+Whereas the matrix B times A is
+going to be an n by n matrix.
+
+34
+00:02:09.641 --> 00:02:11.302
+So the dimensions don't even match, right?
+
+35
+00:02:11.302 --> 00:02:16.750
+So if A x B and
+B x A may not even be the same dimension.
+
+36
+00:02:16.750 --> 00:02:19.040
+In the example on the left,
+I have all two by two matrices.
+
+37
+00:02:19.040 --> 00:02:23.870
+So the dimensions were the same, but
+in general, reversing the order of
+
+38
+00:02:23.870 --> 00:02:29.340
+the matrices can even change
+the dimension of the outcome.
+
+39
+00:02:29.340 --> 00:02:32.200
+So, matrix multiplication
+is not commutative.
+
+40
+00:02:34.360 --> 00:02:36.280
+Here's the next property
+I want to talk about.
+
+41
+00:02:36.280 --> 00:02:43.450
+So, when talking about real numbers or
+scalars, let's say I have 3 x 5 x 2.
+
+42
+00:02:43.450 --> 00:02:46.800
+I can either multiply 5 x 2 first.
+
+43
+00:02:46.800 --> 00:02:50.360
+Then I can compute this as 3 x 10.
+
+44
+00:02:50.360 --> 00:02:57.660
+Or, I can multiply 3 x 5 first,
+and I can compute this as 15 x 2.
+
+45
+00:02:57.660 --> 00:03:00.140
+And both of these give you
+the same answer, right?
+
+46
+00:03:00.140 --> 00:03:01.630
+Both of these is equal to 30.
+
+47
+00:03:01.630 --> 00:03:07.775
+So it doesn't matter whether
+I multiply 5 x 2 first or
+
+48
+00:03:07.775 --> 00:03:13.519
+whether I multiply 3 x 5 first,
+because sort of,
+
+49
+00:03:13.519 --> 00:03:18.080
+well, 3 x (5 x 2) = (3 x 5) x 2.
+
+50
+00:03:18.080 --> 00:03:27.110
+And this is called the associative
+property of real number multiplication.
+
+51
+00:03:27.110 --> 00:03:30.580
+It turns out that matrix
+multiplication is associative.
+
+52
+00:03:30.580 --> 00:03:34.760
+So concretely, let's say I have
+a product of three matrices A x B x C.
+
+53
+00:03:34.760 --> 00:03:39.577
+Then, I can compute this
+either as A x (B x C) or
+
+54
+00:03:39.577 --> 00:03:43.069
+I can computer this as (A x B) x C,
+
+55
+00:03:43.069 --> 00:03:48.180
+and these will actually
+give me the same answer.
+
+56
+00:03:48.180 --> 00:03:51.220
+I'm not gonna prove this but
+you can just take my word for it I guess.
+
+57
+00:03:51.220 --> 00:03:54.000
+So just be clear,
+what I mean by these two cases.
+
+58
+00:03:54.000 --> 00:03:55.550
+Let's look at the first one, right.
+
+59
+00:03:55.550 --> 00:03:56.360
+This first case.
+
+60
+00:03:56.360 --> 00:03:59.800
+What I mean by that is if you
+actually wanna compute A x B x C.
+
+61
+00:03:59.800 --> 00:04:03.170
+What you can do is you
+can first compute B x C.
+
+62
+00:04:03.170 --> 00:04:05.940
+So that D = B x C then compute A x D.
+
+63
+00:04:05.940 --> 00:04:11.460
+And so
+this here is really computing A x B x C.
+
+64
+00:04:11.460 --> 00:04:15.980
+Or, for this second case,
+you can compute this as,
+
+65
+00:04:15.980 --> 00:04:20.460
+you can set E = A x B,
+then compute E times C.
+
+66
+00:04:20.460 --> 00:04:27.130
+And this is then the same as A x B x C,
+and it turns out that
+
+67
+00:04:27.130 --> 00:04:33.750
+both of these options will give you this
+guarantee to give you the same answer.
+
+68
+00:04:33.750 --> 00:04:39.670
+And so we say that matrix multiplication
+thus enjoy the associative property.
+
+69
+00:04:39.670 --> 00:04:41.150
+Okay?
+
+70
+00:04:41.150 --> 00:04:44.210
+And don't worry about the terminology
+associative and commutative.
+
+71
+00:04:44.210 --> 00:04:47.100
+That's what it's called, but I'm not
+really going to use this terminology later
+
+72
+00:04:47.100 --> 00:04:50.900
+in this class, so
+don't worry about memorizing those terms.
+
+73
+00:04:50.900 --> 00:04:54.750
+Finally, I want to tell you
+about the Identity Matrix,
+
+74
+00:04:54.750 --> 00:04:56.690
+which is a special matrix.
+
+75
+00:04:56.690 --> 00:05:00.750
+So let's again make the analogy
+to what we know of real numbers.
+
+76
+00:05:00.750 --> 00:05:04.410
+When dealing with real numbers or
+scalar numbers, the number 1,
+
+77
+00:05:04.410 --> 00:05:09.910
+you can think of it as
+the identity of multiplication.
+
+78
+00:05:09.910 --> 00:05:14.479
+And what I mean by that is that for
+
+79
+00:05:14.479 --> 00:05:18.550
+any number z, 1 x z = z x 1.
+
+80
+00:05:18.550 --> 00:05:24.730
+And that's just equal to the number z for
+any real number z.
+
+81
+00:05:25.890 --> 00:05:29.230
+So 1 is the identity operation and
+so it satisfies this equation.
+
+82
+00:05:29.230 --> 00:05:33.640
+So it turns out,
+that this in the space of matrices there's
+
+83
+00:05:33.640 --> 00:05:38.610
+an identity matrix as well and
+it's usually denoted I or
+
+84
+00:05:38.610 --> 00:05:43.110
+sometimes we write it as I of n x n if we
+want to make it explicit to dimensions.
+
+85
+00:05:43.110 --> 00:05:47.820
+So I subscript n x n is
+the n x n identity matrix.
+
+86
+00:05:47.820 --> 00:05:51.850
+And so that's a different identity
+matrix for each dimension n.
+
+87
+00:05:51.850 --> 00:05:53.470
+And here are few examples.
+
+88
+00:05:53.470 --> 00:05:57.776
+Here's the 2 x 2 identity matrix,
+here's the 3 x 3 identity matrix,
+
+89
+00:05:57.776 --> 00:05:59.880
+here's the 4 x 4 matrix.
+
+90
+00:05:59.880 --> 00:06:05.600
+So the identity matrix has the property
+that it has ones along the diagonals.
+
+91
+00:06:07.660 --> 00:06:09.807
+All right, and so on.
+
+92
+00:06:09.807 --> 00:06:12.810
+And 0 everywhere else.
+
+93
+00:06:12.810 --> 00:06:17.170
+And so, by the way, the 1 x 1
+identity matrix is just a number 1,
+
+94
+00:06:17.170 --> 00:06:18.850
+and so the 1 x 1 matrix with just 1 in it.
+
+95
+00:06:18.850 --> 00:06:21.910
+So it's not a very
+interesting identity matrix.
+
+96
+00:06:21.910 --> 00:06:25.120
+And informally, when I or
+others are being sloppy,
+
+97
+00:06:25.120 --> 00:06:28.940
+very often we'll write the identity
+matrices in fine notation.
+
+98
+00:06:28.940 --> 00:06:33.900
+We'll draw square brackets, just write
+one one one dot dot dot dot one, and
+
+99
+00:06:33.900 --> 00:06:37.775
+then we'll maybe somewhat sloppily
+write a bunch of zeros there.
+
+100
+00:06:37.775 --> 00:06:42.520
+And these zeroes on the,
+this big zero and this big zero,
+
+101
+00:06:42.520 --> 00:06:46.710
+that's meant to denote that this matrix is
+zero everywhere except for the diagonal.
+
+102
+00:06:46.710 --> 00:06:51.640
+So this is just how I might swap
+you the right D identity matrix.
+
+103
+00:06:51.640 --> 00:06:55.180
+And it turns out that the identity
+matrix has its property that for
+
+104
+00:06:55.180 --> 00:07:00.180
+any matrix A, A times identity
+equals I times A equals A so
+
+105
+00:07:00.180 --> 00:07:03.720
+that's a lot like this
+equation that we have up here.
+
+106
+00:07:03.720 --> 00:07:04.650
+Right?
+
+107
+00:07:04.650 --> 00:07:07.840
+So 1 times z equals z
+times 1 equals z itself.
+
+108
+00:07:07.840 --> 00:07:11.290
+So I times A equals A times I equals A.
+
+109
+00:07:12.370 --> 00:07:13.940
+Just to make sure we have
+the dimensions right.
+
+110
+00:07:13.940 --> 00:07:17.420
+So if A is an m by n matrix,
+
+111
+00:07:17.420 --> 00:07:22.160
+then this identity matrix here,
+that's an n by n identity matrix.
+
+112
+00:07:23.360 --> 00:07:27.840
+And if is and by then,
+then this identity matrix, right?
+
+113
+00:07:27.840 --> 00:07:32.560
+For matrix multiplication to make sense,
+that has to be an m by m matrix.
+
+114
+00:07:32.560 --> 00:07:37.900
+Because this m has the match up that m,
+and in either case,
+
+115
+00:07:37.900 --> 00:07:42.860
+the outcome of this process is you get
+back the matrix A which is m by n.
+
+116
+00:07:44.550 --> 00:07:47.890
+So whenever we write
+the identity matrix I, you know,
+
+117
+00:07:47.890 --> 00:07:52.355
+very often the dimension Mention, right,
+will be implicit from the content.
+
+118
+00:07:52.355 --> 00:07:55.535
+So these two I's, they're actually
+different dimension matrices.
+
+119
+00:07:55.535 --> 00:07:58.425
+One may be n by n, the other is n by m.
+
+120
+00:07:58.425 --> 00:08:02.465
+But when we want to make the dimension
+of the matrix explicit, then
+
+121
+00:08:02.465 --> 00:08:06.605
+sometimes we'll write to this I subscript
+n by n, kind of like we had up here.
+
+122
+00:08:06.605 --> 00:08:08.655
+But very often,
+the dimension will be implicit.
+
+123
+00:08:10.100 --> 00:08:15.858
+Finally, I just wanna
+point out that earlier
+
+124
+00:08:15.858 --> 00:08:21.928
+I said that AB is not,
+in general, equal to BA.
+
+125
+00:08:21.928 --> 00:08:23.280
+Right?
+
+126
+00:08:23.280 --> 00:08:25.830
+For most matrices A and
+B, this is not true.
+
+127
+00:08:25.830 --> 00:08:29.640
+But when B is the identity matrix,
+this does hold true,
+
+128
+00:08:29.640 --> 00:08:33.830
+that A times the identity matrix
+does indeed equal to identity
+
+129
+00:08:33.830 --> 00:08:38.280
+times A is just that you know this is not
+true for other matrices B in general.
+
+130
+00:08:39.910 --> 00:08:44.260
+So, that's it for the properties
+of matrix multiplication and
+
+131
+00:08:44.260 --> 00:08:47.630
+special matrices like the identity
+matrix I want to tell you about.
+
+132
+00:08:47.630 --> 00:08:51.820
+In the next and
+final video on our linear algebra review,
+
+133
+00:08:51.820 --> 00:08:57.750
+I'm going to quickly tell you about
+a couple of special matrix operations and
+
+134
+00:08:57.750 --> 00:09:02.389
+after that everything you need to know
+about linear algebra for this class.

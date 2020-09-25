@@ -1,0 +1,739 @@
+WEBVTT
+
+1
+00:00:00.350 --> 00:00:05.000
+In this video, we'll figure out a slightly
+simpler way to write the cost function
+
+2
+00:00:05.000 --> 00:00:06.990
+than we have been using so far.
+
+3
+00:00:06.990 --> 00:00:10.410
+And we'll also figure out how
+to apply gradient descent
+
+4
+00:00:10.410 --> 00:00:13.290
+to fit the parameters
+of logistic regression.
+
+5
+00:00:13.290 --> 00:00:14.633
+So, by the end of this,
+
+6
+00:00:14.633 --> 00:00:19.227
+video you know how to implement a fully
+working version of logistic regression.
+
+7
+00:00:22.908 --> 00:00:25.486
+Here's our cost function for
+logistic regression.
+
+8
+00:00:25.486 --> 00:00:30.396
+Our overall cost function is 1 over m
+times the sum over the trading set of
+
+9
+00:00:30.396 --> 00:00:36.250
+the cost of making different predictions
+on the different examples of labels y i.
+
+10
+00:00:36.250 --> 00:00:39.810
+And this is the cost of a single
+example that we worked out earlier.
+
+11
+00:00:39.810 --> 00:00:41.860
+And just want to remind you that for
+
+12
+00:00:41.860 --> 00:00:46.760
+classification problems in our training
+sets, and in fact even for examples,
+
+13
+00:00:46.760 --> 00:00:51.040
+now that our training set y is
+always equal to zero or one, right?
+
+14
+00:00:51.040 --> 00:00:54.030
+That's sort of part of
+the mathematical definition of y.
+
+15
+00:00:55.770 --> 00:00:57.510
+Because y is either zero or
+
+16
+00:00:57.510 --> 00:01:02.990
+one, we'll be able to come up with
+a simpler way to write this cost function.
+
+17
+00:01:02.990 --> 00:01:06.170
+And in particular,
+rather than writing out this cost function
+
+18
+00:01:06.170 --> 00:01:10.600
+on two separate lines with two separate
+cases, so y equals one and y equals zero.
+
+19
+00:01:10.600 --> 00:01:13.340
+I'm going to show you a way
+to take these two lines and
+
+20
+00:01:13.340 --> 00:01:16.210
+compress them into one equation.
+
+21
+00:01:16.210 --> 00:01:19.330
+And this would make it more convenient
+to write out a cost function and
+
+22
+00:01:19.330 --> 00:01:21.530
+derive gradient descent.
+
+23
+00:01:21.530 --> 00:01:24.500
+Concretely, we can write out
+the cost function as follows.
+
+24
+00:01:24.500 --> 00:01:29.050
+We say that cost of H(x), y.
+
+25
+00:01:29.050 --> 00:01:33.974
+I'm gonna write this as -y
+
+26
+00:01:33.974 --> 00:01:39.328
+times log h(x)- (1-y)
+
+27
+00:01:39.328 --> 00:01:44.475
+times log (1-h(x)).
+
+28
+00:01:44.475 --> 00:01:48.797
+And I'll show you in a second that
+this expression, no, this equation,
+
+29
+00:01:48.797 --> 00:01:51.375
+is an equivalent way, or more compact way,
+
+30
+00:01:51.375 --> 00:01:56.380
+of writing out this definition of
+the cost function that we have up here.
+
+31
+00:01:56.380 --> 00:01:57.751
+Let's see why that's the case.
+
+32
+00:02:03.544 --> 00:02:06.050
+We know that there are only
+two possible cases.
+
+33
+00:02:06.050 --> 00:02:08.680
+Y must be zero or one.
+
+34
+00:02:08.680 --> 00:02:10.010
+So let's suppose Y equals one.
+
+35
+00:02:11.390 --> 00:02:18.067
+If y is equal to 1, than this equation
+is saying that the cost is equal to,
+
+36
+00:02:18.067 --> 00:02:23.480
+well if y is equal to 1,
+then this thing here is equal to 1.
+
+37
+00:02:23.480 --> 00:02:26.640
+And 1 minus y is going to be equal to 0,
+right.
+
+38
+00:02:26.640 --> 00:02:32.080
+So if y is equal to 1, then 1 minus
+y is 1 minus 1, which is therefore 0.
+
+39
+00:02:32.080 --> 00:02:36.000
+So the second term gets
+multiplied by 0 and goes away.
+
+40
+00:02:36.000 --> 00:02:41.910
+And we're left with only this first term,
+which is y times log- y times log (h(x)).
+
+41
+00:02:41.910 --> 00:02:46.720
+Y is 1 so that's equal to -log h(x).
+
+42
+00:02:46.720 --> 00:02:52.750
+And this equation is exactly what
+we have up here for if y = 1.
+
+43
+00:02:52.750 --> 00:02:57.060
+The other case is if y = 0.
+
+44
+00:02:57.060 --> 00:03:03.570
+And if that's the case, then our writing
+of the cos function is saying that,
+
+45
+00:03:03.570 --> 00:03:08.360
+well, if y is equal to 0, then this
+term here would be equal to zero.
+
+46
+00:03:08.360 --> 00:03:11.780
+Whereas 1 minus y,
+if y is equal to zero would be equal to 1,
+
+47
+00:03:11.780 --> 00:03:16.280
+because 1 minus y becomes 1 minus
+zero which is just equal to 1.
+
+48
+00:03:16.280 --> 00:03:22.930
+And so the cost function simplifies
+to just this last term here, right?
+
+49
+00:03:22.930 --> 00:03:27.500
+Because the fist term over here gets
+multiplied by zero, and so it disappears,
+
+50
+00:03:27.500 --> 00:03:33.820
+and so it's just left with this last term,
+which is -log (1- h(x)).
+
+51
+00:03:33.820 --> 00:03:38.290
+And you can verify that this term
+here is just exactly what we had for
+
+52
+00:03:38.290 --> 00:03:39.449
+when y is equal to 0.
+
+53
+00:03:40.530 --> 00:03:45.360
+So this shows that this definition for
+the cost is just a more compact way
+
+54
+00:03:45.360 --> 00:03:49.330
+of taking both of these expressions,
+the cases y =1 and y = 0,
+
+55
+00:03:49.330 --> 00:03:54.160
+and writing them in a more
+convenient form with just one line.
+
+56
+00:03:54.160 --> 00:03:57.610
+We can therefore write all
+our cost functions for
+
+57
+00:03:57.610 --> 00:04:00.000
+logistic regression as follows.
+
+58
+00:04:00.000 --> 00:04:03.270
+It is this 1 over m of the sum
+of these cost functions.
+
+59
+00:04:03.270 --> 00:04:04.980
+And plugging in the definition for
+
+60
+00:04:04.980 --> 00:04:07.270
+the cost that we worked out earlier,
+we end up with this.
+
+61
+00:04:07.270 --> 00:04:09.750
+And we just put the minus sign outside.
+
+62
+00:04:09.750 --> 00:04:12.240
+And why do we choose
+this particular function,
+
+63
+00:04:12.240 --> 00:04:16.280
+while it looks like there could be other
+cost functions we could have chosen.
+
+64
+00:04:16.280 --> 00:04:20.060
+Although I won't have time to go into
+great detail of this in this course,
+
+65
+00:04:20.060 --> 00:04:23.200
+this cost function can be
+derived from statistics
+
+66
+00:04:23.200 --> 00:04:26.450
+using the principle of maximum
+likelihood estimation.
+
+67
+00:04:26.450 --> 00:04:28.640
+Which is an idea in statistics for
+
+68
+00:04:28.640 --> 00:04:32.930
+how to efficiently find parameters'
+data for different models.
+
+69
+00:04:32.930 --> 00:04:35.730
+And it also has a nice
+property that it is convex.
+
+70
+00:04:35.730 --> 00:04:38.380
+So this is the cost function that
+
+71
+00:04:38.380 --> 00:04:42.780
+essentially everyone uses when
+fitting logistic regression models.
+
+72
+00:04:42.780 --> 00:04:46.300
+If you don't understand the terms that
+I just said, if you don't know what
+
+73
+00:04:46.300 --> 00:04:49.670
+the principle of maximum likelihood
+estimation is, don't worry about it.
+
+74
+00:04:49.670 --> 00:04:53.150
+But it's just a deeper rationale and
+justification
+
+75
+00:04:53.150 --> 00:04:58.230
+behind this particular cost function than
+I have time to go into in this class.
+
+76
+00:04:58.230 --> 00:05:02.860
+Given this cost function,
+in order to fit the parameters, what we're
+
+77
+00:05:02.860 --> 00:05:07.814
+going to do then is try to find the
+parameters theta that minimize J of theta.
+
+78
+00:05:07.814 --> 00:05:14.450
+So if we try to minimize this, this would
+give us some set of parameters theta.
+
+79
+00:05:14.450 --> 00:05:20.670
+Finally, if we're given a new example with
+some set of features x, we can then take
+
+80
+00:05:20.670 --> 00:05:25.650
+the thetas that we fit to our training
+set and output our prediction as this.
+
+81
+00:05:25.650 --> 00:05:30.267
+And just to remind you, the output of
+my hypothesis I'm going to interpret as
+
+82
+00:05:30.267 --> 00:05:32.621
+the probability that y is equal to one.
+
+83
+00:05:32.621 --> 00:05:36.870
+And given the input x and
+parameterized by theta.
+
+84
+00:05:36.870 --> 00:05:41.581
+But just, you can think of this as just my
+hypothesis as estimating the probability
+
+85
+00:05:41.581 --> 00:05:43.860
+that y is equal to one.
+
+86
+00:05:43.860 --> 00:05:48.855
+So all that remains to be done is figure
+out how to actually minimize J of theta
+
+87
+00:05:48.855 --> 00:05:50.416
+as a function of theta so
+
+88
+00:05:50.416 --> 00:05:54.410
+that we can actually fit
+the parameters to our training set.
+
+89
+00:05:54.410 --> 00:06:00.620
+The way we're going to minimize the cost
+function is using gradient descent.
+
+90
+00:06:00.620 --> 00:06:05.571
+Here's our cost function and if we want
+to minimize it as a function of theta,
+
+91
+00:06:05.571 --> 00:06:07.552
+here's our usual template for
+
+92
+00:06:07.552 --> 00:06:12.048
+graded descent where we repeatedly
+update each parameter by taking,
+
+93
+00:06:12.048 --> 00:06:17.680
+updating it as itself minus learning
+ray alpha times this derivative term.
+
+94
+00:06:17.680 --> 00:06:21.540
+If you know some calculus, feel free
+to take this term and try to compute
+
+95
+00:06:21.540 --> 00:06:26.700
+the derivative yourself and see if you can
+simplify it to the same answer that I get.
+
+96
+00:06:26.700 --> 00:06:29.590
+But even if you don't know
+calculus don't worry about it.
+
+97
+00:06:30.600 --> 00:06:33.012
+If you actually compute this,
+
+98
+00:06:33.012 --> 00:06:37.567
+what you get is this equation,
+and just write it out here.
+
+99
+00:06:37.567 --> 00:06:44.670
+It's sum from i equals one through m
+of essentially the error times xij.
+
+100
+00:06:44.670 --> 00:06:49.416
+So if you take this partial derivative
+term and plug it back in here,
+
+101
+00:06:49.416 --> 00:06:54.020
+we can then write out our gradient
+descent algorithm as follows.
+
+102
+00:06:55.260 --> 00:06:58.510
+And all I've done is I took the derivative
+term for the previous slide and
+
+103
+00:06:58.510 --> 00:07:00.220
+plugged it in there.
+
+104
+00:07:00.220 --> 00:07:05.196
+So if you have n features,
+you would have a parameter vector theta,
+
+105
+00:07:05.196 --> 00:07:10.453
+which with parameters theta 0,
+theta 1, theta 2, down to theta n.
+
+106
+00:07:10.453 --> 00:07:13.988
+And you will use this update
+to simultaneously update all
+
+107
+00:07:13.988 --> 00:07:16.010
+of your values of theta.
+
+108
+00:07:16.010 --> 00:07:18.590
+Now, if you take this update rule and
+
+109
+00:07:18.590 --> 00:07:23.130
+compare it to what we were doing for
+linear regression.
+
+110
+00:07:23.130 --> 00:07:26.280
+You might be surprised to realize that,
+well,
+
+111
+00:07:26.280 --> 00:07:30.490
+this equation was exactly what we had for
+linear regression.
+
+112
+00:07:30.490 --> 00:07:33.070
+In fact,
+if you look at the earlier videos, and
+
+113
+00:07:33.070 --> 00:07:37.370
+look at the update rule, the Gradient
+Descent rule for linear regression.
+
+114
+00:07:37.370 --> 00:07:41.250
+It looked exactly like what I
+drew here inside the blue box.
+
+115
+00:07:41.250 --> 00:07:45.910
+So are linear regression and logistic
+regression different algorithms or not?
+
+116
+00:07:45.910 --> 00:07:50.032
+Well, this is resolved by observing
+that for logistic regression,
+
+117
+00:07:50.032 --> 00:07:54.450
+what has changed is that the definition
+for this hypothesis has changed.
+
+118
+00:07:54.450 --> 00:08:00.292
+So as whereas for linear regression,
+we had h(x) equals theta transpose X,
+
+119
+00:08:00.292 --> 00:08:03.582
+now this definition of h(x) has changed.
+
+120
+00:08:03.582 --> 00:08:07.960
+And is instead now one over one
+plus e to the negative transpose x.
+
+121
+00:08:07.960 --> 00:08:11.370
+So even though the update rule
+looks cosmetically identical,
+
+122
+00:08:11.370 --> 00:08:14.395
+because the definition of
+the hypothesis has changed,
+
+123
+00:08:14.395 --> 00:08:19.470
+this is actually not the same thing as
+gradient descent for linear regression.
+
+124
+00:08:19.470 --> 00:08:23.070
+In an earlier video, when we were
+talking about gradient descent for
+
+125
+00:08:23.070 --> 00:08:27.640
+linear regression, we had talked about how
+to monitor a gradient descent to make sure
+
+126
+00:08:27.640 --> 00:08:28.710
+that it is converging.
+
+127
+00:08:28.710 --> 00:08:32.189
+I usually apply that same
+method to logistic regression,
+
+128
+00:08:32.189 --> 00:08:36.879
+too to monitor a gradient descent,
+to make sure it's converging correctly.
+
+129
+00:08:36.879 --> 00:08:37.756
+And hopefully,
+
+130
+00:08:37.756 --> 00:08:42.019
+you can figure out how to apply that
+technique to logistic regression yourself.
+
+131
+00:08:43.980 --> 00:08:47.780
+When implementing logistic
+regression with gradient descent,
+
+132
+00:08:47.780 --> 00:08:51.410
+we have all of these
+different parameter values,
+
+133
+00:08:51.410 --> 00:08:56.040
+theta zero down to theta n, that we
+need to update using this expression.
+
+134
+00:08:56.040 --> 00:08:58.790
+And one thing we could do is have a for
+loop.
+
+135
+00:08:58.790 --> 00:09:04.230
+So for i equals zero to n, or
+for i equals one to n plus one.
+
+136
+00:09:04.230 --> 00:09:07.240
+So update each of these
+parameter values in turn.
+
+137
+00:09:07.240 --> 00:09:09.734
+But of course rather than using a for
+loop,
+
+138
+00:09:09.734 --> 00:09:13.076
+ideally we would also use
+a vector rise implementation.
+
+139
+00:09:13.076 --> 00:09:17.949
+So that a vector rise implementation
+can update all of these m plus
+
+140
+00:09:17.949 --> 00:09:20.796
+one parameters all in one fell swoop.
+
+141
+00:09:20.796 --> 00:09:25.235
+And to check your own understanding, you
+might see if you can figure out how to do
+
+142
+00:09:25.235 --> 00:09:28.690
+the vector rise implementation
+with this algorithm as well.
+
+143
+00:09:31.050 --> 00:09:35.620
+So, now you you know how to implement
+gradient descents for logistic regression.
+
+144
+00:09:35.620 --> 00:09:38.070
+There was one last idea that we
+had talked about earlier, for
+
+145
+00:09:38.070 --> 00:09:40.360
+linear regression,
+which was feature scaling.
+
+146
+00:09:40.360 --> 00:09:45.150
+We saw how feature scaling can help
+gradient descent converge faster for
+
+147
+00:09:45.150 --> 00:09:46.520
+linear regression.
+
+148
+00:09:46.520 --> 00:09:50.040
+The idea of feature scaling also
+applies to gradient descent for
+
+149
+00:09:50.040 --> 00:09:51.778
+logistic regression.
+
+150
+00:09:51.778 --> 00:09:55.690
+And yet we have features that are on very
+different scale, then applying feature
+
+151
+00:09:55.690 --> 00:10:00.540
+scaling can also make grading descent
+run faster for logistic regression.
+
+152
+00:10:01.680 --> 00:10:06.270
+So that's it, you now know how to
+implement logistic regression and
+
+153
+00:10:06.270 --> 00:10:08.790
+this is a very powerful, and
+
+154
+00:10:08.790 --> 00:10:11.700
+probably the most widely used,
+classification algorithm in the world.
+
+155
+00:10:11.700 --> 00:10:14.100
+And you now know how we get it to work for
+yourself.

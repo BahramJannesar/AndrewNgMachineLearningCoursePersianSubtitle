@@ -1,0 +1,602 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.650
+In this and the next few videos, I want
+to start to talk about classification
+
+2
+00:00:04.650 --> 00:00:09.510
+problems, where the variable y that
+you want to predict is valued.
+
+3
+00:00:09.510 --> 00:00:12.651
+We'll develop an algorithm
+called logistic regression,
+
+4
+00:00:12.651 --> 00:00:16.931
+which is one of the most popular and most
+widely used learning algorithms today.
+
+5
+00:00:19.473 --> 00:00:23.270
+Here are some examples of
+classification problems.
+
+6
+00:00:23.270 --> 00:00:26.530
+Earlier we talked about
+email spam classification
+
+7
+00:00:26.530 --> 00:00:29.390
+as an example of a classification problem.
+
+8
+00:00:29.390 --> 00:00:33.110
+Another example would be
+classifying online transactions.
+
+9
+00:00:33.110 --> 00:00:35.540
+So if you have a website
+that sells stuff and
+
+10
+00:00:35.540 --> 00:00:39.390
+if you want to know if a particular
+transaction is fraudulent or not,
+
+11
+00:00:39.390 --> 00:00:44.590
+whether someone is using a stolen credit
+card or has stolen the user's password.
+
+12
+00:00:44.590 --> 00:00:46.830
+There's another classification problem.
+
+13
+00:00:46.830 --> 00:00:50.840
+And earlier we also talked about
+the example of classifying
+
+14
+00:00:50.840 --> 00:00:53.960
+tumors as cancerous,
+malignant or as benign tumors.
+
+15
+00:00:55.120 --> 00:00:59.450
+In all of these problems the variable that
+we're trying to predict is a variable
+
+16
+00:00:59.450 --> 00:01:04.160
+y that we can think of as taking
+on two values either zero or one,
+
+17
+00:01:04.160 --> 00:01:09.080
+either spam or not spam, fraudulent or not
+fraudulent, related malignant or benign.
+
+18
+00:01:10.500 --> 00:01:15.670
+Another name for the class that we denote
+with zero is the negative class, and
+
+19
+00:01:15.670 --> 00:01:20.020
+another name for the class that we
+denote with one is the positive class.
+
+20
+00:01:20.020 --> 00:01:23.930
+So zero we denote as the benign tumor,
+and one,
+
+21
+00:01:23.930 --> 00:01:27.110
+positive class we denote
+a malignant tumor.
+
+22
+00:01:27.110 --> 00:01:31.370
+The assignment of the two classes,
+spam not spam and so on.
+
+23
+00:01:31.370 --> 00:01:35.120
+The assignment of the two classes to
+positive and negative to zero and
+
+24
+00:01:35.120 --> 00:01:37.290
+one is somewhat arbitrary and
+
+25
+00:01:37.290 --> 00:01:42.220
+it doesn't really matter but often there
+is this intuition that a negative class
+
+26
+00:01:42.220 --> 00:01:46.590
+is conveying the absence of something
+like the absence of a malignant tumor.
+
+27
+00:01:46.590 --> 00:01:51.460
+Whereas one the positive class is
+conveying the presence of something that
+
+28
+00:01:51.460 --> 00:01:55.170
+we may be looking for, but
+the definition of which is negative and
+
+29
+00:01:55.170 --> 00:01:58.790
+which is positive is somewhat arbitrary
+and it doesn't matter that much.
+
+30
+00:02:00.150 --> 00:02:03.080
+For now we're going to start with
+classification problems with
+
+31
+00:02:03.080 --> 00:02:05.510
+just two classes zero and one.
+
+32
+00:02:05.510 --> 00:02:09.320
+Later one we'll talk about multi
+class problems as well where
+
+33
+00:02:09.320 --> 00:02:14.250
+therefore y may take on four values zero,
+one, two, and three.
+
+34
+00:02:14.250 --> 00:02:17.720
+This is called a multiclass
+classification problem.
+
+35
+00:02:17.720 --> 00:02:22.140
+But for the next few videos, let's
+start with the two class or the binary
+
+36
+00:02:22.140 --> 00:02:25.978
+classification problem and we'll worry
+about the multiclass setting later.
+
+37
+00:02:25.978 --> 00:02:30.580
+So how do we develop
+a classification algorithm?
+
+38
+00:02:30.580 --> 00:02:34.770
+Here's an example of a training set for
+a classification task for
+
+39
+00:02:34.770 --> 00:02:37.410
+classifying a tumor as malignant or
+benign.
+
+40
+00:02:37.410 --> 00:02:44.570
+And notice that malignancy takes on
+only two values, zero or no, one or yes.
+
+41
+00:02:44.570 --> 00:02:47.520
+So one thing we could do
+given this training set
+
+42
+00:02:47.520 --> 00:02:50.309
+is to apply the algorithm
+that we already know.
+
+43
+00:02:51.410 --> 00:02:53.410
+Linear regression to this data set and
+
+44
+00:02:53.410 --> 00:02:56.320
+just try to fit the straight
+line to the data.
+
+45
+00:02:56.320 --> 00:02:59.840
+So if you take this training set and
+fill a straight line to it,
+
+46
+00:02:59.840 --> 00:03:03.730
+maybe you get a hypothesis
+that looks like that, right.
+
+47
+00:03:03.730 --> 00:03:05.695
+So that's my hypothesis.
+
+48
+00:03:05.695 --> 00:03:09.100
+H(x) equals theta transpose x.
+
+49
+00:03:09.100 --> 00:03:14.650
+If you want to make predictions one thing
+you could try doing is then threshold
+
+50
+00:03:14.650 --> 00:03:19.165
+the classifier outputs at
+0.5 that is at a vertical
+
+51
+00:03:19.165 --> 00:03:23.985
+axis value 0.5 and if the hypothesis
+
+52
+00:03:23.985 --> 00:03:27.235
+outputs a value that is greater than
+equal to 0.5 you can take y = 1.
+
+53
+00:03:27.235 --> 00:03:29.955
+If it's less than 0.5 you can take y=0.
+
+54
+00:03:29.955 --> 00:03:32.775
+Let's see what happens if we do that.
+
+55
+00:03:32.775 --> 00:03:36.359
+So 0.5 and so
+that's where the threshold is and
+
+56
+00:03:36.359 --> 00:03:39.990
+that's using linear regression this way.
+
+57
+00:03:39.990 --> 00:03:43.520
+Everything to the right of this
+point we will end up predicting
+
+58
+00:03:43.520 --> 00:03:44.710
+as the positive cross.
+
+59
+00:03:44.710 --> 00:03:50.360
+Because the output values is greater than
+0.5 on the vertical axis and everything
+
+60
+00:03:50.360 --> 00:03:54.629
+to the left of that point we will end
+up predicting as a negative value.
+
+61
+00:03:55.720 --> 00:03:57.620
+In this particular example,
+
+62
+00:03:57.620 --> 00:04:01.630
+it looks like linear regression is
+actually doing something reasonable.
+
+63
+00:04:01.630 --> 00:04:05.420
+Even though this is a classification
+toss we're interested in.
+
+64
+00:04:05.420 --> 00:04:08.120
+But now let's try changing
+the problem a bit.
+
+65
+00:04:08.120 --> 00:04:11.530
+Let me extend out the horizontal
+access a little bit and
+
+66
+00:04:11.530 --> 00:04:15.263
+let's say we got one more training
+example way out there on the right.
+
+67
+00:04:15.263 --> 00:04:18.900
+Notice that that additional
+training example,
+
+68
+00:04:18.900 --> 00:04:21.960
+this one out here, it doesn't
+actually change anything, right.
+
+69
+00:04:21.960 --> 00:04:26.200
+Looking at the training set it's pretty
+clear what a good hypothesis is.
+
+70
+00:04:26.200 --> 00:04:28.970
+Is that well everything to
+the right of somewhere around here,
+
+71
+00:04:28.970 --> 00:04:31.010
+to the right of this we
+should predict this positive.
+
+72
+00:04:31.010 --> 00:04:34.930
+Everything to the left we should probably
+predict as negative because from this
+
+73
+00:04:34.930 --> 00:04:39.620
+training set, it looks like all the tumors
+larger than a certain value around here
+
+74
+00:04:39.620 --> 00:04:44.210
+are malignant, and all the tumors smaller
+than that are not malignant, at least for
+
+75
+00:04:44.210 --> 00:04:44.820
+this training set.
+
+76
+00:04:46.200 --> 00:04:50.730
+But once we've added that extra example
+over here, if you now run linear
+
+77
+00:04:50.730 --> 00:04:54.480
+regression, you instead get
+a straight line fit to the data.
+
+78
+00:04:54.480 --> 00:04:56.090
+That might maybe look like this.
+
+79
+00:04:57.600 --> 00:05:02.890
+And if you know threshold
+hypothesis at 0.5,
+
+80
+00:05:02.890 --> 00:05:06.350
+you end up with a threshold
+that's around here, so
+
+81
+00:05:06.350 --> 00:05:09.750
+that everything to the right of this
+point you predict as positive and
+
+82
+00:05:09.750 --> 00:05:12.070
+everything to the left of that
+point you predict as negative.
+
+83
+00:05:14.590 --> 00:05:18.820
+And this seems a pretty bad thing for
+linear regression to have done, right,
+
+84
+00:05:18.820 --> 00:05:23.110
+because you know these are our positive
+examples, these are our negative examples.
+
+85
+00:05:23.110 --> 00:05:28.090
+It's pretty clear we really should be
+separating the two somewhere around there,
+
+86
+00:05:28.090 --> 00:05:31.260
+but somehow by adding one example
+way out here to the right,
+
+87
+00:05:31.260 --> 00:05:34.300
+this example really isn't
+giving us any new information.
+
+88
+00:05:34.300 --> 00:05:37.050
+I mean, there should be no surprise
+to the learning algorithm.
+
+89
+00:05:37.050 --> 00:05:40.260
+That the example way out here
+turns out to be malignant.
+
+90
+00:05:40.260 --> 00:05:45.210
+But somehow having that example out
+there caused linear regression to change
+
+91
+00:05:45.210 --> 00:05:50.880
+its straight-line fit to the data
+from this magenta line out here
+
+92
+00:05:50.880 --> 00:05:55.670
+to this blue line over here, and
+caused it to give us a worse hypothesis.
+
+93
+00:05:56.900 --> 00:06:01.120
+So, applying linear regression
+to a classification problem
+
+94
+00:06:01.120 --> 00:06:04.470
+often isn't a great idea.
+
+95
+00:06:04.470 --> 00:06:09.870
+In the first example, before I
+added this extra training example,
+
+96
+00:06:09.870 --> 00:06:14.760
+previously linear regression was just
+getting lucky and it got us a hypothesis
+
+97
+00:06:14.760 --> 00:06:19.940
+that worked well for that particular
+example, but usually applying
+
+98
+00:06:19.940 --> 00:06:24.760
+linear regression to a data set, you might
+get lucky but often it isn't a good idea.
+
+99
+00:06:24.760 --> 00:06:28.350
+So I wouldn't use linear regression for
+classification problems.
+
+100
+00:06:29.700 --> 00:06:33.830
+Here's one other funny thing about
+what would happen if we were to use
+
+101
+00:06:33.830 --> 00:06:36.740
+linear regression for
+a classification problem.
+
+102
+00:06:36.740 --> 00:06:40.630
+For classification we know
+that y is either zero or one.
+
+103
+00:06:40.630 --> 00:06:44.250
+But if you are using linear
+regression where the hypothesis
+
+104
+00:06:44.250 --> 00:06:48.380
+can output values that are much
+larger than one or less than zero,
+
+105
+00:06:48.380 --> 00:06:52.570
+even if all of your training examples
+have labels y equals zero or one.
+
+106
+00:06:53.920 --> 00:06:56.739
+And it seems kind of
+strange that even though we
+
+107
+00:06:56.739 --> 00:07:00.786
+know that the labels should be zero,
+one it seems kind of strange if
+
+108
+00:07:00.786 --> 00:07:05.661
+the algorithm can output values much
+larger than one or much smaller than zero.
+
+109
+00:07:09.135 --> 00:07:13.795
+So what we'll do in the next few videos
+is develop an algorithm called logistic
+
+110
+00:07:13.795 --> 00:07:17.044
+regression, which has
+the property that the output,
+
+111
+00:07:17.044 --> 00:07:21.635
+the predictions of logistic regression
+are always between zero and one, and
+
+112
+00:07:21.635 --> 00:07:25.114
+doesn't become bigger than one or
+become less than zero.
+
+113
+00:07:26.250 --> 00:07:29.260
+And by the way,
+logistic regression is, and
+
+114
+00:07:29.260 --> 00:07:33.370
+we will use it as a classification
+algorithm, is some,
+
+115
+00:07:33.370 --> 00:07:38.230
+maybe sometimes confusing that the term
+regression appears in this name
+
+116
+00:07:38.230 --> 00:07:42.150
+even though logistic regression is
+actually a classification algorithm.
+
+117
+00:07:42.150 --> 00:07:44.720
+But that's just a name it was given for
+historical reasons.
+
+118
+00:07:44.720 --> 00:07:49.210
+So don't be confused by that logistic
+regression is actually a classification
+
+119
+00:07:49.210 --> 00:07:54.542
+algorithm that we apply to settings
+where the label y is discrete value,
+
+120
+00:07:54.542 --> 00:07:56.610
+when it's either zero or one.
+
+121
+00:07:56.610 --> 00:08:01.000
+So hopefully you now know why,
+if you have a classification problem,
+
+122
+00:08:01.000 --> 00:08:03.640
+using linear regression isn't a good idea.
+
+123
+00:08:03.640 --> 00:08:04.500
+In the next video,
+
+124
+00:08:04.500 --> 00:08:08.080
+we'll start working out the details
+of the logistic regression algorithm.

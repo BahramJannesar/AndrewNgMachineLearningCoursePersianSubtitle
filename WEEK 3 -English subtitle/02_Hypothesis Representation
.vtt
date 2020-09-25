@@ -1,0 +1,517 @@
+WEBVTT
+
+1
+00:00:00.230 --> 00:00:03.000
+Let's start talking about
+logistic regression.
+
+2
+00:00:03.000 --> 00:00:07.010
+In this video, I'd like to show
+you the hypothesis representation.
+
+3
+00:00:07.010 --> 00:00:11.650
+That is, what is the function we're
+going to use to represent our hypothesis
+
+4
+00:00:11.650 --> 00:00:13.480
+when we have a classification problem?
+
+5
+00:00:15.460 --> 00:00:19.980
+Earlier, we said that we
+would like our classifier
+
+6
+00:00:19.980 --> 00:00:22.940
+to output values that are between 0 and 1.
+
+7
+00:00:22.940 --> 00:00:27.310
+So we'd like to come up with a hypothesis
+that satisfies this property, that is,
+
+8
+00:00:27.310 --> 00:00:29.840
+predictions are maybe between 0 and 1.
+
+9
+00:00:29.840 --> 00:00:34.780
+When we were using linear regression,
+this was the form of a hypothesis,
+
+10
+00:00:34.780 --> 00:00:38.200
+where h(x) is theta transpose x.
+
+11
+00:00:38.200 --> 00:00:42.965
+For logistic regression,
+I'm going to modify this a little bit and
+
+12
+00:00:42.965 --> 00:00:46.065
+make the hypothesis g
+of theta transpose x.
+
+13
+00:00:46.065 --> 00:00:50.585
+Where I'm going to define
+the function g as follows.
+
+14
+00:00:50.585 --> 00:00:56.830
+G(z), z is a real number, is equal to
+one over one plus e to the negative z.
+
+15
+00:00:58.100 --> 00:01:03.093
+This is called the sigmoid function,
+or the logistic function,
+
+16
+00:01:03.093 --> 00:01:05.635
+and the term logistic function,
+
+17
+00:01:05.635 --> 00:01:11.090
+that's what gives rise to
+the name logistic regression.
+
+18
+00:01:11.090 --> 00:01:14.130
+And by the way,
+the terms sigmoid function and
+
+19
+00:01:14.130 --> 00:01:18.680
+logistic function are basically
+synonyms and mean the same thing.
+
+20
+00:01:18.680 --> 00:01:21.640
+So the two terms are basically
+interchangeable, and
+
+21
+00:01:21.640 --> 00:01:25.620
+either term can be used to
+refer to this function g.
+
+22
+00:01:25.620 --> 00:01:29.460
+And if we take these two equations and
+put them together,
+
+23
+00:01:29.460 --> 00:01:34.840
+then here's just an alternative way of
+writing out the form of my hypothesis.
+
+24
+00:01:34.840 --> 00:01:41.890
+I'm saying that h(x) Is 1 over 1 plus
+e to the negative theta transpose x.
+
+25
+00:01:41.890 --> 00:01:45.290
+And all I've do is I've
+taken this variable z,
+
+26
+00:01:45.290 --> 00:01:49.970
+z here is a real number, and
+plugged in theta transpose x.
+
+27
+00:01:49.970 --> 00:01:55.000
+So I end up with theta transpose
+x in place of z there.
+
+28
+00:01:55.000 --> 00:01:57.960
+Lastly, let me show you what
+the sigmoid function looks like.
+
+29
+00:01:57.960 --> 00:02:00.300
+We're gonna plot it on this figure here.
+
+30
+00:02:00.300 --> 00:02:04.700
+The sigmoid function, g(z), also called
+the logistic function, it looks like this.
+
+31
+00:02:04.700 --> 00:02:09.580
+It starts off near 0 and
+then it rises until it crosses 0.5 and
+
+32
+00:02:09.580 --> 00:02:13.540
+the origin, and
+then it flattens out again like so.
+
+33
+00:02:13.540 --> 00:02:16.020
+So that's what the sigmoid
+function looks like.
+
+34
+00:02:16.020 --> 00:02:21.427
+And you notice that the sigmoid function,
+while it asymptotes at one and
+
+35
+00:02:21.427 --> 00:02:26.980
+asymptotes at zero, as a z axis,
+the horizontal axis is z.
+
+36
+00:02:26.980 --> 00:02:30.940
+As z goes to minus infinity,
+g(z) approaches zero.
+
+37
+00:02:30.940 --> 00:02:35.670
+And as g(z) approaches infinity,
+g(z) approaches one.
+
+38
+00:02:35.670 --> 00:02:40.830
+And so because g(z) upwards
+values are between zero and
+
+39
+00:02:40.830 --> 00:02:47.170
+one, we also have that h(x)
+must be between zero and one.
+
+40
+00:02:47.170 --> 00:02:52.930
+Finally, given this hypothesis
+representation, what we need to do,
+
+41
+00:02:52.930 --> 00:02:59.160
+as before,
+is fit the parameters theta to our data.
+
+42
+00:02:59.160 --> 00:03:01.760
+So given a training set we
+need to a pick a value for
+
+43
+00:03:01.760 --> 00:03:07.030
+the parameters theta and this hypothesis
+will then let us make predictions.
+
+44
+00:03:07.030 --> 00:03:11.830
+We'll talk about a learning algorithm
+later for fitting the parameters theta,
+
+45
+00:03:11.830 --> 00:03:16.100
+but first let's talk a bit about
+the interpretation of this model.
+
+46
+00:03:18.630 --> 00:03:23.905
+Here's how I'm going to interpret
+the output of my hypothesis, h(x).
+
+47
+00:03:25.060 --> 00:03:30.060
+When my hypothesis outputs some number,
+I am going to treat that number as
+
+48
+00:03:30.060 --> 00:03:38.050
+the estimated probability that y is
+equal to one on a new input, example x.
+
+49
+00:03:38.050 --> 00:03:40.360
+Here's what I mean, here's an example.
+
+50
+00:03:40.360 --> 00:03:44.190
+Let's say we're using the tumor
+classification example, so
+
+51
+00:03:44.190 --> 00:03:48.920
+we may have a feature vector x,
+which is this x zero equals one as always.
+
+52
+00:03:48.920 --> 00:03:51.860
+And then one feature is
+the size of the tumor.
+
+53
+00:03:52.890 --> 00:03:57.063
+Suppose I have a patient come in and
+they have some tumor size and
+
+54
+00:03:57.063 --> 00:04:00.394
+I feed their feature vector
+x into my hypothesis.
+
+55
+00:04:00.394 --> 00:04:03.920
+And suppose my hypothesis
+outputs the number 0.7.
+
+56
+00:04:03.920 --> 00:04:07.340
+I'm going to interpret my
+hypothesis as follows.
+
+57
+00:04:07.340 --> 00:04:11.150
+I'm gonna say that this
+hypothesis is telling me that for
+
+58
+00:04:11.150 --> 00:04:17.820
+a patient with features x,
+the probability that y equals 1 is 0.7.
+
+59
+00:04:17.820 --> 00:04:21.800
+In other words, I'm going to
+tell my patient that the tumor,
+
+60
+00:04:21.800 --> 00:04:26.710
+sadly, has a 70 percent chance, or
+a 0.7 chance of being malignant.
+
+61
+00:04:26.710 --> 00:04:32.246
+To write this out slightly more formally,
+or to write this out in math,
+
+62
+00:04:32.246 --> 00:04:36.140
+I'm going to interpret
+my hypothesis output as.
+
+63
+00:04:36.140 --> 00:04:41.860
+P of y=1 given x parameterized by theta.
+
+64
+00:04:41.860 --> 00:04:46.310
+So for those of you that are familiar with
+probability, this equation may make sense.
+
+65
+00:04:46.310 --> 00:04:49.040
+If you're a little less
+familiar with probability,
+
+66
+00:04:49.040 --> 00:04:51.390
+then here's how I read this expression.
+
+67
+00:04:51.390 --> 00:04:54.069
+This is the probability
+that y is equal to one.
+
+68
+00:04:54.069 --> 00:04:57.515
+Given x,
+given that my patient has features x, so
+
+69
+00:04:57.515 --> 00:05:02.698
+given my patient has a particular tumor
+size represented by my features x.
+
+70
+00:05:02.698 --> 00:05:07.180
+And this probability is
+parameterized by theta.
+
+71
+00:05:07.180 --> 00:05:11.250
+So I'm basically going to count
+on my hypothesis to give me
+
+72
+00:05:11.250 --> 00:05:15.070
+estimates of the probability
+that y is equal to 1.
+
+73
+00:05:15.070 --> 00:05:18.130
+Now, since this is a classification task,
+
+74
+00:05:18.130 --> 00:05:21.790
+we know that y must be either 0 or
+1, right?
+
+75
+00:05:21.790 --> 00:05:25.350
+Those are the only two values
+that y could possibly take on,
+
+76
+00:05:25.350 --> 00:05:29.490
+either in the training set or for new
+patients that may walk into my office, or
+
+77
+00:05:29.490 --> 00:05:31.078
+into the doctor's office in the future.
+
+78
+00:05:31.078 --> 00:05:36.440
+So given h(x), we can therefore
+compute the probability that
+
+79
+00:05:36.440 --> 00:05:42.300
+y = 0 as well, completely
+because y must be either 0 or 1.
+
+80
+00:05:42.300 --> 00:05:50.280
+We know that the probability of y = 0 plus
+the probability of y = 1 must add up to 1.
+
+81
+00:05:50.280 --> 00:05:52.680
+This first equation looks
+a little bit more complicated.
+
+82
+00:05:52.680 --> 00:05:55.740
+It's basically saying that
+probability of y=0 for
+
+83
+00:05:55.740 --> 00:05:59.700
+a particular patient with features x,
+and given our parameters theta.
+
+84
+00:06:00.750 --> 00:06:04.190
+Plus the probability of y=1 for
+that same patient with features x and
+
+85
+00:06:04.190 --> 00:06:07.510
+given theta parameters
+theta must add up to one.
+
+86
+00:06:07.510 --> 00:06:09.800
+If this equation looks
+a little bit complicated,
+
+87
+00:06:09.800 --> 00:06:14.300
+feel free to mentally imagine
+it without that x and theta.
+
+88
+00:06:14.300 --> 00:06:17.460
+And this is just saying that the product
+of y equals zero plus the product of y
+
+89
+00:06:17.460 --> 00:06:19.560
+equals one, must be equal to one.
+
+90
+00:06:19.560 --> 00:06:23.480
+And we know this to be true because y
+has to be either zero or one, and so
+
+91
+00:06:23.480 --> 00:06:27.260
+the chance of y equals zero,
+plus the chance that y is one.
+
+92
+00:06:27.260 --> 00:06:29.560
+Those two must add up to one.
+
+93
+00:06:29.560 --> 00:06:33.670
+And so if you just take this term and
+
+94
+00:06:33.670 --> 00:06:37.340
+move it to the right hand side,
+then you end up with this equation.
+
+95
+00:06:37.340 --> 00:06:41.730
+That says probability that y equals zero
+is 1 minus probability of y equals 1, and
+
+96
+00:06:41.730 --> 00:06:47.480
+thus if our hypothesis feature
+of x gives us that term.
+
+97
+00:06:47.480 --> 00:06:50.950
+You can therefore quite simply
+compute the probability or
+
+98
+00:06:50.950 --> 00:06:55.370
+compute the estimated probability
+that y is equal to 0 as well.
+
+99
+00:06:55.370 --> 00:06:59.262
+So, you now know what the hypothesis
+representation is for
+
+100
+00:06:59.262 --> 00:07:03.570
+logistic regression and we're seeing
+what the mathematical formula is,
+
+101
+00:07:03.570 --> 00:07:06.670
+defining the hypothesis for
+logistic regression.
+
+102
+00:07:06.670 --> 00:07:10.150
+In the next video, I'd like to
+try to give you better intuition
+
+103
+00:07:10.150 --> 00:07:12.840
+about what the hypothesis
+function looks like.
+
+104
+00:07:12.840 --> 00:07:16.220
+And I wanna tell you about something
+called the decision boundary.
+
+105
+00:07:16.220 --> 00:07:20.340
+And we'll look at some visualizations
+together to try to get a better sense of
+
+106
+00:07:20.340 --> 00:07:23.900
+what this hypothesis function of
+logistic regression really looks like.

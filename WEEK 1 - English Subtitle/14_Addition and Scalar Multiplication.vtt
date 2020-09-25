@@ -1,0 +1,709 @@
+WEBVTT
+
+1
+00:00:00.250 --> 00:00:01.612
+In this video we'll talk about
+
+2
+00:00:01.612 --> 00:00:03.503
+matrix addition and subtraction,
+
+3
+00:00:03.503 --> 00:00:04.950
+as well as how to
+
+4
+00:00:04.950 --> 00:00:06.582
+multiply a matrix by a
+
+5
+00:00:06.582 --> 00:00:09.292
+number, also called Scalar Multiplication.
+
+6
+00:00:09.292 --> 00:00:11.825
+Let's start an example.
+
+7
+00:00:11.825 --> 00:00:14.725
+Given two matrices like these,
+
+8
+00:00:14.725 --> 00:00:16.735
+let's say I want to add them together.
+
+9
+00:00:16.735 --> 00:00:18.038
+How do I do that?
+
+10
+00:00:18.038 --> 00:00:20.538
+And so, what does addition of matrices mean?
+
+11
+00:00:20.538 --> 00:00:21.632
+It turns out that if you
+
+12
+00:00:21.632 --> 00:00:24.312
+want to add two matrices, what
+
+13
+00:00:24.312 --> 00:00:25.762
+you do is you just add
+
+14
+00:00:25.762 --> 00:00:28.076
+up the elements of these matrices one at a time.
+
+15
+00:00:28.076 --> 00:00:30.363
+So, my result of adding
+
+16
+00:00:30.363 --> 00:00:31.480
+two matrices is going to
+
+17
+00:00:31.480 --> 00:00:33.415
+be itself another matrix and
+
+18
+00:00:33.415 --> 00:00:34.972
+the first element again just by
+
+19
+00:00:34.972 --> 00:00:36.732
+taking one and four and
+
+20
+00:00:36.732 --> 00:00:39.470
+multiplying them and adding them together, so I get five.
+
+21
+00:00:39.470 --> 00:00:41.578
+The second element I get
+
+22
+00:00:41.578 --> 00:00:43.092
+by taking two and two
+
+23
+00:00:43.092 --> 00:00:44.169
+and adding them, so I get
+
+24
+00:00:44.169 --> 00:00:47.240
+four; three plus three
+
+25
+00:00:47.255 --> 00:00:49.568
+plus zero is three, and so on.
+
+26
+00:00:49.570 --> 00:00:51.442
+I'm going to stop changing colors, I guess.
+
+27
+00:00:51.442 --> 00:00:52.768
+And, on the right is open
+
+28
+00:00:52.768 --> 00:00:54.820
+five, ten and two.
+
+29
+00:00:56.140 --> 00:00:57.182
+And it turns out you can
+
+30
+00:00:57.182 --> 00:01:00.408
+add only two matrices that are of the same dimensions.
+
+31
+00:01:00.408 --> 00:01:02.789
+So this example is
+
+32
+00:01:02.789 --> 00:01:05.595
+a three by two matrix,
+
+33
+00:01:07.120 --> 00:01:09.029
+because this has 3
+
+34
+00:01:09.029 --> 00:01:11.917
+rows and 2 columns, so it's 3 by 2.
+
+35
+00:01:11.917 --> 00:01:13.451
+This is also a 3
+
+36
+00:01:13.451 --> 00:01:15.113
+by 2 matrix, and the
+
+37
+00:01:15.113 --> 00:01:16.202
+result of adding these two
+
+38
+00:01:16.202 --> 00:01:19.415
+matrices is a 3 by 2 matrix again.
+
+39
+00:01:19.415 --> 00:01:20.468
+So you can only add
+
+40
+00:01:20.470 --> 00:01:21.837
+matrices of the same
+
+41
+00:01:21.837 --> 00:01:23.533
+dimension, and the result
+
+42
+00:01:23.550 --> 00:01:24.959
+will be another matrix that's of
+
+43
+00:01:24.959 --> 00:01:28.057
+the same dimension as the ones you just added.
+
+44
+00:01:29.180 --> 00:01:30.785
+Where as in contrast, if you
+
+45
+00:01:30.785 --> 00:01:31.803
+were to take these two matrices, so this
+
+46
+00:01:31.803 --> 00:01:32.894
+one is a 3 by
+
+47
+00:01:32.894 --> 00:01:36.208
+2 matrix, okay, 3 rows, 2 columns.
+
+48
+00:01:36.230 --> 00:01:38.659
+This here is a 2 by 2 matrix.
+
+49
+00:01:39.190 --> 00:01:41.190
+And because these two matrices
+
+50
+00:01:41.200 --> 00:01:42.837
+are not of the same dimension,
+
+51
+00:01:43.160 --> 00:01:44.635
+you know, this is an error,
+
+52
+00:01:44.635 --> 00:01:46.400
+so you cannot add these
+
+53
+00:01:46.430 --> 00:01:48.508
+two matrices and, you know,
+
+54
+00:01:48.508 --> 00:01:52.184
+their sum is not well-defined.
+
+55
+00:01:52.642 --> 00:01:54.561
+So that's matrix addition.
+
+56
+00:01:54.561 --> 00:01:58.382
+Next, let's talk about multiplying matrices by a scalar number.
+
+57
+00:01:58.382 --> 00:02:00.069
+And the scalar is just a,
+
+58
+00:02:00.069 --> 00:02:02.028
+maybe a overly fancy term for,
+
+59
+00:02:02.028 --> 00:02:04.342
+you know, a number or a real number.
+
+60
+00:02:04.760 --> 00:02:07.075
+Alright, this means real number.
+
+61
+00:02:07.076 --> 00:02:10.280
+So let's take the number 3 and multiply it by this matrix.
+
+62
+00:02:10.280 --> 00:02:13.182
+And if you do that, the result is pretty much what you'll expect.
+
+63
+00:02:13.182 --> 00:02:14.926
+You just take your elements
+
+64
+00:02:14.926 --> 00:02:16.184
+of the matrix and multiply
+
+65
+00:02:16.184 --> 00:02:18.114
+them by 3, one at a time.
+
+66
+00:02:18.114 --> 00:02:19.428
+So, you know, one
+
+67
+00:02:19.428 --> 00:02:21.708
+times three is three.
+
+68
+00:02:21.708 --> 00:02:24.011
+What, two times three is
+
+69
+00:02:24.011 --> 00:02:25.988
+six, 3 times 3
+
+70
+00:02:25.988 --> 00:02:28.181
+is 9, and let's see, I'm
+
+71
+00:02:28.181 --> 00:02:30.152
+going to stop changing colors again.
+
+72
+00:02:30.157 --> 00:02:31.654
+Zero times 3 is zero.
+
+73
+00:02:31.654 --> 00:02:35.992
+Three times 5 is 15, and 3 times 1 is three.
+
+74
+00:02:35.992 --> 00:02:37.849
+And so this matrix is the
+
+75
+00:02:37.849 --> 00:02:40.702
+result of multiplying that matrix on the left by 3.
+
+76
+00:02:40.702 --> 00:02:42.173
+And you notice, again,
+
+77
+00:02:42.173 --> 00:02:43.443
+this is a 3 by 2
+
+78
+00:02:43.443 --> 00:02:44.903
+matrix and the result is
+
+79
+00:02:44.903 --> 00:02:47.505
+a matrix of the same dimension.
+
+80
+00:02:47.505 --> 00:02:48.634
+This is a 3 by
+
+81
+00:02:48.634 --> 00:02:49.920
+2, both of these are
+
+82
+00:02:49.920 --> 00:02:52.607
+3 by 2 dimensional matrices.
+
+83
+00:02:52.634 --> 00:02:54.334
+And by the way,
+
+84
+00:02:54.334 --> 00:02:57.050
+you can write multiplication, you know, either way.
+
+85
+00:02:57.050 --> 00:02:59.491
+So, I have three times this matrix.
+
+86
+00:02:59.491 --> 00:03:01.468
+I could also have written this
+
+87
+00:03:01.470 --> 00:03:05.256
+matrix and 0, 2, 5, 3, 1, right.
+
+88
+00:03:05.256 --> 00:03:07.672
+I just copied this matrix over to the right.
+
+89
+00:03:07.672 --> 00:03:11.228
+I can also take this matrix and multiply this by three.
+
+90
+00:03:11.228 --> 00:03:12.040
+So whether it's you know, 3
+
+91
+00:03:12.060 --> 00:03:13.388
+times the matrix or the
+
+92
+00:03:13.388 --> 00:03:14.983
+matrix times three is
+
+93
+00:03:14.983 --> 00:03:18.771
+the same thing and this thing here in the middle is the result.
+
+94
+00:03:19.380 --> 00:03:22.869
+You can also take a matrix and divide it by a number.
+
+95
+00:03:22.869 --> 00:03:24.275
+So, turns out taking
+
+96
+00:03:24.275 --> 00:03:25.716
+this matrix and dividing it by
+
+97
+00:03:25.716 --> 00:03:27.140
+four, this is actually the
+
+98
+00:03:27.172 --> 00:03:29.055
+same as taking the number
+
+99
+00:03:29.055 --> 00:03:32.819
+one quarter, and multiplying it by this matrix.
+
+100
+00:03:32.819 --> 00:03:35.318
+4, 0, 6, 3 and
+
+101
+00:03:35.318 --> 00:03:36.803
+so, you can figure
+
+102
+00:03:36.820 --> 00:03:38.593
+the answer, the result of
+
+103
+00:03:38.593 --> 00:03:40.365
+this product is, one quarter
+
+104
+00:03:40.365 --> 00:03:43.274
+times four is one, one quarter times zero is zero.
+
+105
+00:03:43.282 --> 00:03:46.570
+One quarter times six is,
+
+106
+00:03:46.590 --> 00:03:49.353
+what, three halves, about six over
+
+107
+00:03:49.353 --> 00:03:50.369
+four is three halves, and
+
+108
+00:03:50.369 --> 00:03:53.862
+one quarter times three is three quarters.
+
+109
+00:03:54.410 --> 00:03:55.880
+And so that's the results
+
+110
+00:03:55.920 --> 00:03:59.207
+of computing this matrix divided by four.
+
+111
+00:03:59.207 --> 00:04:01.677
+Vectors give you the result.
+
+112
+00:04:01.697 --> 00:04:03.805
+Finally, for a slightly
+
+113
+00:04:03.805 --> 00:04:05.714
+more complicated example, you can
+
+114
+00:04:05.714 --> 00:04:09.460
+also take these operations and combine them together.
+
+115
+00:04:09.513 --> 00:04:11.448
+So in this calculation, I
+
+116
+00:04:11.448 --> 00:04:12.801
+have three times a vector
+
+117
+00:04:12.801 --> 00:04:16.370
+plus a vector minus another vector divided by three.
+
+118
+00:04:16.370 --> 00:04:18.344
+So just make sure we know where these are, right.
+
+119
+00:04:18.344 --> 00:04:20.031
+This multiplication.
+
+120
+00:04:20.031 --> 00:04:23.648
+This is an example of
+
+121
+00:04:23.680 --> 00:04:27.986
+scalar multiplication because I am taking three and multiplying it.
+
+122
+00:04:27.986 --> 00:04:30.240
+And this is, you know, another
+
+123
+00:04:30.240 --> 00:04:32.067
+scalar multiplication.
+
+124
+00:04:32.067 --> 00:04:34.182
+Or more like scalar division, I guess.
+
+125
+00:04:34.182 --> 00:04:36.503
+It really just means one zero times this.
+
+126
+00:04:36.503 --> 00:04:39.445
+And so if we evaluate
+
+127
+00:04:39.509 --> 00:04:43.044
+these two operations first, then
+
+128
+00:04:43.044 --> 00:04:44.612
+what we get is this thing
+
+129
+00:04:44.612 --> 00:04:47.127
+is equal to, let's see,
+
+130
+00:04:47.127 --> 00:04:49.902
+so three times that vector is three,
+
+131
+00:04:49.912 --> 00:04:53.200
+twelve, six, plus
+
+132
+00:04:53.200 --> 00:04:55.088
+my vector in the middle which
+
+133
+00:04:55.088 --> 00:04:58.552
+is a 005 minus
+
+134
+00:04:59.850 --> 00:05:03.733
+one, zero, two-thirds, right?
+
+135
+00:05:03.740 --> 00:05:05.318
+And again, just to make
+
+136
+00:05:05.318 --> 00:05:07.064
+sure we understand what is going on here,
+
+137
+00:05:07.064 --> 00:05:11.504
+this plus symbol, that is
+
+138
+00:05:11.520 --> 00:05:15.690
+matrix addition, right?
+
+139
+00:05:15.690 --> 00:05:16.973
+I really, since these are
+
+140
+00:05:16.973 --> 00:05:20.204
+vectors, remember, vectors are special cases of matrices, right?
+
+141
+00:05:20.204 --> 00:05:21.538
+This, you can also call
+
+142
+00:05:21.538 --> 00:05:25.106
+this vector addition This
+
+143
+00:05:25.110 --> 00:05:27.148
+minus sign here, this is
+
+144
+00:05:27.160 --> 00:05:30.162
+again a matrix subtraction,
+
+145
+00:05:30.162 --> 00:05:32.249
+but because this is an
+
+146
+00:05:32.249 --> 00:05:33.432
+n by 1, really a three
+
+147
+00:05:33.432 --> 00:05:35.547
+by one matrix, that this
+
+148
+00:05:35.547 --> 00:05:36.494
+is actually a vector, so this is
+
+149
+00:05:36.494 --> 00:05:39.822
+also vector, this column.
+
+150
+00:05:39.850 --> 00:05:43.677
+We call this matrix a vector subtraction, as well.
+
+151
+00:05:43.677 --> 00:05:44.392
+OK?
+
+152
+00:05:44.392 --> 00:05:46.073
+And finally to wrap this up.
+
+153
+00:05:46.110 --> 00:05:48.103
+This therefore gives me a
+
+154
+00:05:48.118 --> 00:05:49.952
+vector, whose first element is
+
+155
+00:05:49.952 --> 00:05:53.632
+going to be 3+0-1,
+
+156
+00:05:53.632 --> 00:05:56.150
+so that's 3-1, which is 2.
+
+157
+00:05:56.150 --> 00:06:01.204
+The second element is 12+0-0, which is 12.
+
+158
+00:06:01.214 --> 00:06:03.970
+And the third element
+
+159
+00:06:03.970 --> 00:06:07.222
+of this is, what, 6+5-(2/3),
+
+160
+00:06:07.222 --> 00:06:10.678
+which is 11-(2/3), so
+
+161
+00:06:10.678 --> 00:06:14.021
+that's 10 and one-third
+
+162
+00:06:14.021 --> 00:06:16.029
+and see, you close this square bracket.
+
+163
+00:06:16.029 --> 00:06:17.983
+And so this gives me a
+
+164
+00:06:17.983 --> 00:06:21.671
+3 by 1 matrix, which is
+
+165
+00:06:21.671 --> 00:06:23.901
+also just called a 3
+
+166
+00:06:23.901 --> 00:06:29.005
+dimensional vector, which
+
+167
+00:06:29.030 --> 00:06:32.847
+is the outcome of this calculation over here.
+
+168
+00:06:32.847 --> 00:06:34.984
+So that's how you
+
+169
+00:06:34.984 --> 00:06:36.698
+add and subtract matrices and
+
+170
+00:06:36.698 --> 00:06:41.488
+vectors and multiply them by scalars or by row numbers.
+
+171
+00:06:41.488 --> 00:06:42.767
+So far I have only talked
+
+172
+00:06:42.767 --> 00:06:44.718
+about how to multiply matrices and
+
+173
+00:06:44.718 --> 00:06:46.994
+vectors by scalars, by row numbers.
+
+174
+00:06:46.994 --> 00:06:48.128
+In the next video we will
+
+175
+00:06:48.128 --> 00:06:49.418
+talk about a much more
+
+176
+00:06:49.418 --> 00:06:51.035
+interesting step, of taking
+
+177
+00:06:51.035 --> 00:06:54.112
+2 matrices and multiplying 2 matrices together.

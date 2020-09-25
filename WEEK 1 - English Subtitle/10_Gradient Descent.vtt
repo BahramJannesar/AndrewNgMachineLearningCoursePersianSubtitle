@@ -1,0 +1,859 @@
+WEBVTT
+
+1
+00:00:00.370 --> 00:00:02.420
+We previously defined the cost function J.
+
+2
+00:00:02.420 --> 00:00:06.960
+In this video, I want to tell you about
+an algorithm called gradient descent for
+
+3
+00:00:06.960 --> 00:00:09.360
+minimizing the cost function J.
+
+4
+00:00:09.360 --> 00:00:12.860
+It turns out gradient descent
+is a more general algorithm, and
+
+5
+00:00:12.860 --> 00:00:15.000
+is used not only in linear regression.
+
+6
+00:00:15.000 --> 00:00:17.910
+It's actually used all over
+the place in machine learning.
+
+7
+00:00:17.910 --> 00:00:21.010
+And later in the class,
+we'll use gradient descent to minimize
+
+8
+00:00:21.010 --> 00:00:25.110
+other functions as well, not just the cost
+function J for the linear regression.
+
+9
+00:00:26.150 --> 00:00:30.163
+So in this video, we'll talk about
+gradient descent for minimizing some
+
+10
+00:00:30.163 --> 00:00:34.434
+arbitrary function J and then in later
+videos, we'll take this algorithm and
+
+11
+00:00:34.434 --> 00:00:38.122
+apply it specifically to the cost
+function J that we have defined for
+
+12
+00:00:38.122 --> 00:00:39.306
+linear regression.
+
+13
+00:00:41.848 --> 00:00:43.849
+So here's the problem setup.
+
+14
+00:00:43.849 --> 00:00:46.748
+Going to assume that we have
+some function J(theta 0,
+
+15
+00:00:46.748 --> 00:00:50.202
+theta 1) maybe it's the cost
+function from linear regression,
+
+16
+00:00:50.202 --> 00:00:53.340
+maybe it's some other
+function we wanna minimize.
+
+17
+00:00:53.340 --> 00:00:55.919
+And we want to come up
+with an algorithm for
+
+18
+00:00:55.919 --> 00:00:59.617
+minimizing that as a function
+of J(theta 0, theta 1).
+
+19
+00:00:59.617 --> 00:01:04.324
+Just as an aside it turns out that
+gradient descent actually applies to more
+
+20
+00:01:04.324 --> 00:01:05.800
+general functions.
+
+21
+00:01:05.800 --> 00:01:09.530
+So imagine, if you have a function that's
+a function of J, as theta 0, theta 1,
+
+22
+00:01:09.530 --> 00:01:16.360
+theta 2, up to say some theta n,
+and you want to minimize theta 0.
+
+23
+00:01:16.360 --> 00:01:23.880
+You minimize over theta 0 up to theta
+n of this J of theta 0 up to theta n.
+
+24
+00:01:23.880 --> 00:01:25.690
+And it turns our gradient
+descent is an algorithm for
+
+25
+00:01:25.690 --> 00:01:27.740
+solving this more general problem.
+
+26
+00:01:27.740 --> 00:01:30.520
+But for the sake of brevity, for
+
+27
+00:01:30.520 --> 00:01:34.840
+the sake of succinctness of notation,
+I'm just going to pretend I have only
+
+28
+00:01:34.840 --> 00:01:37.470
+two parameters throughout
+the rest of this video.
+
+29
+00:01:37.470 --> 00:01:40.420
+Here's the idea for gradient descent.
+
+30
+00:01:40.420 --> 00:01:45.240
+What we're going to do is we're going to
+start off with some initial guesses for
+
+31
+00:01:45.240 --> 00:01:47.180
+theta 0 and theta 1.
+
+32
+00:01:47.180 --> 00:01:51.916
+Doesn't really matter what they are, but
+a common choice would be we set theta
+
+33
+00:01:51.916 --> 00:01:55.600
+0 to 0, and set theta 1 to 0,
+just initialize them to 0.
+
+34
+00:01:55.600 --> 00:02:00.372
+What we're going to do in gradient descent
+is we'll keep changing theta 0 and
+
+35
+00:02:00.372 --> 00:02:05.359
+theta 1 a little bit to try to reduce
+J(theta 0, theta 1), until hopefully,
+
+36
+00:02:05.359 --> 00:02:08.420
+we wind at a minimum, or
+maybe at a local minimum.
+
+37
+00:02:09.880 --> 00:02:13.588
+So let's see in pictures
+what gradient descent does.
+
+38
+00:02:13.588 --> 00:02:16.269
+Let's say you're trying to
+minimize this function.
+
+39
+00:02:16.269 --> 00:02:18.812
+So notice the axes, this is theta 0,
+
+40
+00:02:18.812 --> 00:02:22.784
+theta 1 on the horizontal axes and
+J is the vertical axis and
+
+41
+00:02:22.784 --> 00:02:27.730
+so the height of the surface shows J and
+we want to minimize this function.
+
+42
+00:02:27.730 --> 00:02:31.840
+So we're going to start off with theta 0,
+theta 1 at some point.
+
+43
+00:02:31.840 --> 00:02:35.450
+So imagine picking some value for
+theta 0, theta 1, and
+
+44
+00:02:35.450 --> 00:02:40.160
+that corresponds to starting at some
+point on the surface of this function.
+
+45
+00:02:40.160 --> 00:02:43.130
+So whatever value of theta 0,
+theta 1 gives you some point here.
+
+46
+00:02:43.130 --> 00:02:44.917
+I did initialize them to 0, 0 but
+
+47
+00:02:44.917 --> 00:02:47.700
+sometimes you initialize
+it to other values as well.
+
+48
+00:02:49.280 --> 00:02:54.290
+Now, I want you to imagine
+that this figure shows a hole.
+
+49
+00:02:54.290 --> 00:02:57.930
+Imagine this is like the landscape
+of some grassy park,
+
+50
+00:02:57.930 --> 00:03:02.710
+with two hills like so, and I want us
+to imagine that you are physically
+
+51
+00:03:02.710 --> 00:03:08.030
+standing at that point on the hill,
+on this little red hill in your park.
+
+52
+00:03:08.030 --> 00:03:12.270
+In gradient descent, what we're going to
+do is we're going to spin 360 degrees
+
+53
+00:03:12.270 --> 00:03:17.260
+around, just look all around us, and ask,
+if I were to take a little baby step in
+
+54
+00:03:17.260 --> 00:03:22.290
+some direction, and I want to go
+downhill as quickly as possible,
+
+55
+00:03:22.290 --> 00:03:25.060
+what direction do I take
+that little baby step in?
+
+56
+00:03:25.060 --> 00:03:26.790
+If I wanna go down, so
+
+57
+00:03:26.790 --> 00:03:30.300
+I wanna physically walk down this
+hill as rapidly as possible.
+
+58
+00:03:31.370 --> 00:03:35.060
+Turns out, that if you're standing at that
+point on the hill, you look all around and
+
+59
+00:03:35.060 --> 00:03:38.820
+you find that the best direction
+is to take a little step downhill
+
+60
+00:03:38.820 --> 00:03:40.930
+is roughly that direction.
+
+61
+00:03:40.930 --> 00:03:44.530
+Okay, and
+now you're at this new point on your hill.
+
+62
+00:03:44.530 --> 00:03:46.750
+You're gonna, again, look all around and
+
+63
+00:03:46.750 --> 00:03:52.230
+say what direction should I step in order
+to take a little baby step downhill?
+
+64
+00:03:52.230 --> 00:03:56.050
+And if you do that and take another step,
+you take a step in that direction.
+
+65
+00:03:57.220 --> 00:03:58.446
+And then you keep going.
+
+66
+00:03:58.446 --> 00:04:00.293
+From this new point you look around,
+
+67
+00:04:00.293 --> 00:04:04.020
+decide what direction would
+take you downhill most quickly.
+
+68
+00:04:04.020 --> 00:04:06.190
+Take another step, another step, and so
+
+69
+00:04:06.190 --> 00:04:10.660
+on until you converge to this
+local minimum down here.
+
+70
+00:04:11.920 --> 00:04:13.690
+Gradient descent has
+an interesting property.
+
+71
+00:04:14.810 --> 00:04:18.500
+This first time we ran gradient descent
+we were starting at this point over
+
+72
+00:04:18.500 --> 00:04:20.130
+here, right?
+
+73
+00:04:20.130 --> 00:04:22.290
+Started at that point over here.
+
+74
+00:04:22.290 --> 00:04:26.940
+Now imagine we had initialized gradient
+descent just a couple steps to the right.
+
+75
+00:04:26.940 --> 00:04:31.000
+Imagine we'd initialized gradient descent
+with that point on the upper right.
+
+76
+00:04:31.000 --> 00:04:35.064
+If you were to repeat this process, so
+start from that point, look all around,
+
+77
+00:04:35.064 --> 00:04:38.961
+take a little step in the direction of
+steepest descent, you would do that.
+
+78
+00:04:38.961 --> 00:04:42.120
+Then look around,
+take another step, and so on.
+
+79
+00:04:43.960 --> 00:04:47.910
+And if you started just a couple of steps
+to the right, gradient descent would've
+
+80
+00:04:47.910 --> 00:04:52.860
+taken you to this second local
+optimum over on the right.
+
+81
+00:04:54.250 --> 00:04:58.005
+So if you had started this first point,
+you would've wound up at this local
+
+82
+00:04:58.005 --> 00:05:02.090
+optimum, but if you started just
+at a slightly different location,
+
+83
+00:05:02.090 --> 00:05:06.050
+you would've wound up at a very
+different local optimum.
+
+84
+00:05:06.050 --> 00:05:08.810
+And this is a property of
+gradient descent that we'll say
+
+85
+00:05:08.810 --> 00:05:10.780
+a little bit more about later.
+
+86
+00:05:10.780 --> 00:05:14.970
+So that's the intuition in pictures.
+
+87
+00:05:14.970 --> 00:05:18.070
+Let's look at the math.
+
+88
+00:05:18.070 --> 00:05:21.130
+This is the definition of
+the gradient descent algorithm.
+
+89
+00:05:21.130 --> 00:05:26.540
+We're going to just repeatedly
+do this until convergence,
+
+90
+00:05:26.540 --> 00:05:31.950
+we're going to update my parameter
+theta j by taking theta j and
+
+91
+00:05:31.950 --> 00:05:36.560
+subtracting from it alpha times
+this term over here, okay?
+
+92
+00:05:36.560 --> 00:05:40.920
+So let's see, there's lot of details in
+this equation so let me unpack some of it.
+
+93
+00:05:40.920 --> 00:05:45.715
+First, this notation here,
+:=, gonna use := to
+
+94
+00:05:45.715 --> 00:05:50.847
+denote assignment, so
+it's the assignment operator.
+
+95
+00:05:50.847 --> 00:05:56.965
+So briefly, if I write a := b, what
+this means is, it means in a computer,
+
+96
+00:05:56.965 --> 00:06:02.650
+this means take the value in b and
+use it overwrite whatever value is a.
+
+97
+00:06:02.650 --> 00:06:07.025
+So this means set a to be equal to
+the value of b, which is assignment.
+
+98
+00:06:07.025 --> 00:06:10.515
+And I can also do a := a + 1.
+
+99
+00:06:10.515 --> 00:06:13.020
+This means take a and
+increase its value by one.
+
+100
+00:06:13.020 --> 00:06:17.489
+Whereas in contrast,
+if I use the equal sign and
+
+101
+00:06:17.489 --> 00:06:22.308
+I write a equals b,
+then this is a truth assertion.
+
+102
+00:06:24.854 --> 00:06:26.542
+Okay?
+So if I write a equals b,
+
+103
+00:06:26.542 --> 00:06:31.160
+then I'll asserting that the value of
+a equals to the value of b, right?
+
+104
+00:06:31.160 --> 00:06:34.136
+So the left hand side,
+that's the computer operation,
+
+105
+00:06:34.136 --> 00:06:36.450
+where we set the value
+of a to a new value.
+
+106
+00:06:36.450 --> 00:06:40.480
+The right hand side, this is asserting,
+I'm just making a claim that the values of
+
+107
+00:06:40.480 --> 00:06:45.620
+a and b are the same, and so whereas you
+can write a := a + 1, that means increment
+
+108
+00:06:45.620 --> 00:06:50.810
+a by 1, hopefully I won't ever write
+a = a + 1 because that's just wrong.
+
+109
+00:06:50.810 --> 00:06:54.100
+a and a + 1 can never be
+equal to the same values.
+
+110
+00:06:54.100 --> 00:06:55.020
+Okay?
+
+111
+00:06:55.020 --> 00:06:59.404
+So this is first part of the definition.
+
+112
+00:06:59.404 --> 00:07:06.640
+This alpha here is a number that
+is called the learning rate.
+
+113
+00:07:08.760 --> 00:07:12.310
+And what alpha does is
+it basically controls
+
+114
+00:07:12.310 --> 00:07:15.280
+how big a step we take downhill
+with creating descent.
+
+115
+00:07:15.280 --> 00:07:19.750
+So if alpha is very large, then that
+corresponds to a very aggressive gradient
+
+116
+00:07:19.750 --> 00:07:22.880
+descent procedure where we're
+trying take huge steps downhill and
+
+117
+00:07:22.880 --> 00:07:26.730
+if alpha is very small, then we're taking
+little, little baby steps downhill.
+
+118
+00:07:26.730 --> 00:07:30.980
+And I'll come back and say more about this
+later, about how to set alpha and so on.
+
+119
+00:07:32.090 --> 00:07:37.320
+And finally, this term here,
+that's a derivative term.
+
+120
+00:07:37.320 --> 00:07:42.400
+I don't wanna talk about it right now, but
+I will derive this derivative term and
+
+121
+00:07:42.400 --> 00:07:45.360
+tell you exactly what this is later, okay?
+
+122
+00:07:45.360 --> 00:07:49.100
+And some of you will be more familiar
+with calculus than others, but
+
+123
+00:07:49.100 --> 00:07:51.550
+even if you aren't familiar with calculus,
+don't worry about it.
+
+124
+00:07:51.550 --> 00:07:54.010
+I'll tell you what you need
+to know about this term here.
+
+125
+00:07:55.450 --> 00:08:00.260
+Now, there's one more subtlety
+about gradient descent which is in
+
+126
+00:08:00.260 --> 00:08:04.230
+gradient descent we're going to update,
+you know, theta 0 and theta 1, right?
+
+127
+00:08:04.230 --> 00:08:07.809
+So this update takes place for
+j = 0 and j = 1, so
+
+128
+00:08:07.809 --> 00:08:12.260
+you're gonna update theta 0 and
+update theta 1.
+
+129
+00:08:12.260 --> 00:08:19.593
+And the subtlety of how you
+implement gradient descent is for
+
+130
+00:08:19.593 --> 00:08:25.201
+this expression, for this update equation,
+
+131
+00:08:25.201 --> 00:08:32.127
+you want to simultaneously
+update theta 0 and theta 1.
+
+132
+00:08:32.127 --> 00:08:36.304
+What I mean by that is that in this
+equation, we're gonna update theta 0 :=
+
+133
+00:08:36.304 --> 00:08:40.569
+theta 0 minus something, and
+update theta 1 := theta 1 minus something.
+
+134
+00:08:40.569 --> 00:08:46.552
+And the way to implement is you should
+compute the right hand side, right?
+
+135
+00:08:46.552 --> 00:08:51.661
+Compute that thing for theta 0 and
+theta 1 and then simultaneously,
+
+136
+00:08:51.661 --> 00:08:55.654
+at the same time,
+update theta 0 and theta 1, okay?
+
+137
+00:08:55.654 --> 00:08:58.175
+So let me say what I mean by that.
+
+138
+00:08:58.175 --> 00:09:02.387
+This is a correct implementation of
+gradient descent meaning simultaneous
+
+139
+00:09:02.387 --> 00:09:02.960
+update.
+
+140
+00:09:02.960 --> 00:09:05.928
+So I'm gonna set temp0 equals that,
+set temp1 equals that so
+
+141
+00:09:05.928 --> 00:09:09.736
+basic compute the right-hand sides, and
+then having computed the right-hand
+
+142
+00:09:09.736 --> 00:09:13.824
+sides and stored them into variables temp0
+and temp1, I'm gonna update theta 0 and
+
+143
+00:09:13.824 --> 00:09:17.240
+theta 1 simultaneously because
+that's the correct implementation.
+
+144
+00:09:18.550 --> 00:09:19.460
+In contrast,
+
+145
+00:09:19.460 --> 00:09:24.140
+here's an incorrect implementation that
+does not do a simultaneous update.
+
+146
+00:09:24.140 --> 00:09:28.274
+So in this incorrect implementation,
+we compute temp0, and
+
+147
+00:09:28.274 --> 00:09:33.580
+then we update theta 0, and then we
+compute temp1, and then we update temp1.
+
+148
+00:09:34.780 --> 00:09:37.010
+And the difference between
+the right hand side and
+
+149
+00:09:37.010 --> 00:09:40.510
+the left hand side implementations
+is that If you look down here,
+
+150
+00:09:40.510 --> 00:09:45.260
+you look at this step, if by this
+time you've already updated theta 0,
+
+151
+00:09:45.260 --> 00:09:52.130
+then you would be using the new value of
+theta 0 to compute this derivative term.
+
+152
+00:09:52.130 --> 00:09:58.366
+And so this gives you a different value
+of temp1, than the left-hand side, right?
+
+153
+00:09:58.366 --> 00:10:02.700
+Because you've now plugged in the new
+value of theta 0 into this equation.
+
+154
+00:10:02.700 --> 00:10:05.750
+And so, this on the right-hand side
+is not a correct implementation
+
+155
+00:10:05.750 --> 00:10:07.720
+of gradient descent, okay?
+
+156
+00:10:07.720 --> 00:10:10.710
+So I don't wanna say why you need
+to do the simultaneous updates.
+
+157
+00:10:10.710 --> 00:10:15.670
+It turns out that the way gradient
+descent is usually implemented,
+
+158
+00:10:15.670 --> 00:10:17.680
+which I'll say more about later,
+
+159
+00:10:17.680 --> 00:10:21.990
+it actually turns out to be more natural
+to implement the simultaneous updates.
+
+160
+00:10:21.990 --> 00:10:23.765
+And when people talk
+about gradient descent,
+
+161
+00:10:23.765 --> 00:10:26.020
+they always mean simultaneous update.
+
+162
+00:10:26.020 --> 00:10:28.470
+If you implement the non
+simultaneous update,
+
+163
+00:10:28.470 --> 00:10:31.210
+it turns out it will probably work anyway.
+
+164
+00:10:31.210 --> 00:10:32.690
+But this algorithm wasn't right.
+
+165
+00:10:32.690 --> 00:10:35.010
+It's not what people refer
+to as gradient descent, and
+
+166
+00:10:35.010 --> 00:10:37.423
+this is some other algorithm
+with different properties.
+
+167
+00:10:37.423 --> 00:10:42.234
+And for various reasons this can behave
+in slightly stranger ways, and so
+
+168
+00:10:42.234 --> 00:10:48.010
+what you should do is really implement the
+simultaneous update of gradient descent.
+
+169
+00:10:48.010 --> 00:10:51.420
+So, that's the outline of
+the gradient descent algorithm.
+
+170
+00:10:51.420 --> 00:10:56.080
+In the next video, we're going to go
+into the details of the derivative term,
+
+171
+00:10:56.080 --> 00:10:58.660
+which I wrote up but didn't really define.
+
+172
+00:10:58.660 --> 00:11:02.620
+And if you've taken a calculus class
+before and if you're familiar with partial
+
+173
+00:11:02.620 --> 00:11:06.970
+derivatives and derivatives, it turns out
+that's exactly what that derivative term
+
+174
+00:11:06.970 --> 00:11:11.870
+is, but in case you aren't familiar
+with calculus, don't worry about it.
+
+175
+00:11:11.870 --> 00:11:14.010
+The next video will give
+you all the intuitions and
+
+176
+00:11:14.010 --> 00:11:18.260
+will tell you everything you need to know
+to compute that derivative term, even if
+
+177
+00:11:18.260 --> 00:11:23.050
+you haven't seen calculus, or even if you
+haven't seen partial derivatives before.
+
+178
+00:11:23.050 --> 00:11:25.860
+And with that, with the next video,
+hopefully we'll
+
+179
+00:11:25.860 --> 00:11:29.280
+be able to give you all the intuitions
+you need to apply gradient descent.

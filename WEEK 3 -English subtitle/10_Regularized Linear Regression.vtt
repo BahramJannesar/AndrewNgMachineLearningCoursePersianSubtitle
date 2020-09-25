@@ -1,0 +1,738 @@
+WEBVTT
+
+1
+00:00:00.240 --> 00:00:04.540
+For linear regression, we have previously
+worked out two learning algorithms.
+
+2
+00:00:04.540 --> 00:00:08.780
+One based on gradient descent and
+one based on the normal equation.
+
+3
+00:00:08.780 --> 00:00:11.607
+In this video,
+we'll take those two algorithms and
+
+4
+00:00:11.607 --> 00:00:15.087
+generalize them to the case of
+regularized linear regression.
+
+5
+00:00:17.363 --> 00:00:20.994
+Here's the optimization objective
+that we came up with last time for
+
+6
+00:00:20.994 --> 00:00:23.390
+regularized linear regression.
+
+7
+00:00:23.390 --> 00:00:27.795
+This first part is our usual objective for
+linear regression.
+
+8
+00:00:27.795 --> 00:00:32.682
+And we now have this additional
+regularization term, where lambda
+
+9
+00:00:32.682 --> 00:00:37.170
+is our regularization parameter, and
+we like to find parameters theta
+
+10
+00:00:37.170 --> 00:00:41.880
+that minimizes this cost function, this
+regularized cost function, J of theta.
+
+11
+00:00:41.880 --> 00:00:44.780
+Previously, we were using
+gradient descent for
+
+12
+00:00:44.780 --> 00:00:49.370
+the original cost function
+without the regularization term.
+
+13
+00:00:49.370 --> 00:00:53.680
+And we had the following algorithm,
+for regular linear regression, without
+
+14
+00:00:53.680 --> 00:00:58.490
+regularization, we would repeatedly update
+the parameters theta J as follows for
+
+15
+00:00:58.490 --> 00:01:00.840
+J equals 0, 1, 2, up through n.
+
+16
+00:01:02.040 --> 00:01:07.240
+Let me take this and just write
+the case for theta 0 separately.
+
+17
+00:01:07.240 --> 00:01:12.690
+So I'm just going to write the update for
+theta 0 separately than for
+
+18
+00:01:12.690 --> 00:01:17.150
+the update for the parameters 1,
+2, 3, and so on up to n.
+
+19
+00:01:17.150 --> 00:01:19.990
+And so this is,
+I haven't changed anything yet, right.
+
+20
+00:01:19.990 --> 00:01:24.670
+This is just writing the update for theta
+0 separately from the updates for theta 1,
+
+21
+00:01:24.670 --> 00:01:26.870
+theta 2, theta 3, up to theta n.
+
+22
+00:01:26.870 --> 00:01:30.590
+And the reason I want to do this
+is you may remember that for
+
+23
+00:01:30.590 --> 00:01:35.000
+our regularized linear regression, we
+penalize the parameters theta 1, theta 2,
+
+24
+00:01:35.000 --> 00:01:36.740
+and so on up to theta n.
+
+25
+00:01:36.740 --> 00:01:38.950
+But we don't penalize theta 0.
+
+26
+00:01:38.950 --> 00:01:43.730
+So, when we modify this algorithm for
+regularized linear regression,
+
+27
+00:01:43.730 --> 00:01:47.480
+we're going to end up treating
+theta zero slightly differently.
+
+28
+00:01:48.550 --> 00:01:52.350
+Concretely, if we want to
+take this algorithm and
+
+29
+00:01:52.350 --> 00:01:55.449
+modify it to use
+the regular rise objective,
+
+30
+00:01:55.449 --> 00:02:00.460
+all we need to do is take this term at
+the bottom and modify it as follows.
+
+31
+00:02:00.460 --> 00:02:03.820
+We'll take this term and
+
+32
+00:02:03.820 --> 00:02:08.950
+add minus lambda over m times theta j.
+
+33
+00:02:08.950 --> 00:02:13.090
+And if you implement this,
+then you have gradient descent for
+
+34
+00:02:13.090 --> 00:02:18.050
+trying to minimize the regularized
+cost function, j of theta.
+
+35
+00:02:18.050 --> 00:02:22.390
+And concretely, I'm not gonna
+do the calculus to prove it, but
+
+36
+00:02:22.390 --> 00:02:27.790
+concretely if you look at this term, this
+term hat I've written in square brackets,
+
+37
+00:02:27.790 --> 00:02:31.170
+if you know calculus it's
+possible to prove that that term
+
+38
+00:02:31.170 --> 00:02:35.050
+is the partial derivative
+with respect to J of theta
+
+39
+00:02:35.050 --> 00:02:39.722
+using the new definition of J of
+theta with the regularization term.
+
+40
+00:02:39.722 --> 00:02:48.030
+And similarly, this term up on top
+which I'm drawing the cyan box,
+
+41
+00:02:48.030 --> 00:02:53.040
+that's still the partial derivative
+respect of theta zero of J of theta.
+
+42
+00:02:53.040 --> 00:02:56.220
+If you look at the update for theta j,
+
+43
+00:02:56.220 --> 00:02:59.005
+it's possible to show
+something very interesting.
+
+44
+00:02:59.005 --> 00:03:03.760
+Concretely, theta j gets updated
+as theta j minus alpha times,
+
+45
+00:03:03.760 --> 00:03:07.950
+and then you have this other term
+here that depends on theta J.
+
+46
+00:03:07.950 --> 00:03:11.170
+So if you group all the terms
+together that depend on theta j,
+
+47
+00:03:11.170 --> 00:03:15.850
+you can show that this update can
+be written equivalently as follows.
+
+48
+00:03:15.850 --> 00:03:20.280
+And all I did was add theta j here is,
+so theta j times 1.
+
+49
+00:03:20.280 --> 00:03:25.650
+And this term is, right, lambda over m,
+there's also an alpha here,
+
+50
+00:03:25.650 --> 00:03:29.390
+so you end up with alpha lambda
+over m multiplied into theta j.
+
+51
+00:03:30.540 --> 00:03:38.090
+And this term here, 1 minus alpha times
+lambda m, is a pretty interesting term.
+
+52
+00:03:38.090 --> 00:03:39.820
+It has a pretty interesting effect.
+
+53
+00:03:42.370 --> 00:03:46.320
+Concretely this term,
+1 minus alpha times lambda over m,
+
+54
+00:03:46.320 --> 00:03:51.340
+is going to be a number that is
+usually a little bit less than one,
+
+55
+00:03:51.340 --> 00:03:55.895
+because alpha times lambda over m is
+going to be positive, and usually
+
+56
+00:03:55.895 --> 00:03:59.765
+if your learning rate is small and if m
+is large, this is usually pretty small.
+
+57
+00:03:59.765 --> 00:04:03.275
+So this term here is gonna be a number
+that's usually a little bit less than 1,
+
+58
+00:04:03.275 --> 00:04:07.115
+so think of it as a number like 0.99,
+let's say.
+
+59
+00:04:07.115 --> 00:04:10.515
+And so
+the effect of our update to theta j is,
+
+60
+00:04:10.515 --> 00:04:15.915
+we're going to say that theta j gets
+replaced by theta j times 0.99, right?
+
+61
+00:04:16.915 --> 00:04:21.300
+So theta j times 0.99 has the effect of
+
+62
+00:04:21.300 --> 00:04:23.780
+shrinking theta j a little
+bit towards zero.
+
+63
+00:04:23.780 --> 00:04:26.070
+So this makes theta j a bit smaller.
+
+64
+00:04:26.070 --> 00:04:31.510
+And more formally, this makes the square
+norm of theta j a little bit smaller.
+
+65
+00:04:31.510 --> 00:04:35.980
+And then after that,
+the second term here, that's actually
+
+66
+00:04:35.980 --> 00:04:40.830
+exactly the same as the original
+gradient descent update that we had,
+
+67
+00:04:40.830 --> 00:04:44.250
+before we added all this
+regularization stuff.
+
+68
+00:04:44.250 --> 00:04:49.188
+So, hopefully this gradient descent,
+hopefully this update makes sense.
+
+69
+00:04:49.188 --> 00:04:52.110
+When we're using a regularized
+linear regression and
+
+70
+00:04:52.110 --> 00:04:56.190
+what we're doing is on every iteration
+we're multiplying theta j by a number
+
+71
+00:04:56.190 --> 00:05:00.270
+that's a little bit less then one, so its
+shrinking the parameter a little bit, and
+
+72
+00:05:00.270 --> 00:05:04.170
+then we're performing
+a similar update as before.
+
+73
+00:05:04.170 --> 00:05:09.005
+Of course that's just the intuition behind
+what this particular update is doing.
+
+74
+00:05:09.005 --> 00:05:12.995
+Mathematically what it's doing
+is it's exactly gradient descent
+
+75
+00:05:12.995 --> 00:05:18.175
+on the cost function J of theta that we
+defined on the previous slide that uses
+
+76
+00:05:18.175 --> 00:05:19.825
+the regularization term.
+
+77
+00:05:19.825 --> 00:05:24.500
+Gradient descent was just one
+of our two algorithms for
+
+78
+00:05:24.500 --> 00:05:26.660
+fitting a linear regression model.
+
+79
+00:05:26.660 --> 00:05:30.200
+The second algorithm was the one
+based on the normal equation,
+
+80
+00:05:30.200 --> 00:05:34.840
+where what we did was we created
+the design matrix X where
+
+81
+00:05:34.840 --> 00:05:38.900
+each row corresponded to
+a separate training example.
+
+82
+00:05:38.900 --> 00:05:45.440
+And we created a vector y, so this is
+a vector, that's an m dimensional vector.
+
+83
+00:05:45.440 --> 00:05:48.480
+And that contained the labels
+from my training set.
+
+84
+00:05:48.480 --> 00:05:57.030
+So whereas X is an m by (n+1) dimensional
+matrix, y is an m dimensional vector.
+
+85
+00:05:57.030 --> 00:06:02.970
+And in order to minimize the cost
+function J, we found that one
+
+86
+00:06:02.970 --> 00:06:07.295
+way to do so
+is to set theta to be equal to this.
+
+87
+00:06:07.295 --> 00:06:13.090
+Right, you have X transpose X,
+inverse, X transpose Y.
+
+88
+00:06:13.090 --> 00:06:15.730
+I'm leaving room here to
+fill in stuff of course.
+
+89
+00:06:15.730 --> 00:06:20.160
+And what this value for theta does is this
+
+90
+00:06:20.160 --> 00:06:25.040
+minimizes the cost function J of theta,
+when we were not using regularization.
+
+91
+00:06:26.340 --> 00:06:31.240
+Now that we are using regularization,
+if you were to derive what the minimum is,
+
+92
+00:06:31.240 --> 00:06:35.060
+and just to give you a sense of how to
+derive the minimum, the way you derive it
+
+93
+00:06:35.060 --> 00:06:39.494
+is you take partial derivatives
+with respect to each parameter.
+
+94
+00:06:39.494 --> 00:06:42.880
+Set this to zero, and
+then do a bunch of math and
+
+95
+00:06:42.880 --> 00:06:48.600
+you can then show that it's a formula like
+this that minimizes the cost function.
+
+96
+00:06:48.600 --> 00:06:53.930
+And concretely,
+if you are using regularization,
+
+97
+00:06:53.930 --> 00:06:55.940
+then this formula changes as follows.
+
+98
+00:06:55.940 --> 00:06:59.490
+Inside this parenthesis,
+you end up with a matrix like this.
+
+99
+00:06:59.490 --> 00:07:04.530
+0, 1, 1, 1, and so on,
+1, until the bottom.
+
+100
+00:07:04.530 --> 00:07:08.060
+So this thing over here is a matrix
+whose upper left-most entry is 0.
+
+101
+00:07:08.060 --> 00:07:13.050
+There are ones on the diagonals, and
+then zeros everywhere else in this matrix.
+
+102
+00:07:13.050 --> 00:07:16.780
+Because I'm drawing this rather sloppily.
+
+103
+00:07:16.780 --> 00:07:19.266
+But as a example, if n = 2,
+
+104
+00:07:19.266 --> 00:07:24.370
+then this matrix is going to
+be a three by three matrix.
+
+105
+00:07:24.370 --> 00:07:31.660
+More generally, this matrix is
+an (n+1) by (n+1) dimensional matrix.
+
+106
+00:07:31.660 --> 00:07:36.070
+So if n = 2, then that matrix becomes
+something that looks like this.
+
+107
+00:07:36.070 --> 00:07:39.305
+It would be 0, and
+then 1s on the diagonals, and
+
+108
+00:07:39.305 --> 00:07:42.290
+then 0s on the rest of the diagonals.
+
+109
+00:07:42.290 --> 00:07:46.080
+And once again, I'm not going to show this
+derivation, which is frankly somewhat long
+
+110
+00:07:46.080 --> 00:07:51.295
+and involved, but it is possible to prove
+that if you are using the new definition
+
+111
+00:07:51.295 --> 00:07:56.320
+of J of theta, with the regularization
+objective, then this new formula for
+
+112
+00:07:56.320 --> 00:08:00.440
+theta is the one that we give you,
+the global minimum of J of theta.
+
+113
+00:08:01.470 --> 00:08:06.800
+So finally I want to just quickly
+describe the issue of non-invertibility.
+
+114
+00:08:06.800 --> 00:08:10.736
+This is relatively advanced material,
+so you should consider this as optional.
+
+115
+00:08:10.736 --> 00:08:13.620
+And feel free to skip it,
+or if you listen to it and
+
+116
+00:08:13.620 --> 00:08:16.420
+positive it doesn't really make sense,
+don't worry about it either.
+
+117
+00:08:16.420 --> 00:08:19.720
+But earlier when I talked about
+the normal equation method,
+
+118
+00:08:19.720 --> 00:08:23.760
+we also had an optional video
+on the non-invertibility issue.
+
+119
+00:08:23.760 --> 00:08:26.420
+So this is another optional part to this,
+
+120
+00:08:26.420 --> 00:08:31.658
+sort of an add-on to that earlier
+optional video on non-invertibility.
+
+121
+00:08:31.658 --> 00:08:36.070
+Now, consider a setting where m,
+the number of examples, is less than or
+
+122
+00:08:36.070 --> 00:08:38.700
+equal to n, the number of features.
+
+123
+00:08:38.700 --> 00:08:42.860
+If you have fewer examples than features,
+than this matrix,
+
+124
+00:08:42.860 --> 00:08:49.660
+X transpose X will be non-invertible,
+or singular.
+
+125
+00:08:49.660 --> 00:08:53.050
+Or the other term for
+this is the matrix will be degenerate.
+
+126
+00:08:53.050 --> 00:08:57.100
+And if you implement this in
+Octave anyway and you use the pinv
+
+127
+00:08:57.100 --> 00:09:01.600
+function to take the pseudo inverse,
+it will kind of do the right thing, but
+
+128
+00:09:01.600 --> 00:09:05.990
+it's not clear that it would give you
+a very good hypothesis, even though
+
+129
+00:09:05.990 --> 00:09:12.270
+numerically the Octave pinv function will
+give you a result that kinda makes sense.
+
+130
+00:09:13.270 --> 00:09:16.470
+But if you were doing this
+in a different language, and
+
+131
+00:09:16.470 --> 00:09:21.530
+if you were taking just the regular
+inverse, which in Octave denoted with
+
+132
+00:09:21.530 --> 00:09:26.320
+the function inv, we're trying to take
+the regular inverse of X transpose X.
+
+133
+00:09:26.320 --> 00:09:31.150
+Then in this setting,
+you find that X transpose X is singular,
+
+134
+00:09:31.150 --> 00:09:35.540
+is non-invertible, and if you're doing
+this in different program language and
+
+135
+00:09:35.540 --> 00:09:39.890
+using some linear algebra library to
+try to take the inverse of this matrix,
+
+136
+00:09:39.890 --> 00:09:44.690
+it just might not work because that
+matrix is non-invertible or singular.
+
+137
+00:09:44.690 --> 00:09:48.595
+Fortunately, regularization
+also takes care of this for us.
+
+138
+00:09:48.595 --> 00:09:52.280
+And concretely, so long as
+the regularization parameter lambda
+
+139
+00:09:52.280 --> 00:09:56.780
+is strictly greater than 0, it is actually
+possible to prove that this matrix,
+
+140
+00:09:56.780 --> 00:10:02.040
+X transpose X plus lambda times this funny
+matrix here, it is possible to prove
+
+141
+00:10:02.040 --> 00:10:07.430
+that this matrix will not be singular and
+that this matrix will be invertible.
+
+142
+00:10:07.430 --> 00:10:11.990
+So using regularization also takes
+care of any non-invertibility
+
+143
+00:10:11.990 --> 00:10:15.350
+issues of the X transpose
+X matrix as well.
+
+144
+00:10:15.350 --> 00:10:18.960
+So you now know how to implement
+regularized linear regression.
+
+145
+00:10:18.960 --> 00:10:22.060
+Using this you'll be
+able to avoid overfitting
+
+146
+00:10:22.060 --> 00:10:25.470
+even if you have lots of features
+in a relatively small training set.
+
+147
+00:10:25.470 --> 00:10:28.860
+And this should let you get linear
+regression to work much better for
+
+148
+00:10:28.860 --> 00:10:30.130
+many problems.
+
+149
+00:10:30.130 --> 00:10:33.270
+In the next video we'll take
+this regularization idea and
+
+150
+00:10:33.270 --> 00:10:35.230
+apply it to logistic regression.
+
+151
+00:10:35.230 --> 00:10:38.960
+So that you'd be able to get logistic
+regression to avoid overfitting and
+
+152
+00:10:38.960 --> 00:10:40.020
+perform much better as well.

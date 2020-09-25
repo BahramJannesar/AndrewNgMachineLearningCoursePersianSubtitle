@@ -1,0 +1,890 @@
+WEBVTT
+
+1
+00:00:00.150 --> 00:00:01.160
+in this video we will start
+
+2
+00:00:01.520 --> 00:00:02.600
+to talk about a new version
+
+3
+00:00:03.250 --> 00:00:04.880
+of linear regression that's more powerful.
+
+4
+00:00:05.800 --> 00:00:07.230
+One that works with multiple variables
+
+5
+00:00:08.230 --> 00:00:09.070
+or with multiple features.
+
+6
+00:00:10.320 --> 00:00:10.860
+Here's what I mean.
+
+7
+00:00:12.200 --> 00:00:13.670
+In the original version of
+
+8
+00:00:13.900 --> 00:00:14.920
+linear regression that we developed,
+
+9
+00:00:15.780 --> 00:00:17.590
+we have a single feature x,
+
+10
+00:00:18.030 --> 00:00:19.450
+the size of the house, and
+
+11
+00:00:19.600 --> 00:00:20.650
+we wanted to use that to
+
+12
+00:00:20.760 --> 00:00:22.510
+predict why the price of
+
+13
+00:00:22.660 --> 00:00:24.210
+the house and this was
+
+14
+00:00:25.310 --> 00:00:26.590
+our form of our hypothesis.
+
+15
+00:00:28.540 --> 00:00:29.210
+But now imagine, what if
+
+16
+00:00:29.410 --> 00:00:30.580
+we had not only the size
+
+17
+00:00:31.020 --> 00:00:32.440
+of the house as a feature
+
+18
+00:00:33.140 --> 00:00:34.450
+or as a variable of which
+
+19
+00:00:34.600 --> 00:00:35.490
+to try to predict the price,
+
+20
+00:00:36.450 --> 00:00:38.270
+but that we also knew the
+
+21
+00:00:38.410 --> 00:00:39.710
+number of bedrooms, the number
+
+22
+00:00:39.990 --> 00:00:42.490
+of house and the age of the home and years.
+
+23
+00:00:43.180 --> 00:00:44.050
+It seems like this would give
+
+24
+00:00:44.230 --> 00:00:46.630
+us a lot more information with which to predict the price.
+
+25
+00:00:47.810 --> 00:00:49.130
+To introduce a little bit
+
+26
+00:00:49.290 --> 00:00:50.760
+of notation, we sort of
+
+27
+00:00:50.940 --> 00:00:51.910
+started to talk about this earlier,
+
+28
+00:00:52.900 --> 00:00:53.800
+I'm going to use the variables
+
+29
+00:00:54.560 --> 00:00:56.300
+X subscript 1 X subscript
+
+30
+00:00:56.880 --> 00:00:59.320
+2 and so on to
+
+31
+00:00:59.480 --> 00:01:00.780
+denote my, in this
+
+32
+00:01:00.960 --> 00:01:03.000
+case, four features and I'm
+
+33
+00:01:03.310 --> 00:01:04.500
+going to continue to use
+
+34
+00:01:04.850 --> 00:01:06.780
+Y to denote the variable,
+
+35
+00:01:07.370 --> 00:01:09.720
+the output variable price that we're trying to predict.
+
+36
+00:01:11.010 --> 00:01:12.600
+Let's introduce a little bit more notation.
+
+37
+00:01:13.850 --> 00:01:15.210
+Now that we have four features
+
+38
+00:01:16.560 --> 00:01:18.490
+I'm going to use lowercase "n"
+
+39
+00:01:19.540 --> 00:01:20.670
+to denote the number of features.
+
+40
+00:01:21.180 --> 00:01:22.460
+So in this example we have
+
+41
+00:01:23.030 --> 00:01:24.420
+n4 because we have, you
+
+42
+00:01:24.820 --> 00:01:27.610
+know, one, two, three, four features.
+
+43
+00:01:28.850 --> 00:01:30.880
+And "n" is different from
+
+44
+00:01:31.700 --> 00:01:33.280
+our earlier notation where we
+
+45
+00:01:33.570 --> 00:01:36.670
+were using "n" to denote the number of examples.
+
+46
+00:01:37.330 --> 00:01:38.640
+So if you have
+
+47
+00:01:39.050 --> 00:01:41.070
+47 rows  "M" is the
+
+48
+00:01:41.300 --> 00:01:43.580
+number of rows on this table or the number of training examples.
+
+49
+00:01:45.480 --> 00:01:47.290
+So I'm also
+
+50
+00:01:47.500 --> 00:01:48.910
+going to use X superscript
+
+51
+00:01:49.540 --> 00:01:51.050
+"I" to denote the
+
+52
+00:01:51.260 --> 00:01:53.460
+input features of the "I" training example.
+
+53
+00:01:55.190 --> 00:01:58.100
+As a concrete example let say
+
+54
+00:01:58.720 --> 00:02:00.580
+X2 is going to
+
+55
+00:02:00.710 --> 00:02:02.300
+be a vector of
+
+56
+00:02:02.550 --> 00:02:05.690
+the features for my second training example.
+
+57
+00:02:06.430 --> 00:02:08.020
+And so X2 here is
+
+58
+00:02:08.160 --> 00:02:09.260
+going to be a vector 1416,
+
+59
+00:02:09.520 --> 00:02:10.560
+3, 2, 40 since those
+
+60
+00:02:11.060 --> 00:02:14.110
+are my four
+
+61
+00:02:14.410 --> 00:02:16.100
+features that I have
+
+62
+00:02:17.500 --> 00:02:19.410
+to try to predict the price of the second house.
+
+63
+00:02:20.990 --> 00:02:22.470
+So, in this notation, the
+
+64
+00:02:24.200 --> 00:02:25.250
+superscript 2 here.
+
+65
+00:02:26.720 --> 00:02:28.620
+That's an index into my training set.
+
+66
+00:02:28.990 --> 00:02:31.630
+This is not X to the power of 2.
+
+67
+00:02:32.010 --> 00:02:33.150
+Instead, this is, you know,
+
+68
+00:02:33.370 --> 00:02:36.430
+an index that says look at the second row of this table.
+
+69
+00:02:36.960 --> 00:02:38.260
+This refers to my second training example.
+
+70
+00:02:39.280 --> 00:02:41.780
+With this notation X2 is
+
+71
+00:02:42.140 --> 00:02:43.890
+a four dimensional vector.
+
+72
+00:02:44.400 --> 00:02:45.760
+In fact, more generally, this is
+
+73
+00:02:45.930 --> 00:02:48.630
+an in-dimensional feature back there.
+
+74
+00:02:51.030 --> 00:02:52.730
+With this notation, X2 is
+
+75
+00:02:53.290 --> 00:02:55.320
+now a vector and so,
+
+76
+00:02:55.770 --> 00:02:58.300
+I'm going to use also Xi
+
+77
+00:02:58.790 --> 00:03:00.030
+subscript J to denote
+
+78
+00:03:00.550 --> 00:03:01.740
+the value of the J,
+
+79
+00:03:02.850 --> 00:03:04.420
+of feature number J
+
+80
+00:03:05.170 --> 00:03:06.360
+and the training example.
+
+81
+00:03:07.950 --> 00:03:11.490
+So concretely X2 subscript 3,
+
+82
+00:03:11.920 --> 00:03:14.130
+will refer to feature
+
+83
+00:03:14.420 --> 00:03:15.800
+number three in the
+
+84
+00:03:15.930 --> 00:03:17.670
+x factor which is equal to 2,right?
+
+85
+00:03:18.300 --> 00:03:20.360
+That was a 3 over there, just fix my handwriting.
+
+86
+00:03:20.860 --> 00:03:23.810
+So x2 subscript 3 is going to be equal to 2.
+
+87
+00:03:26.810 --> 00:03:28.010
+Now that we have multiple features,
+
+88
+00:03:29.110 --> 00:03:30.390
+let's talk about what the
+
+89
+00:03:30.470 --> 00:03:32.360
+form of our hypothesis should be.
+
+90
+00:03:33.220 --> 00:03:34.790
+Previously this was the
+
+91
+00:03:34.860 --> 00:03:36.650
+form of our hypothesis, where x
+
+92
+00:03:37.250 --> 00:03:39.280
+was our single feature, but
+
+93
+00:03:39.440 --> 00:03:40.450
+now that we have multiple features,
+
+94
+00:03:41.010 --> 00:03:43.350
+we aren't going to use the simple representation any more.
+
+95
+00:03:44.460 --> 00:03:46.040
+Instead, a form
+
+96
+00:03:46.630 --> 00:03:48.140
+of the hypothesis in linear regression
+
+97
+00:03:49.380 --> 00:03:50.630
+is going to be this, can be
+
+98
+00:03:50.820 --> 00:03:52.190
+theta 0 plus theta
+
+99
+00:03:52.440 --> 00:03:55.690
+1 x1 plus theta 2
+
+100
+00:03:55.840 --> 00:03:57.320
+x2 plus theta 3 x3
+
+101
+00:03:58.610 --> 00:04:00.140
+plus theta 4 X4.
+
+102
+00:04:00.910 --> 00:04:02.610
+And if we have N features then
+
+103
+00:04:02.860 --> 00:04:04.110
+rather than summing up over
+
+104
+00:04:04.340 --> 00:04:05.380
+our four features, we would have
+
+105
+00:04:05.570 --> 00:04:07.050
+a sum over our N features.
+
+106
+00:04:08.570 --> 00:04:10.270
+Concretely for a particular
+
+107
+00:04:11.480 --> 00:04:12.880
+setting of our parameters we
+
+108
+00:04:13.010 --> 00:04:15.500
+may have H of
+
+109
+00:04:17.370 --> 00:04:18.990
+X 80 + 0.1 X1 +  0.01x2 + 3x3 - 2x4.
+
+110
+00:04:19.160 --> 00:04:23.070
+This would be one
+
+111
+00:04:25.710 --> 00:04:27.060
+example of a hypothesis
+
+112
+00:04:27.700 --> 00:04:29.170
+and you remember a
+
+113
+00:04:29.760 --> 00:04:30.710
+hypothesis is trying to predict
+
+114
+00:04:31.100 --> 00:04:32.020
+the price of the house in
+
+115
+00:04:32.360 --> 00:04:33.910
+thousands of dollars, just saying
+
+116
+00:04:34.250 --> 00:04:35.020
+that, you know, the base
+
+117
+00:04:35.360 --> 00:04:37.270
+price of a house
+
+118
+00:04:37.470 --> 00:04:39.960
+is maybe 80,000 plus another open
+
+119
+00:04:40.690 --> 00:04:41.960
+1, so that's an extra,
+
+120
+00:04:42.460 --> 00:04:43.680
+what, hundred dollars per square feet,
+
+121
+00:04:44.430 --> 00:04:45.710
+yeah, plus the price goes up
+
+122
+00:04:45.860 --> 00:04:47.340
+a little bit for each
+
+123
+00:04:47.920 --> 00:04:50.120
+additional floor that the house has.
+
+124
+00:04:50.690 --> 00:04:51.480
+X two is the number of
+
+125
+00:04:51.740 --> 00:04:53.020
+floors, and it goes
+
+126
+00:04:53.170 --> 00:04:54.300
+up further for each additional
+
+127
+00:04:54.790 --> 00:04:55.870
+bedroom the house has, because
+
+128
+00:04:56.190 --> 00:04:57.390
+X three was the number
+
+129
+00:04:57.570 --> 00:04:58.890
+of bedrooms, and the price
+
+130
+00:04:59.220 --> 00:05:01.090
+goes down a little bit
+
+131
+00:05:01.540 --> 00:05:03.930
+with each additional age of the house.
+
+132
+00:05:04.230 --> 00:05:07.150
+With each additional year of the age of the house.
+
+133
+00:05:08.930 --> 00:05:11.630
+Here's the form of a hypothesis rewritten on the slide.
+
+134
+00:05:11.990 --> 00:05:13.390
+And what I'm gonna do is
+
+135
+00:05:13.590 --> 00:05:14.560
+introduce a little bit of
+
+136
+00:05:14.650 --> 00:05:16.300
+notation to simplify this equation.
+
+137
+00:05:17.840 --> 00:05:19.660
+For convenience of notation, let
+
+138
+00:05:19.770 --> 00:05:22.800
+me define x subscript 0 to be equals one.
+
+139
+00:05:23.870 --> 00:05:25.080
+Concretely, this means that for
+
+140
+00:05:25.270 --> 00:05:27.770
+every example i I
+
+141
+00:05:27.850 --> 00:05:29.300
+have a feature vector X superscript
+
+142
+00:05:29.850 --> 00:05:31.500
+I and X superscript
+
+143
+00:05:32.000 --> 00:05:34.370
+I subscript 0 is going to be equal to 1.
+
+144
+00:05:34.970 --> 00:05:35.990
+You can think of this as defining
+
+145
+00:05:36.810 --> 00:05:38.590
+an additional zero feature.
+
+146
+00:05:39.290 --> 00:05:40.320
+So whereas previously I had
+
+147
+00:05:40.670 --> 00:05:41.790
+n features because x1, x2
+
+148
+00:05:41.930 --> 00:05:43.920
+through xn, I'm now defining
+
+149
+00:05:44.830 --> 00:05:46.150
+an additional sort of zero
+
+150
+00:05:47.210 --> 00:05:48.910
+feature vector that always takes
+
+151
+00:05:49.310 --> 00:05:50.590
+on the value of one.
+
+152
+00:05:52.130 --> 00:05:53.860
+So now my feature vector
+
+153
+00:05:54.200 --> 00:05:56.390
+X becomes this N+1 dimensional
+
+154
+00:05:58.410 --> 00:06:01.020
+vector that is zero index.
+
+155
+00:06:02.430 --> 00:06:04.080
+So this is now a n+1
+
+156
+00:06:04.190 --> 00:06:05.650
+dimensional feature vector, but
+
+157
+00:06:05.940 --> 00:06:07.200
+I'm gonna index it from
+
+158
+00:06:07.420 --> 00:06:09.400
+0 and I'm also going
+
+159
+00:06:09.700 --> 00:06:10.950
+to think of my
+
+160
+00:06:11.090 --> 00:06:13.240
+parameters as a vector.
+
+161
+00:06:13.610 --> 00:06:15.620
+So, our parameters here, right
+
+162
+00:06:15.790 --> 00:06:16.800
+that would be our theta zero,
+
+163
+00:06:17.150 --> 00:06:18.130
+theta one, theta two, and so
+
+164
+00:06:18.380 --> 00:06:18.780
+on all the way up to theta n,
+
+165
+00:06:18.790 --> 00:06:19.950
+we're going to gather
+
+166
+00:06:20.340 --> 00:06:21.580
+them up into a parameter
+
+167
+00:06:22.380 --> 00:06:24.030
+vector written theta 0, theta
+
+168
+00:06:24.190 --> 00:06:25.990
+1, theta 2, and so
+
+169
+00:06:26.280 --> 00:06:27.390
+on, down to theta n.
+
+170
+00:06:28.330 --> 00:06:30.160
+This is another zero index vector.
+
+171
+00:06:30.560 --> 00:06:31.590
+It's of index signed from zero.
+
+172
+00:06:32.820 --> 00:06:35.380
+That is another n plus 1 dimensional vector.
+
+173
+00:06:37.180 --> 00:06:39.840
+So, my hypothesis cannot be
+
+174
+00:06:40.000 --> 00:06:42.720
+written theta 0x0 plus
+
+175
+00:06:42.910 --> 00:06:45.560
+theta 1x1+ up to
+
+176
+00:06:46.400 --> 00:06:47.330
+theta n Xn.
+
+177
+00:06:48.820 --> 00:06:50.310
+And this equation is
+
+178
+00:06:50.460 --> 00:06:51.600
+the same as this on
+
+179
+00:06:51.910 --> 00:06:53.670
+top because, you know,
+
+180
+00:06:54.080 --> 00:06:55.710
+eight zero is equal to one.
+
+181
+00:06:58.270 --> 00:06:59.300
+Underneath and I now
+
+182
+00:06:59.390 --> 00:07:00.700
+take this form of the
+
+183
+00:07:00.740 --> 00:07:02.130
+hypothesis and write this
+
+184
+00:07:02.500 --> 00:07:04.990
+as either transpose x,
+
+185
+00:07:05.370 --> 00:07:06.910
+depending on how familiar
+
+186
+00:07:07.320 --> 00:07:08.960
+you are with inner products of
+
+187
+00:07:09.720 --> 00:07:12.050
+vectors if you
+
+188
+00:07:12.180 --> 00:07:13.880
+write what theta transfers x
+
+189
+00:07:14.110 --> 00:07:15.260
+is what theta transfer and
+
+190
+00:07:15.360 --> 00:07:17.370
+this is theta zero,
+
+191
+00:07:17.840 --> 00:07:19.730
+theta one, up to theta
+
+192
+00:07:20.070 --> 00:07:22.880
+N. So this
+
+193
+00:07:23.140 --> 00:07:24.910
+thing here is theta transpose
+
+194
+00:07:25.810 --> 00:07:27.820
+and this is actually a N
+
+195
+00:07:27.960 --> 00:07:30.930
+plus one by one matrix.
+[It should be a 1 by (n+1) matrix]
+
+196
+00:07:31.850 --> 00:07:32.600
+It's also called a row vector
+
+197
+00:07:34.090 --> 00:07:35.160
+and you take that and
+
+198
+00:07:35.420 --> 00:07:37.420
+multiply it with the
+
+199
+00:07:37.510 --> 00:07:38.440
+vector X which is X
+
+200
+00:07:38.640 --> 00:07:40.560
+zero, X one, and so
+
+201
+00:07:40.820 --> 00:07:41.790
+on, down to X n.
+
+202
+00:07:43.030 --> 00:07:44.400
+And so, the inner product
+
+203
+00:07:44.940 --> 00:07:47.050
+that is theta transpose X
+
+204
+00:07:47.910 --> 00:07:48.810
+is just equal to this.
+
+205
+00:07:49.520 --> 00:07:50.610
+This gives us a convenient way
+
+206
+00:07:50.770 --> 00:07:51.830
+to write the form of the
+
+207
+00:07:52.110 --> 00:07:53.310
+hypothesis as just the inner
+
+208
+00:07:53.510 --> 00:07:55.240
+product between our parameter
+
+209
+00:07:55.760 --> 00:07:57.200
+vector theta and our theta
+
+210
+00:07:57.550 --> 00:07:59.220
+vector X. And it
+
+211
+00:07:59.350 --> 00:08:00.360
+is this little bit of notation,
+
+212
+00:08:01.000 --> 00:08:02.270
+this little excerpt of the
+
+213
+00:08:02.320 --> 00:08:03.690
+notation convention that let
+
+214
+00:08:03.740 --> 00:08:05.530
+us write this in this compact form.
+
+215
+00:08:06.360 --> 00:08:09.230
+So that's the form of a hypthesis when we have multiple features.
+
+216
+00:08:09.980 --> 00:08:10.940
+And, just to give this another
+
+217
+00:08:11.230 --> 00:08:12.330
+name, this is also
+
+218
+00:08:12.570 --> 00:08:13.860
+called multivariate linear regression.
+
+219
+00:08:15.200 --> 00:08:16.640
+And the term multivariable that's just
+
+220
+00:08:17.120 --> 00:08:18.300
+maybe a fancy term for saying
+
+221
+00:08:18.730 --> 00:08:20.370
+we have multiple features, or
+
+222
+00:08:20.830 --> 00:08:22.900
+multivariables with which to try to predict the value Y.

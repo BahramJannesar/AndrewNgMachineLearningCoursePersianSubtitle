@@ -1,0 +1,576 @@
+WEBVTT
+
+1
+00:00:00.180 --> 00:00:01.750
+What is machine learning?
+
+2
+00:00:01.750 --> 00:00:04.370
+In this video,
+we will try to define what it is and
+
+3
+00:00:04.370 --> 00:00:08.420
+also try to give you a sense of when
+you want to use machine learning.
+
+4
+00:00:08.420 --> 00:00:10.750
+Even among machine learning practitioners,
+
+5
+00:00:10.750 --> 00:00:15.480
+there isn't a well accepted definition of
+what is and what isn't machine learning.
+
+6
+00:00:15.480 --> 00:00:18.980
+But let me show you a couple of examples
+of the ways that people have tried to
+
+7
+00:00:18.980 --> 00:00:20.440
+define it.
+
+8
+00:00:20.440 --> 00:00:25.090
+Here's a definition of what is machine
+learning as due to Arthur Samuel.
+
+9
+00:00:25.090 --> 00:00:27.880
+He defined machine learning
+as the field of study
+
+10
+00:00:27.880 --> 00:00:31.970
+that gives computers the ability to
+learn without being explicitly learned.
+
+11
+00:00:33.110 --> 00:00:37.891
+Samuel's claim to fame was that back in
+the 1950, he wrote a checkers playing
+
+12
+00:00:37.891 --> 00:00:41.773
+program and the amazing thing about
+this checkers playing program
+
+13
+00:00:41.773 --> 00:00:45.812
+was that Arthur Samuel himself
+wasn't a very good checkers player.
+
+14
+00:00:45.812 --> 00:00:49.887
+But what he did was he had to programmed
+maybe tens of thousands of games against
+
+15
+00:00:49.887 --> 00:00:54.087
+himself, and by watching what sorts of
+board positions tended to lead to wins and
+
+16
+00:00:54.087 --> 00:00:56.867
+what sort of board positions
+tended to lead to losses,
+
+17
+00:00:56.867 --> 00:01:01.070
+the checkers playing program learned over
+time what are good board positions and
+
+18
+00:01:01.070 --> 00:01:03.180
+what are bad board positions.
+
+19
+00:01:03.180 --> 00:01:06.400
+And eventually learn to play checkers
+better than the Arthur Samuel
+
+20
+00:01:06.400 --> 00:01:08.210
+himself was able to.
+
+21
+00:01:08.210 --> 00:01:10.320
+This was a remarkable result.
+
+22
+00:01:10.320 --> 00:01:14.120
+Arthur Samuel himself turns out not
+to be a very good checkers player.
+
+23
+00:01:14.120 --> 00:01:18.100
+But because a computer has the patience
+to play tens of thousands of
+
+24
+00:01:18.100 --> 00:01:22.790
+games against itself, no human has
+the patience to play that many games.
+
+25
+00:01:22.790 --> 00:01:27.380
+By doing this, a computer was able to
+get so much checkers playing experience
+
+26
+00:01:27.380 --> 00:01:31.860
+that it eventually became a better
+checkers player than Arthur himself.
+
+27
+00:01:32.860 --> 00:01:36.345
+This is a somewhat informal definition and
+an older one.
+
+28
+00:01:36.345 --> 00:01:39.240
+Here's a slightly more recent
+definition by Tom Mitchell
+
+29
+00:01:39.240 --> 00:01:42.000
+who's a friend of Carnegie Melon.
+
+30
+00:01:42.000 --> 00:01:45.170
+So Tom defines machine
+learning by saying that
+
+31
+00:01:45.170 --> 00:01:48.450
+a well-posed learning problem
+is defined as follows.
+
+32
+00:01:48.450 --> 00:01:52.830
+He says, a computer program is said to
+learn from experience E with respect to
+
+33
+00:01:52.830 --> 00:01:56.650
+some task T and some performance
+measure P, if its performance on T,
+
+34
+00:01:56.650 --> 00:02:00.580
+as measured by P,
+improves with experience E.
+
+35
+00:02:00.580 --> 00:02:03.920
+I actually think he came out with this
+definition just to make it rhyme.
+
+36
+00:02:03.920 --> 00:02:08.260
+For the checkers playing examples,
+the experience E would be
+
+37
+00:02:08.260 --> 00:02:13.070
+the experience of having the program
+play tens of thousands of games itself.
+
+38
+00:02:13.070 --> 00:02:16.860
+The task T would be the task
+of playing checkers, and
+
+39
+00:02:16.860 --> 00:02:20.030
+the performance measure P
+will be the probability that
+
+40
+00:02:20.030 --> 00:02:22.990
+wins the next game of checkers
+against some new opponent.
+
+41
+00:02:24.140 --> 00:02:27.400
+Throughout these videos,
+besides me trying to teach you stuff,
+
+42
+00:02:27.400 --> 00:02:31.900
+I'll occasionally ask you a question to
+make sure you understand the content.
+
+43
+00:02:31.900 --> 00:02:32.400
+Here's one.
+
+44
+00:02:33.520 --> 00:02:37.750
+On top is a definition of machine
+learning by Tom Mitchell.
+
+45
+00:02:37.750 --> 00:02:42.750
+Let's say your email program watches which
+emails you do or do not mark as spam.
+
+46
+00:02:42.750 --> 00:02:44.640
+So in an email client like this,
+
+47
+00:02:44.640 --> 00:02:50.180
+you might click the Spam button to report
+some email as spam but not other emails.
+
+48
+00:02:50.180 --> 00:02:52.990
+And based on which
+emails you mark as spam,
+
+49
+00:02:52.990 --> 00:02:58.670
+say your email program learns
+better how to filter spam email.
+
+50
+00:02:58.670 --> 00:03:01.610
+What is the task T in this setting?
+
+51
+00:03:01.610 --> 00:03:04.960
+In a few seconds,
+the video will pause and when it does so,
+
+52
+00:03:04.960 --> 00:03:09.710
+you can use your mouse to select one
+of these four radio buttons to let
+
+53
+00:03:09.710 --> 00:03:13.540
+me know which of these four you think
+is the right answer to this question.
+
+54
+00:03:16.190 --> 00:03:18.740
+So hopefully you got that
+this is the right answer,
+
+55
+00:03:18.740 --> 00:03:21.330
+classifying emails is the task T.
+
+56
+00:03:21.330 --> 00:03:26.630
+In fact, this definition defines
+a task T performance measure P and
+
+57
+00:03:26.630 --> 00:03:29.270
+some experience E.
+
+58
+00:03:29.270 --> 00:03:32.980
+And so, watching you label
+emails as spam or not spam,
+
+59
+00:03:32.980 --> 00:03:37.570
+this would be the experience E and
+and the fraction of
+
+60
+00:03:37.570 --> 00:03:43.100
+emails correctly classified,
+that might be a performance measure P.
+
+61
+00:03:43.100 --> 00:03:48.260
+And so on the task of systems performance,
+
+62
+00:03:48.260 --> 00:03:54.120
+on the performance measure P will
+improve after the experience E.
+
+63
+00:03:55.270 --> 00:03:55.830
+In this class,
+
+64
+00:03:55.830 --> 00:03:59.090
+I hope to teach you about various
+different types of learning algorithms.
+
+65
+00:03:59.090 --> 00:04:02.010
+There are several different
+types of learning algorithms.
+
+66
+00:04:02.010 --> 00:04:05.380
+The main two types are what we
+call supervised learning and
+
+67
+00:04:05.380 --> 00:04:07.270
+unsupervised learning.
+
+68
+00:04:07.270 --> 00:04:10.850
+I'll define what these terms mean
+more in the next couple videos.
+
+69
+00:04:10.850 --> 00:04:13.380
+It turns out that in supervised learning,
+
+70
+00:04:13.380 --> 00:04:17.625
+the idea is we're going to teach
+the computer how to do something.
+
+71
+00:04:17.625 --> 00:04:22.000
+Whereas in unsupervised learning,
+we're going to let it learn by itself.
+
+72
+00:04:22.000 --> 00:04:25.030
+Don't worry if these two
+terms don't make sense yet.
+
+73
+00:04:25.030 --> 00:04:26.343
+In the next two videos,
+
+74
+00:04:26.343 --> 00:04:29.834
+I'm going to say exactly what
+these two types of learning are.
+
+75
+00:04:29.834 --> 00:04:34.287
+You might also hear other ghost terms
+such as reinforcement learning and
+
+76
+00:04:34.287 --> 00:04:36.570
+recommender systems.
+
+77
+00:04:36.570 --> 00:04:40.545
+These are other types of machine learning
+algorithms that we'll talk about later.
+
+78
+00:04:40.545 --> 00:04:44.460
+But the two most use types of learning
+algorithms are probably supervised
+
+79
+00:04:44.460 --> 00:04:46.179
+learning and unsupervised learning.
+
+80
+00:04:46.179 --> 00:04:48.960
+And I'll define them in the next two
+videos and we'll spend most of this
+
+81
+00:04:48.960 --> 00:04:52.375
+class talking about these two
+types of learning algorithms.
+
+82
+00:04:52.375 --> 00:04:55.950
+It turns out what are the other things
+to spend a lot of time on in this
+
+83
+00:04:55.950 --> 00:05:00.620
+class is practical advice for
+applying learning algorithms.
+
+84
+00:05:00.620 --> 00:05:02.710
+This is something that I
+feel pretty strongly about.
+
+85
+00:05:02.710 --> 00:05:06.670
+And exactly something that I don't
+know if any other university teachers.
+
+86
+00:05:06.670 --> 00:05:10.190
+Teaching about learning algorithms
+is like giving a set of tools.
+
+87
+00:05:10.190 --> 00:05:13.255
+And equally important or more important
+
+88
+00:05:13.255 --> 00:05:17.135
+than giving you the tools as they
+teach you how to apply these tools.
+
+89
+00:05:17.135 --> 00:05:20.945
+I like to make an analogy to
+learning to become a carpenter.
+
+90
+00:05:20.945 --> 00:05:23.917
+Imagine that someone is teaching
+you how to be a carpenter, and
+
+91
+00:05:23.917 --> 00:05:28.722
+they say, here's a hammer, here's
+a screwdriver, here's a saw, good luck.
+
+92
+00:05:28.722 --> 00:05:30.517
+Well, that's no good.
+
+93
+00:05:30.517 --> 00:05:32.107
+You have all these tools but
+
+94
+00:05:32.107 --> 00:05:35.527
+the more important thing is to learn
+how to use these tools properly.
+
+95
+00:05:36.747 --> 00:05:40.547
+There's a huge difference between people
+that know how to use these machine
+
+96
+00:05:40.547 --> 00:05:44.920
+learning algorithms, versus people that
+don't know how to use these tools well.
+
+97
+00:05:44.920 --> 00:05:47.270
+Here, in Silicon Valley where I live,
+
+98
+00:05:47.270 --> 00:05:51.610
+when I go visit different companies even
+at the top Silicon Valley companies, very
+
+99
+00:05:51.610 --> 00:05:56.120
+often I see people trying to apply machine
+learning algorithms to some problem and
+
+100
+00:05:56.120 --> 00:05:58.980
+sometimes they have been going at for
+six months.
+
+101
+00:05:58.980 --> 00:06:04.189
+But sometimes when I look at what their
+doing, I say, I could have told them like,
+
+102
+00:06:04.189 --> 00:06:09.018
+gee, I could have told you six months
+ago that you should be taking a learning
+
+103
+00:06:09.018 --> 00:06:13.018
+algorithm and applying it in like
+the slightly modified way and
+
+104
+00:06:13.018 --> 00:06:16.294
+your chance of success will
+have been much higher.
+
+105
+00:06:16.294 --> 00:06:20.158
+So what we're going to do in this class is
+actually spend a lot of the time talking
+
+106
+00:06:20.158 --> 00:06:23.963
+about how if you're actually trying
+to develop a machine learning system,
+
+107
+00:06:23.963 --> 00:06:27.885
+how to make those best practices type
+decisions about the way in which you build
+
+108
+00:06:27.885 --> 00:06:28.920
+your system.
+
+109
+00:06:28.920 --> 00:06:33.168
+So that when you're finally learning
+algorithim, you're less likely to end up
+
+110
+00:06:33.168 --> 00:06:37.289
+one of those people who end up persuing
+something after six months that someone
+
+111
+00:06:37.289 --> 00:06:41.177
+else could have figured out just
+a waste of time for six months.
+
+112
+00:06:41.177 --> 00:06:45.218
+So I'm actually going to spend a lot of
+time teaching you those sorts of best
+
+113
+00:06:45.218 --> 00:06:49.128
+practices in machine learning and
+AI and how to get the stuff to work and
+
+114
+00:06:49.128 --> 00:06:53.500
+how the best people do it in
+Silicon Valley and around the world.
+
+115
+00:06:53.500 --> 00:06:56.870
+I hope to make you one of the best
+people in knowing how to design and
+
+116
+00:06:56.870 --> 00:07:00.230
+build serious machine learning and
+AI systems.
+
+117
+00:07:00.230 --> 00:07:04.390
+So that's machine learning, and
+these are the main topics I hope to teach.
+
+118
+00:07:04.390 --> 00:07:08.320
+In the next video, I'm going to define
+what is supervised learning and
+
+119
+00:07:08.320 --> 00:07:10.580
+after that what is unsupervised learning.
+
+120
+00:07:10.580 --> 00:07:13.580
+And also time to talk about when
+you would use each of them.

@@ -1,0 +1,913 @@
+WEBVTT
+
+1
+00:00:00.320 --> 00:00:03.682
+In this video I like to tell you
+about the idea of Vectorization.
+
+2
+00:00:03.682 --> 00:00:08.380
+So, whether you using Octave or
+a similar language like MATLAB or
+
+3
+00:00:08.380 --> 00:00:12.540
+whether you're using Python [INAUDIBLE],
+R, Java, C++,
+
+4
+00:00:12.540 --> 00:00:17.470
+all of these languages have either
+built into them or have regularly and
+
+5
+00:00:17.470 --> 00:00:21.840
+easily accessible difference in
+numerical linear algebra libraries.
+
+6
+00:00:21.840 --> 00:00:24.400
+They're usually very well written,
+highly optimized,
+
+7
+00:00:24.400 --> 00:00:29.250
+often sort of developed by people that
+have PhDs in numerical computing or
+
+8
+00:00:29.250 --> 00:00:32.070
+they're really specialized
+in numerical computing.
+
+9
+00:00:32.070 --> 00:00:35.590
+And when you're implementing machine
+learning algorithms, if you're
+
+10
+00:00:35.590 --> 00:00:39.880
+able to take advantage of these linear
+algebra libraries or these numerical
+
+11
+00:00:39.880 --> 00:00:44.510
+linear algebra libraries, and make some
+routine calls to them rather than sort of
+
+12
+00:00:44.510 --> 00:00:48.470
+write code yourself to do things
+that these libraries could be doing.
+
+13
+00:00:48.470 --> 00:00:51.970
+If you do that, then often you get code
+that, first, is more efficient, so
+
+14
+00:00:51.970 --> 00:00:53.170
+you just run more quickly and
+
+15
+00:00:53.170 --> 00:00:58.120
+take better advantage of any parallel
+hardware your computer may have and so on.
+
+16
+00:00:58.120 --> 00:01:03.080
+And second, it also means that you end up
+with less code that you need to write,
+
+17
+00:01:03.080 --> 00:01:07.330
+so it's a simpler implementation that is
+therefore maybe also more likely to be
+
+18
+00:01:07.330 --> 00:01:08.540
+by free.
+
+19
+00:01:08.540 --> 00:01:13.450
+And as a concrete example,
+rather than writing code yourself to
+
+20
+00:01:13.450 --> 00:01:18.170
+multiply matrices, if you let
+Octave do it by typing a times b,
+
+21
+00:01:18.170 --> 00:01:22.220
+that would use a very efficient
+routine to multiply the two matrices.
+
+22
+00:01:22.220 --> 00:01:26.090
+And there's a bunch of examples like
+these, where if you use appropriate
+
+23
+00:01:26.090 --> 00:01:30.310
+vectorization implementations you get much
+simpler code and much more efficient code.
+
+24
+00:01:30.310 --> 00:01:31.470
+Let's look at some examples.
+
+25
+00:01:33.090 --> 00:01:36.110
+Here's our usual hypothesis for
+linear regression, and
+
+26
+00:01:36.110 --> 00:01:40.010
+if you want to compute h(x),
+notice that there's a sum on the right.
+
+27
+00:01:40.010 --> 00:01:46.660
+And so one thing you could do is, compute
+the sum from j = 0 to j = n yourself.
+
+28
+00:01:46.660 --> 00:01:51.920
+Another way to think of this is to
+think of h(x) as theta transpose x,
+
+29
+00:01:51.920 --> 00:01:56.330
+and what you can do is, think of this
+as you are computing this inner product
+
+30
+00:01:56.330 --> 00:02:03.220
+between two vectors where theta is your
+vector, say, theta 0, theta 1, theta 2.
+
+31
+00:02:03.220 --> 00:02:07.221
+If you have two features,
+if n equals two, and
+
+32
+00:02:07.221 --> 00:02:11.632
+if you think x as this vector,
+x0, x1, x2, and
+
+33
+00:02:11.632 --> 00:02:17.590
+these two views can give you
+two different implementations.
+
+34
+00:02:17.590 --> 00:02:18.820
+Here's what I mean.
+
+35
+00:02:18.820 --> 00:02:23.623
+Here's an unvectorized implementation for
+how to compute and by unvectorize,
+
+36
+00:02:23.623 --> 00:02:25.360
+I mean without vectorization.
+
+37
+00:02:25.360 --> 00:02:30.160
+We might first initialize
+prediction just to be 0.0.
+
+38
+00:02:30.160 --> 00:02:36.057
+The prediction's going to eventually be
+h(x), and then I'm going to have a for
+
+39
+00:02:36.057 --> 00:02:42.320
+loop for j=1 through n+1, prediction
+gets incremented by theta(j) * x(j).
+
+40
+00:02:42.320 --> 00:02:44.740
+So it's kind of this expression over here.
+
+41
+00:02:44.740 --> 00:02:45.736
+By the way, I should mention,
+
+42
+00:02:45.736 --> 00:02:51.100
+in these vectors that I wrote over here,
+I had these vectors being 0 index.
+
+43
+00:02:51.100 --> 00:02:53.270
+So I had theta 0, theta 1, theta 2.
+
+44
+00:02:53.270 --> 00:02:58.543
+But because MATLAB is one index,
+theta 0 in that MATLAB, we would end up
+
+45
+00:02:58.543 --> 00:03:03.557
+representing as theta 1 and
+the second element ends up as theta 2 and
+
+46
+00:03:03.557 --> 00:03:08.570
+this third element may end up as theta 3,
+just because our vectors in
+
+47
+00:03:08.570 --> 00:03:13.411
+MATLAB are indexed starting from 1,
+even though I wrote theta and
+
+48
+00:03:13.411 --> 00:03:18.620
+x here, starting indexing from 0,
+which is why here I have a for loop.
+
+49
+00:03:18.620 --> 00:03:25.480
+j goes from 1 through n+1 rather than
+j goes through 0 up to n, right?
+
+50
+00:03:25.480 --> 00:03:30.286
+But so this is an unvectorized
+implementation in that we have for
+
+51
+00:03:30.286 --> 00:03:33.940
+loop that is summing up
+the n elements of the sum.
+
+52
+00:03:33.940 --> 00:03:39.251
+In contrast, here's how you would
+write a vectorized implementation,
+
+53
+00:03:39.251 --> 00:03:43.290
+which is that you would think of a x and
+theta as vectors.
+
+54
+00:03:43.290 --> 00:03:46.620
+You just said prediction = theta' * x.
+
+55
+00:03:46.620 --> 00:03:48.150
+You're just computing like so.
+
+56
+00:03:48.150 --> 00:03:52.077
+So instead of writing all these
+lines of code with a for loop,
+
+57
+00:03:52.077 --> 00:03:54.620
+you instead just have one line of code.
+
+58
+00:03:54.620 --> 00:03:57.764
+And what this line of code
+on the right will do is,
+
+59
+00:03:57.764 --> 00:04:02.604
+it will use Octaves highly optimized
+numerical linear algebra routines to
+
+60
+00:04:02.604 --> 00:04:07.823
+compute this inner product between the two
+vectors, theta and X, and not only is
+
+61
+00:04:07.823 --> 00:04:13.250
+the vectorized implementation simpler,
+it will also run much more efficiently.
+
+62
+00:04:15.850 --> 00:04:17.590
+So that was octave, but
+
+63
+00:04:17.590 --> 00:04:22.080
+the issue of vectorization applies to
+other programming language as well.
+
+64
+00:04:22.080 --> 00:04:24.740
+Lets look on the example in C++.
+
+65
+00:04:24.740 --> 00:04:27.820
+Here's what an unvectorized
+implementation might look like.
+
+66
+00:04:27.820 --> 00:04:31.468
+We again initialize prediction to 0.0 and
+
+67
+00:04:31.468 --> 00:04:35.650
+then we now how a for
+loop for j = 0 up to n.
+
+68
+00:04:35.650 --> 00:04:40.598
+Prediction += theta j * x[j],
+where again, you have this explicit for
+
+69
+00:04:40.598 --> 00:04:42.620
+loop that you write yourself.
+
+70
+00:04:42.620 --> 00:04:47.720
+In contrast, using a good numerical
+linear algebra library in C++,
+
+71
+00:04:47.720 --> 00:04:50.950
+you could write a function like,
+or rather.
+
+72
+00:04:54.410 --> 00:04:59.000
+In contrast, using a good numerical
+linear algebra library in C++,
+
+73
+00:04:59.000 --> 00:05:02.500
+you can instead write code
+that might look like this.
+
+74
+00:05:02.500 --> 00:05:06.540
+So depending on the details of your
+numerical linear algebra library,
+
+75
+00:05:06.540 --> 00:05:11.230
+you might be able to have an object, this
+is a C++ object, which is vector theta,
+
+76
+00:05:11.230 --> 00:05:17.540
+and a C++ object which is vector x,
+and you just take theta.transpose * x,
+
+77
+00:05:17.540 --> 00:05:22.270
+where this times becomes a C++
+sort of overload operator so
+
+78
+00:05:22.270 --> 00:05:26.380
+you can just multiply
+these two vectors in C++.
+
+79
+00:05:26.380 --> 00:05:30.390
+And depending on the details of your
+numerical linear algebra library,
+
+80
+00:05:30.390 --> 00:05:32.880
+you might end up using
+a slightly different syntax, but
+
+81
+00:05:32.880 --> 00:05:35.800
+by relying on the library
+to do this inner product,
+
+82
+00:05:35.800 --> 00:05:39.290
+you can get a much simpler piece of
+code and a much more efficient one.
+
+83
+00:05:40.660 --> 00:05:43.590
+Let's now look at a more
+sophisticated example.
+
+84
+00:05:43.590 --> 00:05:45.840
+Just to remind you,
+here's our update rule for
+
+85
+00:05:45.840 --> 00:05:48.260
+a gradient descent of a linear regression.
+
+86
+00:05:48.260 --> 00:05:55.070
+And so we update theta j using this rule
+for all values of j = 0, 1, 2, and so on.
+
+87
+00:05:55.070 --> 00:05:59.575
+And if I just write out these
+equations for theta 0, theta 1,
+
+88
+00:05:59.575 --> 00:06:03.410
+theta 2, assuming we have two features,
+so n = 2.
+
+89
+00:06:03.410 --> 00:06:08.377
+Then these are the updates we perform for
+theta 0, theta 1, theta 2, where you might
+
+90
+00:06:08.377 --> 00:06:13.230
+remember my saying in an earlier video,
+that these should be simultaneous updates.
+
+91
+00:06:14.850 --> 00:06:19.580
+So, let's see if we can come up with
+a vectorizing notation of this.
+
+92
+00:06:20.754 --> 00:06:24.120
+Here are my same three equations
+written in a slightly smaller font, and
+
+93
+00:06:24.120 --> 00:06:28.110
+you can imagine that one way to implement
+these three lines of code is to have a for
+
+94
+00:06:28.110 --> 00:06:35.500
+loop that says for j = 0, 1 through 2 to
+update theta j, or something like that.
+
+95
+00:06:35.500 --> 00:06:39.570
+But instead, let's come up with
+a vectorized implementation and see if
+
+96
+00:06:39.570 --> 00:06:43.830
+we can have a simpler way to basically
+compress these three lines of code or
+
+97
+00:06:43.830 --> 00:06:48.540
+a for loop that effectively does
+these three steps one set at a time.
+
+98
+00:06:48.540 --> 00:06:50.070
+Let's see if we can take
+these three steps and
+
+99
+00:06:50.070 --> 00:06:54.220
+compress them into one
+line of vectorized code.
+
+100
+00:06:54.220 --> 00:06:55.500
+Here's the idea.
+
+101
+00:06:55.500 --> 00:06:58.538
+What I'm going to do is,
+
+102
+00:06:58.538 --> 00:07:03.458
+I'm going to think of theta as a vector,
+
+103
+00:07:03.458 --> 00:07:08.090
+and I'm gonna update theta as theta-
+
+104
+00:07:08.090 --> 00:07:12.723
+alpha times some other vector delta,
+
+105
+00:07:12.723 --> 00:07:18.511
+where delta's is going
+to be equal to 1 over m,
+
+106
+00:07:18.511 --> 00:07:21.740
+sum from i = 1 through m.
+
+107
+00:07:21.740 --> 00:07:28.100
+And then this term over on the right,
+okay?
+
+108
+00:07:28.100 --> 00:07:29.840
+So, let me explain what's going on here.
+
+109
+00:07:31.310 --> 00:07:34.920
+Here, I'm going to treat
+theta as a vector, so
+
+110
+00:07:34.920 --> 00:07:38.170
+this is n plus one dimensional vector, and
+
+111
+00:07:38.170 --> 00:07:43.610
+I'm saying that theta gets here
+updated as that's a vector, Rn + 1.
+
+112
+00:07:43.610 --> 00:07:50.080
+Alpha is a real number, and
+delta, here is a vector.
+
+113
+00:07:50.080 --> 00:07:54.920
+So, this subtraction operation,
+that's a vector subtraction, okay?
+
+114
+00:07:54.920 --> 00:07:58.380
+Cuz alpha times delta is a vector, and so
+
+115
+00:07:58.380 --> 00:08:04.270
+I'm saying theta gets this vector,
+alpha times delta subtracted from it.
+
+116
+00:08:04.270 --> 00:08:06.580
+So, what is a vector delta?
+
+117
+00:08:06.580 --> 00:08:10.959
+Well this vector delta,
+looks like this, and
+
+118
+00:08:10.959 --> 00:08:17.040
+what it's meant to be is really
+meant to be this thing over here.
+
+119
+00:08:17.040 --> 00:08:22.066
+Concretely, delta will be a n
+plus one dimensional vector, and
+
+120
+00:08:22.066 --> 00:08:27.570
+the very first element of the vector
+delta is going to be equal to that.
+
+121
+00:08:27.570 --> 00:08:32.203
+So, if we have the delta,
+if we index it from 0,
+
+122
+00:08:32.203 --> 00:08:37.288
+if it's delta 0, delta 1,
+delta 2, what I want is
+
+123
+00:08:37.288 --> 00:08:42.730
+that delta 0 is equal to this
+first box in green up above.
+
+124
+00:08:42.730 --> 00:08:48.621
+And indeed,
+you might be able to convince yourself
+
+125
+00:08:48.621 --> 00:08:53.964
+that delta 0 is this 1
+of the m sum of ho(x),
+
+126
+00:08:53.964 --> 00:08:58.360
+x(i) minus y(i) times x(i) 0.
+
+127
+00:08:58.360 --> 00:09:01.352
+So, let's just make sure
+we're on this same page
+
+128
+00:09:01.352 --> 00:09:04.010
+about how delta really is computed.
+
+129
+00:09:04.010 --> 00:09:09.930
+Delta is 1 over m times this sum
+over here, and what is this sum?
+
+130
+00:09:09.930 --> 00:09:15.782
+Well, this term over here,
+that's a real number,
+
+131
+00:09:15.782 --> 00:09:19.772
+and the second term over here, x i,
+
+132
+00:09:19.772 --> 00:09:24.427
+this term over there is a vector, right,
+
+133
+00:09:24.427 --> 00:09:29.481
+because x(i) may be
+a vector that would be,
+
+134
+00:09:29.481 --> 00:09:34.136
+say, x(i)0, x(i)1, x(i)2,
+
+135
+00:09:34.136 --> 00:09:38.150
+right, and what is the summation?
+
+136
+00:09:38.150 --> 00:09:44.142
+Well, what the summation
+is saying is that,
+
+137
+00:09:44.142 --> 00:09:49.504
+this term, that is this term over here,
+
+138
+00:09:49.504 --> 00:09:54.707
+this is equal to, (h of(x(1))-
+
+139
+00:09:54.707 --> 00:10:00.700
+y(1)) * x(1) + (h of(x(2))-
+
+140
+00:10:00.700 --> 00:10:06.080
+y(2) x x(2) +, and so on, okay?
+
+141
+00:10:06.080 --> 00:10:10.041
+Because this is summation of i, so
+as i ranges from i = 1 through m,
+
+142
+00:10:10.041 --> 00:10:15.100
+you get these different terms, and
+you're summing up these terms here.
+
+143
+00:10:15.100 --> 00:10:19.990
+And the meaning of these terms, this
+is a lot like if you remember actually
+
+144
+00:10:19.990 --> 00:10:23.760
+from the earlier quiz in this,
+right, you saw this equation.
+
+145
+00:10:23.760 --> 00:10:30.680
+We said that in order to vectorize this
+code we will instead said u = 2v + 5w.
+
+146
+00:10:30.680 --> 00:10:34.760
+So we're saying that the vector u
+is equal to two times the vector v
+
+147
+00:10:34.760 --> 00:10:36.470
+plus five times the vector w.
+
+148
+00:10:36.470 --> 00:10:40.530
+So this is an example of how
+to add different vectors and
+
+149
+00:10:40.530 --> 00:10:42.940
+this summation's the same thing.
+
+150
+00:10:42.940 --> 00:10:49.740
+This is saying that the summation over
+here is just some real number, right?
+
+151
+00:10:49.740 --> 00:10:54.370
+That's kinda like the number two or
+some other number times the vector, x1.
+
+152
+00:10:54.370 --> 00:10:59.213
+So it's kinda like 2v or
+say some other number times x1, and
+
+153
+00:10:59.213 --> 00:11:04.244
+then plus instead of 5w we instead
+have some other real number,
+
+154
+00:11:04.244 --> 00:11:09.739
+plus some other vector, and
+then you add on other vectors, plus dot,
+
+155
+00:11:09.739 --> 00:11:14.580
+dot, dot, plus the other vectors,
+which is why, over all,
+
+156
+00:11:14.580 --> 00:11:20.670
+this thing over here, that whole quantity,
+that delta is just some vector.
+
+157
+00:11:22.240 --> 00:11:27.592
+And concretely, the three elements
+of delta correspond if n = 2,
+
+158
+00:11:27.592 --> 00:11:32.800
+the three elements of delta
+correspond exactly to this thing,
+
+159
+00:11:32.800 --> 00:11:35.920
+to the second thing, and this third thing.
+
+160
+00:11:35.920 --> 00:11:41.050
+Which is why when you update theta
+according to theta- alpha delta,
+
+161
+00:11:41.050 --> 00:11:44.610
+we end up carrying exactly
+the same simultaneous updates
+
+162
+00:11:44.610 --> 00:11:46.670
+as the update rules that we have up top.
+
+163
+00:11:47.980 --> 00:11:51.940
+So, I know that there was a lot that
+happened on this slide, but again,
+
+164
+00:11:51.940 --> 00:11:57.010
+feel free to pause the video and
+if you aren't sure
+
+165
+00:11:57.010 --> 00:12:02.590
+what just happened I'd encourage you
+to step through this slide to make
+
+166
+00:12:02.590 --> 00:12:08.435
+sure you understand why is it that this
+update here with this definition of delta,
+
+167
+00:12:08.435 --> 00:12:12.870
+right, why is it that that's
+equal to this update on top?
+
+168
+00:12:12.870 --> 00:12:18.430
+And if it's still not clear,
+one insight is that, this thing over here,
+
+169
+00:12:18.430 --> 00:12:21.960
+that's exactly the vector x, and so
+
+170
+00:12:21.960 --> 00:12:26.560
+we're just taking all three of these
+computations, and compressing them into
+
+171
+00:12:26.560 --> 00:12:31.420
+one step with this vector delta,
+which is why we can come up
+
+172
+00:12:31.420 --> 00:12:36.000
+with a vectorized implementation of this
+step of the new refresh in this way.
+
+173
+00:12:37.010 --> 00:12:41.630
+So, I hope this step makes sense and
+do look at the video and
+
+174
+00:12:41.630 --> 00:12:44.030
+see if you can understand it.
+
+175
+00:12:44.030 --> 00:12:47.230
+In case you don't understand quite
+the equivalence of this map,
+
+176
+00:12:47.230 --> 00:12:50.620
+if you implement this, this turns
+out to be the right answer anyway.
+
+177
+00:12:50.620 --> 00:12:53.839
+So, even if you didn't quite
+understand equivalence,
+
+178
+00:12:53.839 --> 00:12:58.610
+if you just implement it this way, you'll
+be able to get linear regression to work.
+
+179
+00:12:58.610 --> 00:13:03.142
+But if you're able to figure out
+why these two steps are equivalent,
+
+180
+00:13:03.142 --> 00:13:08.710
+then hopefully that will give you a better
+understanding of vectorization as well.
+
+181
+00:13:08.710 --> 00:13:13.210
+And finally, if you are implementing
+linear regression using more than one or
+
+182
+00:13:13.210 --> 00:13:17.915
+two features, so sometimes we use
+linear regression with 10's or 100's or
+
+183
+00:13:17.915 --> 00:13:19.650
+1,000's of features.
+
+184
+00:13:19.650 --> 00:13:23.140
+But if you use the vectorized
+implementation of linear regression,
+
+185
+00:13:23.140 --> 00:13:27.465
+you'll see that will run much faster
+than if you had, say, your old for
+
+186
+00:13:27.465 --> 00:13:31.500
+loop that was updating theta zero,
+then theta one, then theta two yourself.
+
+187
+00:13:31.500 --> 00:13:34.220
+So, using a vectorized implementation,
+you should be
+
+188
+00:13:34.220 --> 00:13:37.860
+able to get a much more efficient
+implementation of linear regression.
+
+189
+00:13:37.860 --> 00:13:41.820
+And when you vectorize later algorithms
+that we'll see in this class,
+
+190
+00:13:41.820 --> 00:13:45.110
+there's good trick, whether in Octave or
+some other language like C++, Java,
+
+191
+00:13:45.110 --> 00:13:47.700
+for getting your code to
+run more efficiently.

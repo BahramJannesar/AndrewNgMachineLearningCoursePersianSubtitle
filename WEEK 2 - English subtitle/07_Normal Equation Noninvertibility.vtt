@@ -1,0 +1,459 @@
+WEBVTT
+
+1
+00:00:00.220 --> 00:00:05.060
+In this video I want to talk about
+the Normal equation and non-invertibility.
+
+2
+00:00:05.060 --> 00:00:07.640
+This is a somewhat more advanced concept,
+but
+
+3
+00:00:07.640 --> 00:00:09.890
+it's something that I've
+often been asked about.
+
+4
+00:00:09.890 --> 00:00:12.490
+And so I want to talk it here and
+address it here.
+
+5
+00:00:12.490 --> 00:00:14.400
+But this is a somewhat
+more advanced concept,
+
+6
+00:00:14.400 --> 00:00:17.550
+so feel free to consider
+this optional material.
+
+7
+00:00:18.600 --> 00:00:23.210
+And there's a phenomenon that you may
+run into that may be somewhat useful to
+
+8
+00:00:23.210 --> 00:00:26.890
+understand, but even if you don't
+understand the normal equation and
+
+9
+00:00:26.890 --> 00:00:29.610
+linear progression,
+you should really get that to work okay.
+
+10
+00:00:31.340 --> 00:00:32.030
+Here's the issue.
+
+11
+00:00:33.470 --> 00:00:37.450
+For those of you there are, maybe some
+are more familiar with linear algebra,
+
+12
+00:00:37.450 --> 00:00:39.520
+what some students have asked me is,
+
+13
+00:00:39.520 --> 00:00:45.610
+when computing this Theta equals X
+transpose X inverse X transpose Y.
+
+14
+00:00:45.610 --> 00:00:49.580
+What if the matrix X transpose
+X is non-invertible?
+
+15
+00:00:49.580 --> 00:00:52.400
+So for those of you that know
+a bit more linear algebra
+
+16
+00:00:52.400 --> 00:00:56.060
+you may know that only some
+matrices are invertible and
+
+17
+00:00:56.060 --> 00:01:00.680
+some matrices do not have an inverse
+we call those non-invertible matrices.
+
+18
+00:01:00.680 --> 00:01:04.220
+Singular or degenerate matrices.
+
+19
+00:01:04.220 --> 00:01:05.120
+The issue or
+
+20
+00:01:05.120 --> 00:01:10.978
+the problem of x transpose x being non
+invertible should happen pretty rarely.
+
+21
+00:01:10.978 --> 00:01:15.720
+And in Octave if you implement
+this to compute theta,
+
+22
+00:01:15.720 --> 00:01:20.260
+it turns out that this will
+actually do the right thing.
+
+23
+00:01:20.260 --> 00:01:23.910
+I'm getting a little technical now, and
+I don't want to go into the details,
+
+24
+00:01:23.910 --> 00:01:27.850
+but Octave hast two functions for
+inverting matrices.
+
+25
+00:01:27.850 --> 00:01:31.370
+One is called pinv, and
+the other is called inv.
+
+26
+00:01:31.370 --> 00:01:35.090
+And the differences between these
+two are somewhat technical.
+
+27
+00:01:35.090 --> 00:01:37.930
+One's called the pseudo-inverse,
+one's called the inverse.
+
+28
+00:01:37.930 --> 00:01:40.490
+But you can show mathematically that so
+
+29
+00:01:40.490 --> 00:01:45.430
+long as you use the pinv function
+then this will actually compute
+
+30
+00:01:45.430 --> 00:01:51.000
+the value of data that you want even
+if X transpose X is non-invertible.
+
+31
+00:01:51.000 --> 00:01:52.720
+The specific details between inv.
+
+32
+00:01:52.720 --> 00:01:54.450
+What is the difference between pinv?
+
+33
+00:01:54.450 --> 00:01:55.690
+What is inv?
+
+34
+00:01:55.690 --> 00:01:59.090
+That's somewhat advanced
+numerical computing concepts,
+
+35
+00:01:59.090 --> 00:02:00.740
+I don't really want to get into.
+
+36
+00:02:00.740 --> 00:02:05.220
+But I thought in this optional video, I'll
+try to give you little bit of intuition
+
+37
+00:02:05.220 --> 00:02:08.982
+about what it means for
+X transpose X to be non-invertible.
+
+38
+00:02:08.982 --> 00:02:13.140
+For those of you that know a bit more
+linear Algebra might be interested.
+
+39
+00:02:13.140 --> 00:02:18.400
+I'm not gonna prove this mathematically
+but if X transpose X is non-invertible,
+
+40
+00:02:18.400 --> 00:02:22.160
+there usually two most common causes for
+this.
+
+41
+00:02:22.160 --> 00:02:26.560
+The first cause is if somehow in your
+learning problem you have redundant
+
+42
+00:02:26.560 --> 00:02:27.710
+features.
+
+43
+00:02:27.710 --> 00:02:32.140
+Concretely, if you're trying to predict
+housing prices and if x1 is the size of
+
+44
+00:02:32.140 --> 00:02:37.940
+the house in feet, in square feet and x2
+is the size of the house in square meters,
+
+45
+00:02:37.940 --> 00:02:46.060
+then you know 1 meter is equal to
+3.28 feet Rounded to two decimals.
+
+46
+00:02:46.060 --> 00:02:49.720
+And so your two features will
+always satisfy the constraint x1
+
+47
+00:02:49.720 --> 00:02:54.650
+equals 3.28 squared times x2.
+
+48
+00:02:54.650 --> 00:02:58.730
+And you can show for those of you that are
+somewhat advanced in linear Algebra, but
+
+49
+00:02:58.730 --> 00:03:02.753
+if you're explaining the algebra you can
+actually show that if your two features
+
+50
+00:03:02.753 --> 00:03:05.470
+are related,
+are a linear equation like this.
+
+51
+00:03:05.470 --> 00:03:08.770
+Then matrix X transpose X
+would be non-invertable.
+
+52
+00:03:08.770 --> 00:03:13.430
+The second thing that can cause X
+transpose X to be non-invertable is if you
+
+53
+00:03:13.430 --> 00:03:18.350
+are training, if you are trying to run the
+learning algorithm with a lot of features.
+
+54
+00:03:18.350 --> 00:03:22.520
+Concretely, if m is less than or
+equal to n.
+
+55
+00:03:22.520 --> 00:03:27.850
+For example, if you imagine that
+you have m = 10 training examples
+
+56
+00:03:27.850 --> 00:03:32.770
+that you have n equals 100
+features then you're trying to fit
+
+57
+00:03:32.770 --> 00:03:37.280
+a parameter back to theta which is,
+you know, n plus one dimensional.
+
+58
+00:03:37.280 --> 00:03:38.350
+So this is 101 dimensional,
+
+59
+00:03:38.350 --> 00:03:42.550
+you're trying to fit 101 parameters
+from just 10 training examples.
+
+60
+00:03:44.100 --> 00:03:48.490
+This turns out to sometimes work but
+not always be a good idea.
+
+61
+00:03:48.490 --> 00:03:53.210
+Because as we'll see later,
+you might not have enough data if you only
+
+62
+00:03:53.210 --> 00:03:58.060
+have 10 examples to fit you know,
+100 or 101 parameters.
+
+63
+00:03:58.060 --> 00:04:02.300
+We'll see later in this course why
+this might be too little data to fit
+
+64
+00:04:02.300 --> 00:04:03.990
+this many parameters.
+
+65
+00:04:03.990 --> 00:04:07.780
+But commonly what we do
+then if m is less than n,
+
+66
+00:04:07.780 --> 00:04:11.260
+is to see if we can either
+delete some features or
+
+67
+00:04:11.260 --> 00:04:15.450
+to use a technique called regularization
+which is something that we'll talk about
+
+68
+00:04:15.450 --> 00:04:20.420
+later in this class as well, that will
+kind of let you fit a lot of parameters,
+
+69
+00:04:20.420 --> 00:04:23.660
+use a lot features, even if you have
+a relatively small training set.
+
+70
+00:04:23.660 --> 00:04:27.380
+But this regularization will be
+a later topic in this course.
+
+71
+00:04:27.380 --> 00:04:32.625
+But to summarize if ever you find
+that x transpose x is singular or
+
+72
+00:04:32.625 --> 00:04:37.930
+alternatively you find it non-invertable,
+what I would recommend you do is
+
+73
+00:04:37.930 --> 00:04:43.400
+first look at your features and see if you
+have redundant features like this x1, x2.
+
+74
+00:04:43.400 --> 00:04:47.300
+You're being linearly dependent or being
+a linear function of each other like so.
+
+75
+00:04:47.300 --> 00:04:51.290
+And if you do have redundant features and
+if you just delete one of these features,
+
+76
+00:04:51.290 --> 00:04:53.050
+you really don't need
+both of these features.
+
+77
+00:04:53.050 --> 00:04:55.330
+If you just delete one of these features,
+
+78
+00:04:55.330 --> 00:04:58.790
+that would solve your
+non-invertibility problem.
+
+79
+00:04:58.790 --> 00:05:02.430
+And so I would first think through my
+features and check if any are redundant.
+
+80
+00:05:02.430 --> 00:05:05.770
+And if so then keep deleting
+redundant features until they're no
+
+81
+00:05:05.770 --> 00:05:07.190
+longer redundant.
+
+82
+00:05:07.190 --> 00:05:09.220
+And if your features are not redundant,
+
+83
+00:05:09.220 --> 00:05:11.640
+I would check if I may
+have too many features.
+
+84
+00:05:11.640 --> 00:05:16.050
+And if that's the case, I would either
+delete some features if I can bear to
+
+85
+00:05:16.050 --> 00:05:20.390
+use fewer features or else I would
+consider using regularization.
+
+86
+00:05:20.390 --> 00:05:22.570
+Which is this topic that
+we'll talk about later.
+
+87
+00:05:24.050 --> 00:05:26.690
+So that's it for the normal equation and
+
+88
+00:05:26.690 --> 00:05:31.640
+what it means for if the matrix X
+transpose X is non-invertable but
+
+89
+00:05:31.640 --> 00:05:35.700
+this is a problem that you should run that
+hopefully you run into pretty rarely and
+
+90
+00:05:35.700 --> 00:05:38.490
+if you just implement it
+in octave using P and
+
+91
+00:05:38.490 --> 00:05:42.410
+using the P n function which is
+called a pseudo inverse function so
+
+92
+00:05:42.410 --> 00:05:46.100
+you could use a different linear out your
+alive in Is called a pseudo-inverse but
+
+93
+00:05:46.100 --> 00:05:49.180
+that implementation should
+just do the right thing,
+
+94
+00:05:49.180 --> 00:05:52.420
+even if X transpose X is non-invertable,
+which should happen pretty rarely anyways,
+
+95
+00:05:52.420 --> 00:05:58.450
+so this should not be a problem for
+most implementations of linear regression.

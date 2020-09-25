@@ -1,0 +1,710 @@
+WEBVTT
+
+1
+00:00:00.520 --> 00:00:04.480
+In previous videos, we talked about
+the gradient descent algorithm and
+
+2
+00:00:04.480 --> 00:00:09.540
+we talked about the linear regression
+model and the squared error cost function.
+
+3
+00:00:09.540 --> 00:00:14.280
+In this video we're gonna put together
+gradient descent with our cost function,
+
+4
+00:00:14.280 --> 00:00:17.400
+and that will give us an algorithm for
+linear regression or
+
+5
+00:00:17.400 --> 00:00:18.730
+putting a straight line to our data.
+
+6
+00:00:20.800 --> 00:00:24.950
+So this was what we worked
+out in the previous videos.
+
+7
+00:00:24.950 --> 00:00:28.920
+This gradient descent algorithm
+which you should be familiar and
+
+8
+00:00:28.920 --> 00:00:34.210
+here's the linear regression model
+with our linear hypothesis and
+
+9
+00:00:34.210 --> 00:00:36.540
+our squared error cost function.
+
+10
+00:00:36.540 --> 00:00:42.312
+What we're going to do is
+apply gradient descent
+
+11
+00:00:42.312 --> 00:00:47.820
+to minimize our squared
+error cost function.
+
+12
+00:00:47.820 --> 00:00:51.275
+Now in order to apply gradient descent,
+in order to, you know,
+
+13
+00:00:51.275 --> 00:00:59.810
+write this piece of code, the key term we
+need is this derivative term over here.
+
+14
+00:00:59.810 --> 00:01:04.060
+So you need to figure out what is
+this partial derivative term and
+
+15
+00:01:04.060 --> 00:01:07.710
+plugging in the definition
+of the cause function j.
+
+16
+00:01:07.710 --> 00:01:11.670
+This turns out to be this.
+
+17
+00:01:13.020 --> 00:01:15.550
+Sum from y equals 1 though m.
+
+18
+00:01:15.550 --> 00:01:21.400
+Of this squared error cost function term.
+
+19
+00:01:21.400 --> 00:01:23.520
+And all I did here was I just,
+
+20
+00:01:23.520 --> 00:01:26.190
+you know plug in the definition
+of the cost function there.
+
+21
+00:01:27.290 --> 00:01:34.820
+And simplifying a little bit more,
+this turns out to be equal to this.
+
+22
+00:01:34.820 --> 00:01:43.280
+Sigma i equals one through m of theta
+zero plus theta one x i minus Yi squared.
+
+23
+00:01:43.280 --> 00:01:47.830
+And all I did there was I took
+the definition for my hypothesis and
+
+24
+00:01:47.830 --> 00:01:50.782
+plugged it in there.
+
+25
+00:01:50.782 --> 00:01:53.190
+And turns out we need to figure out
+what is this partial derivative for
+
+26
+00:01:53.190 --> 00:01:56.570
+two cases for J equals 0 and J equals 1.
+
+27
+00:01:56.570 --> 00:02:00.310
+So we want to figure out what
+is this partial derivative for
+
+28
+00:02:00.310 --> 00:02:04.170
+both the theta 0 case and
+the theta 1 case.
+
+29
+00:02:04.170 --> 00:02:06.940
+And I'm just going to
+write out the answers.
+
+30
+00:02:06.940 --> 00:02:12.064
+It turns out this first term is,
+simplifies to 1/M
+
+31
+00:02:12.064 --> 00:02:18.354
+sum from over my training step
+of just that of X(i)- Y(i) and
+
+32
+00:02:18.354 --> 00:02:24.294
+for this term partial derivative
+let's write the theta 1,
+
+33
+00:02:24.294 --> 00:02:27.114
+it turns out I get this term.
+
+34
+00:02:27.114 --> 00:02:34.008
+Minus Y(i) times X(i).
+
+35
+00:02:34.008 --> 00:02:37.440
+Okay and
+
+36
+00:02:37.440 --> 00:02:41.720
+computing these partial derivatives,
+so we're going from this equation.
+
+37
+00:02:41.720 --> 00:02:46.000
+Right going from this equation to
+either of the equations down there.
+
+38
+00:02:46.000 --> 00:02:51.020
+Computing those partial derivative terms
+requires some multivariate calculus.
+
+39
+00:02:51.020 --> 00:02:54.930
+If you know calculus, feel free to work
+through the derivations yourself and
+
+40
+00:02:54.930 --> 00:02:59.510
+check that if you take the derivatives,
+you actually get the answers that I got.
+
+41
+00:02:59.510 --> 00:03:04.050
+But if you're less familiar with calculus,
+don't worry about it and
+
+42
+00:03:04.050 --> 00:03:08.100
+it's fine to just take these equations
+that were worked out and you won't
+
+43
+00:03:08.100 --> 00:03:11.350
+need to know calculus or anything like
+that, in order to do the homework so
+
+44
+00:03:11.350 --> 00:03:13.390
+let's implement gradient descent and
+get back to work.
+
+45
+00:03:14.750 --> 00:03:18.490
+So armed with these definitions or
+armed with what we worked out to be
+
+46
+00:03:18.490 --> 00:03:22.310
+the derivatives which is really just
+the slope of the cost function j
+
+47
+00:03:23.310 --> 00:03:27.160
+we can now plug them back in to
+our gradient descent algorithm.
+
+48
+00:03:27.160 --> 00:03:28.640
+So here's gradient descent for
+
+49
+00:03:28.640 --> 00:03:32.728
+linear regression which is gonna
+repeat until convergence, theta 0 and
+
+50
+00:03:32.728 --> 00:03:38.380
+theta 1 get updated as you know this thing
+minus alpha times the derivative term.
+
+51
+00:03:39.390 --> 00:03:41.070
+So this term here.
+
+52
+00:03:43.080 --> 00:03:46.050
+So here's our linear regression algorithm.
+
+53
+00:03:47.160 --> 00:03:48.628
+This first term here.
+
+54
+00:03:52.529 --> 00:03:56.804
+That term is of course just the partial
+derivative with respect to theta zero,
+
+55
+00:03:56.804 --> 00:03:59.790
+that we worked out on a previous slide.
+
+56
+00:03:59.790 --> 00:04:05.730
+And this second term here,
+that term is just a partial derivative in
+
+57
+00:04:05.730 --> 00:04:11.420
+respect to theta 1,
+that we worked out on the previous line.
+
+58
+00:04:11.420 --> 00:04:15.230
+And just as a quick reminder, you must,
+when implementing gradient descent.
+
+59
+00:04:15.230 --> 00:04:19.265
+There's actually this detail that
+you should be implementing it so
+
+60
+00:04:19.265 --> 00:04:22.250
+the update theta 0 and
+theta 1 simultaneously.
+
+61
+00:04:24.290 --> 00:04:25.570
+So.
+
+62
+00:04:25.570 --> 00:04:28.120
+Let's see how gradient descent works.
+
+63
+00:04:28.120 --> 00:04:31.862
+One of the issues we saw with gradient
+descent is that it can be susceptible to
+
+64
+00:04:31.862 --> 00:04:32.700
+local optima.
+
+65
+00:04:32.700 --> 00:04:36.780
+So when I first explained gradient
+descent I showed you this picture of it
+
+66
+00:04:36.780 --> 00:04:40.900
+going downhill on the surface, and we saw
+how depending on where you initialize it,
+
+67
+00:04:40.900 --> 00:04:43.014
+you can end up at different local optima.
+
+68
+00:04:43.014 --> 00:04:45.480
+You will either wind up here or here.
+
+69
+00:04:45.480 --> 00:04:50.390
+But, it turns out that
+that the cost function for
+
+70
+00:04:50.390 --> 00:04:55.220
+linear regression is always going to
+be a bow shaped function like this.
+
+71
+00:04:55.220 --> 00:05:00.190
+The technical term for this is that
+this is called a convex function.
+
+72
+00:05:03.230 --> 00:05:07.800
+And I'm not gonna give the formal
+definition for what is a convex function,
+
+73
+00:05:07.800 --> 00:05:09.490
+C, O, N, V, E, X.
+
+74
+00:05:09.490 --> 00:05:16.620
+But informally a convex function
+means a bowl shaped function and so
+
+75
+00:05:16.620 --> 00:05:22.295
+this function doesn't have any local
+optima except for the one global optimum.
+
+76
+00:05:22.295 --> 00:05:26.465
+And does gradient descent on this type
+of cost function which you get whenever
+
+77
+00:05:26.465 --> 00:05:30.445
+you're using linear regression it will
+always converge to the global optimum.
+
+78
+00:05:30.445 --> 00:05:33.155
+Because there are no other local optimum,
+global optimum.
+
+79
+00:05:33.155 --> 00:05:36.615
+So now let's see this algorithm in action.
+
+80
+00:05:38.250 --> 00:05:45.910
+As usual, here are plots of the hypothesis
+function and of my cost function j.
+
+81
+00:05:45.910 --> 00:05:50.020
+And so let's say I've initialized
+my parameters at this value.
+
+82
+00:05:50.020 --> 00:05:54.220
+Let's say, usually you initialize
+your parameters at zero, zero.
+
+83
+00:05:54.220 --> 00:05:56.370
+Theta zero and theta equals zero.
+
+84
+00:05:56.370 --> 00:06:01.354
+But for the demonstration,
+in this physical infrontation
+
+85
+00:06:01.354 --> 00:06:07.619
+I've initialized you know, theta zero at
+900 and theta one at about -0.1 okay.
+
+86
+00:06:07.619 --> 00:06:12.644
+And so this corresponds to h(x)=-900-0.1x,
+[the intercept should be +900]
+
+87
+00:06:12.644 --> 00:06:16.547
+is this line,
+out here on the cost function.
+
+88
+00:06:16.547 --> 00:06:21.060
+Now, if we take one step
+in gradient descent,
+
+89
+00:06:21.060 --> 00:06:26.845
+we end up going from this point out here,
+over to the down and
+
+90
+00:06:26.845 --> 00:06:31.510
+left, to that second point over there.
+
+91
+00:06:31.510 --> 00:06:35.450
+And you notice that my line
+changed a little bit, and
+
+92
+00:06:35.450 --> 00:06:39.780
+as I take another step of gradient
+descent, my line on the left will change.
+
+93
+00:06:41.230 --> 00:06:42.380
+Right?
+
+94
+00:06:42.380 --> 00:06:46.370
+And I've also moved to a new
+point on my cost function.
+
+95
+00:06:47.670 --> 00:06:52.760
+And as I take further steps of gradient
+descent, I'm going down in cost.
+
+96
+00:06:52.760 --> 00:06:56.190
+So my parameters and
+such are following this trajectory.
+
+97
+00:06:57.340 --> 00:07:02.430
+And if you look on the left,
+this corresponds with hypotheses.
+
+98
+00:07:02.430 --> 00:07:06.520
+That seem to be getting to be better and
+better fits to the data
+
+99
+00:07:08.200 --> 00:07:14.660
+until eventually I've now wound up at
+the global minimum and this global minimum
+
+100
+00:07:14.660 --> 00:07:20.090
+corresponds to this hypothesis,
+which gets me a good fit to the data.
+
+101
+00:07:21.400 --> 00:07:25.800
+And so that's gradient descent,
+and we've just run it and
+
+102
+00:07:25.800 --> 00:07:31.230
+gotten a good fit to my
+data set of housing prices.
+
+103
+00:07:31.230 --> 00:07:34.490
+And you can now use it to predict,
+you know,
+
+104
+00:07:34.490 --> 00:07:38.900
+if your friend has a house
+size 1250 square feet,
+
+105
+00:07:38.900 --> 00:07:43.350
+you can now read off the value and tell
+them that I don't know maybe they could
+
+106
+00:07:43.350 --> 00:07:48.720
+get $250,000 for their house.
+
+107
+00:07:48.720 --> 00:07:52.620
+Finally just to give this another
+name it turns out that the algorithm
+
+108
+00:07:52.620 --> 00:07:57.510
+that we just went over is sometimes
+called batch gradient descent.
+
+109
+00:07:57.510 --> 00:08:00.730
+And it turns out in machine learning I
+don't know I feel like us machine learning
+
+110
+00:08:00.730 --> 00:08:04.310
+people were not always great
+at giving names to algorithms.
+
+111
+00:08:04.310 --> 00:08:08.880
+But the term batch gradient
+descent refers to the fact that
+
+112
+00:08:08.880 --> 00:08:13.850
+in every step of gradient descent, we're
+looking at all of the training examples.
+
+113
+00:08:13.850 --> 00:08:17.760
+So in gradient descent,
+when computing the derivatives,
+
+114
+00:08:17.760 --> 00:08:21.400
+we're computing the sums [INAUDIBLE].
+
+115
+00:08:21.400 --> 00:08:25.660
+So ever step of gradient descent we end up
+computing something like this that sums
+
+116
+00:08:25.660 --> 00:08:30.620
+over our m training examples and so
+the term batch gradient descent refers to
+
+117
+00:08:30.620 --> 00:08:34.175
+the fact that we're looking at
+the entire batch of training examples.
+
+118
+00:08:34.175 --> 00:08:36.365
+And again,
+it's really not a great name, but
+
+119
+00:08:36.365 --> 00:08:39.585
+this is what machine
+learning people call it.
+
+120
+00:08:39.585 --> 00:08:43.715
+And it turns out that there are sometimes
+other versions of gradient descent that
+
+121
+00:08:43.715 --> 00:08:46.247
+are not batch versions,
+but they are instead.
+
+122
+00:08:46.247 --> 00:08:48.837
+Do not look at the entire training set but
+
+123
+00:08:48.837 --> 00:08:51.247
+look at small subsets of
+the training sets at a time.
+
+124
+00:08:51.247 --> 00:08:55.207
+And we'll talk about those versions
+later in this course as well.
+
+125
+00:08:55.207 --> 00:08:58.357
+But for now using the algorithm we just
+learned about or using batch gradient
+
+126
+00:08:58.357 --> 00:09:03.497
+descent you now know how to implement
+gradient descent for linear regression.
+
+127
+00:09:05.980 --> 00:09:09.550
+So that's linear regression
+with gradient descent.
+
+128
+00:09:09.550 --> 00:09:12.260
+If you've seen advanced
+linear algebra before, so
+
+129
+00:09:12.260 --> 00:09:15.510
+some of you may have taken a class
+in advanced linear algebra.
+
+130
+00:09:15.510 --> 00:09:19.410
+You might know that there exists
+a solution for numerically solving for
+
+131
+00:09:19.410 --> 00:09:22.270
+the minimum of the cost
+function j without needing to
+
+132
+00:09:22.270 --> 00:09:25.870
+use an iterative algorithm
+like gradient descent.
+
+133
+00:09:25.870 --> 00:09:29.730
+Later in this course we'll talk about
+that method as well that just solves for
+
+134
+00:09:29.730 --> 00:09:33.020
+the minimum of the cost function j
+without needing these multiple steps of
+
+135
+00:09:33.020 --> 00:09:34.520
+gradient descent.
+
+136
+00:09:34.520 --> 00:09:37.020
+That other method is called
+the normal equations method.
+
+137
+00:09:37.020 --> 00:09:41.000
+But in case you've heard of that
+method it turns out that gradient
+
+138
+00:09:41.000 --> 00:09:46.420
+descent will scale better to larger data
+sets than that normal equation method.
+
+139
+00:09:46.420 --> 00:09:50.140
+And now that we know about gradient
+descent we'll be able to use it in lots
+
+140
+00:09:50.140 --> 00:09:51.400
+of different contexts and
+
+141
+00:09:51.400 --> 00:09:53.910
+we'll use it in lots of different
+machine learning problems as well.
+
+142
+00:09:55.340 --> 00:10:00.430
+So congrats on learning about your
+first machine learning algorithm.
+
+143
+00:10:00.430 --> 00:10:04.990
+We'll later have exercises in which we'll
+ask you to implement gradient descent and
+
+144
+00:10:04.990 --> 00:10:07.480
+hopefully see these algorithms right for
+yourselves.
+
+145
+00:10:07.480 --> 00:10:11.460
+But before that I first want to
+tell you in the next set of videos.
+
+146
+00:10:11.460 --> 00:10:14.510
+The first one to tell you
+about a generalization of
+
+147
+00:10:14.510 --> 00:10:17.900
+the gradient descent algorithm that
+will make it much more powerful.
+
+148
+00:10:17.900 --> 00:10:20.420
+And I guess I'll tell you
+about that in the next video.

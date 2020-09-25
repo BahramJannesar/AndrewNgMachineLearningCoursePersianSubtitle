@@ -1,0 +1,744 @@
+WEBVTT
+
+1
+00:00:00.290 --> 00:00:03.747
+In this video we'll talk about
+matrix-matrix multiplication, or
+
+2
+00:00:03.747 --> 00:00:06.630
+how to multiply two matrices together.
+
+3
+00:00:06.630 --> 00:00:10.170
+When we talk about the method in
+linear regression for how to solve for
+
+4
+00:00:10.170 --> 00:00:13.123
+the parameters theta 0 and
+theta 1 all in one shot,
+
+5
+00:00:13.123 --> 00:00:16.270
+without needing an iterative
+algorithm like gradient descent.
+
+6
+00:00:16.270 --> 00:00:18.810
+When we talk about that algorithm,
+it turns out
+
+7
+00:00:18.810 --> 00:00:22.840
+that matrix-matrix multiplication is one
+of the key steps that you need to know.
+
+8
+00:00:24.090 --> 00:00:27.440
+So let's, as usual, start with an example.
+
+9
+00:00:28.840 --> 00:00:32.610
+Let's say I have two matrices and
+I want to multiply them together.
+
+10
+00:00:32.610 --> 00:00:34.805
+Let me again just run
+through this example and
+
+11
+00:00:34.805 --> 00:00:38.060
+then I'll tell you a little
+bit of what happened.
+
+12
+00:00:38.060 --> 00:00:43.460
+So the first thing I'm gonna do is
+I'm going to pull out the first
+
+13
+00:00:43.460 --> 00:00:46.480
+column of this matrix on the right.
+
+14
+00:00:46.480 --> 00:00:49.240
+And I'm going to take this
+matrix on the left and
+
+15
+00:00:49.240 --> 00:00:53.790
+multiply it by a vector that
+is just this first column.
+
+16
+00:00:55.180 --> 00:00:59.770
+And it turns out, if I do that,
+I'm going to get the vector 11, 9.
+
+17
+00:00:59.770 --> 00:01:03.370
+So this is the same
+matrix-vector multiplication
+
+18
+00:01:03.370 --> 00:01:04.790
+as you saw in the last video.
+
+19
+00:01:06.070 --> 00:01:08.570
+I worked this out in advance,
+so I know it's 11, 9.
+
+20
+00:01:08.570 --> 00:01:12.620
+And then the second thing
+I want to do is I'm
+
+21
+00:01:12.620 --> 00:01:16.550
+going to pull out the second column
+of this matrix on the right.
+
+22
+00:01:16.550 --> 00:01:20.430
+And I'm then going to take
+this matrix on the left, so
+
+23
+00:01:20.430 --> 00:01:24.960
+take that matrix, and multiply it
+by that second column on the right.
+
+24
+00:01:24.960 --> 00:01:28.840
+So again, this is a matrix-vector
+multiplication step
+
+25
+00:01:28.840 --> 00:01:30.580
+which you saw from the previous video.
+
+26
+00:01:30.580 --> 00:01:35.540
+And it turns out that if you multiply this
+matrix and this vector you get 10, 14.
+
+27
+00:01:35.540 --> 00:01:39.650
+And by the way, if you want to practice
+your matrix-vector multiplication,
+
+28
+00:01:39.650 --> 00:01:42.159
+feel free to pause the video and
+check this product yourself.
+
+29
+00:01:43.260 --> 00:01:46.880
+Then I'm just gonna take these two
+results and put them together, and
+
+30
+00:01:46.880 --> 00:01:48.470
+that'll be my answer.
+
+31
+00:01:48.470 --> 00:01:53.060
+So it turns out the outcome of this
+product is gonna be a two by two matrix.
+
+32
+00:01:53.060 --> 00:01:58.005
+And the way I'm gonna fill in this
+matrix is just by taking my elements 11,
+
+33
+00:01:58.005 --> 00:01:59.950
+9, and plugging them here.
+
+34
+00:01:59.950 --> 00:02:07.510
+And taking 10, 14 and plugging
+them into the second column, okay?
+
+35
+00:02:07.510 --> 00:02:12.350
+So that was the mechanics of how to
+multiply a matrix by another matrix.
+
+36
+00:02:12.350 --> 00:02:15.810
+You basically look at the second
+matrix one column at a time and
+
+37
+00:02:15.810 --> 00:02:17.550
+you assemble the answers.
+
+38
+00:02:17.550 --> 00:02:20.252
+And again, we'll step through this
+much more carefully in a second.
+
+39
+00:02:20.252 --> 00:02:25.494
+But I just want to point out also,
+this first example is a 2x3 matrix.
+
+40
+00:02:25.494 --> 00:02:31.270
+Multiply that by a 3x2 matrix,
+and the outcome
+
+41
+00:02:31.270 --> 00:02:36.520
+of this product turns
+out to be a 2x2 matrix.
+
+42
+00:02:36.520 --> 00:02:39.744
+And again, we'll see in
+a second why this was the case.
+
+43
+00:02:39.744 --> 00:02:42.730
+All right,
+that was the mechanics of the calculation.
+
+44
+00:02:42.730 --> 00:02:46.540
+Let's actually look at the details and
+look at what exactly happened.
+
+45
+00:02:46.540 --> 00:02:47.480
+Here are the details.
+
+46
+00:02:47.480 --> 00:02:52.550
+I have a matrix A and I want to
+multiply that with a matrix B and
+
+47
+00:02:52.550 --> 00:02:54.540
+the result will be some new matrix C.
+
+48
+00:02:55.720 --> 00:03:00.300
+It turns out you can only multiply
+together matrices whose dimensions match.
+
+49
+00:03:00.300 --> 00:03:04.630
+So A is an m x n matrix,
+so m rows, n columns.
+
+50
+00:03:04.630 --> 00:03:07.000
+And we multiply with an n x o matrix.
+
+51
+00:03:07.000 --> 00:03:10.680
+And it turns out this n here
+must match this n here.
+
+52
+00:03:10.680 --> 00:03:13.340
+So the number of columns
+in the first matrix
+
+53
+00:03:13.340 --> 00:03:16.830
+must equal to the number of
+rows in the second matrix.
+
+54
+00:03:16.830 --> 00:03:25.470
+And the result of this product will be
+a m x o matrix, like the matrix C here.
+
+55
+00:03:25.470 --> 00:03:30.220
+And in the previous video everything we
+did corresponded to the special case of
+
+56
+00:03:30.220 --> 00:03:32.400
+o being equal to 1.
+
+57
+00:03:32.400 --> 00:03:35.540
+That was to the case of B being a vector.
+
+58
+00:03:35.540 --> 00:03:40.930
+But now we're gonna deal with the case
+of values of o larger than 1.
+
+59
+00:03:40.930 --> 00:03:46.690
+So here's how you multiply
+together the two matrices.
+
+60
+00:03:46.690 --> 00:03:51.712
+What I'm going to do is I'm going
+to take the first column of B and
+
+61
+00:03:51.712 --> 00:03:57.960
+treat that as a vector, and multiply
+the matrix A by the first column of B.
+
+62
+00:03:57.960 --> 00:04:03.980
+And the result of that will be a n by 1
+vector, and I'm gonna put that over here.
+
+63
+00:04:05.220 --> 00:04:11.880
+Then I'm gonna take the second
+column of B, right?
+
+64
+00:04:11.880 --> 00:04:14.820
+So this is another n by 1 vector.
+
+65
+00:04:14.820 --> 00:04:17.130
+So this column here, this is n by 1.
+
+66
+00:04:17.130 --> 00:04:18.810
+It's an n-dimensional vector.
+
+67
+00:04:18.810 --> 00:04:22.460
+Gonna multiply this matrix
+with this n by 1 vector.
+
+68
+00:04:22.460 --> 00:04:28.600
+The result will be a m-dimensional vector,
+which we'll put there, and so on.
+
+69
+00:04:29.750 --> 00:04:34.860
+And then I'm gonna take the third column,
+multiply it by this matrix.
+
+70
+00:04:34.860 --> 00:04:37.530
+I get a m-dimensional vector.
+
+71
+00:04:37.530 --> 00:04:41.200
+And so on,
+until you get to the last column.
+
+72
+00:04:41.200 --> 00:04:45.230
+The matrix times the last column
+gives you the last column of C.
+
+73
+00:04:46.510 --> 00:04:50.198
+Just to say that again, the ith column
+
+74
+00:04:50.198 --> 00:04:55.154
+of the matrix C is obtained
+by taking the matrix A and
+
+75
+00:04:55.154 --> 00:05:01.149
+multiplying the matrix A with
+the ith column of the matrix B for
+
+76
+00:05:01.149 --> 00:05:05.080
+the values of i = 1, 2, up through o.
+
+77
+00:05:05.080 --> 00:05:10.190
+So this is just a summary of what we did
+up there in order to compute the matrix C.
+
+78
+00:05:11.530 --> 00:05:13.660
+Let's look at just one more example.
+
+79
+00:05:13.660 --> 00:05:17.300
+Let's say I want to multiply
+together these two matrices.
+
+80
+00:05:17.300 --> 00:05:24.230
+So what I'm going to do is first pull out
+the first column of my second matrix.
+
+81
+00:05:24.230 --> 00:05:29.670
+That was my matrix B on
+the previous slide and
+
+82
+00:05:29.670 --> 00:05:32.670
+I therefore have this
+matrix times that vector.
+
+83
+00:05:32.670 --> 00:05:35.340
+And so, oh,
+let's do this calculation quickly.
+
+84
+00:05:35.340 --> 00:05:41.332
+This is going to be equal to the 1, 3 x 0,
+
+85
+00:05:41.332 --> 00:05:46.168
+3, so that gives 1 x 0 + 3 x 3.
+
+86
+00:05:46.168 --> 00:05:51.255
+And the second element is going to be 2,
+5 x 0,
+
+87
+00:05:51.255 --> 00:05:55.488
+3, so that's gonna be 2 x 0 + 5 x 3.
+
+88
+00:05:55.488 --> 00:06:00.748
+And that is 9, 15.
+
+89
+00:06:00.748 --> 00:06:03.158
+Oh, actually let me write that in green.
+
+90
+00:06:03.158 --> 00:06:07.948
+So this is 9, 15.
+
+91
+00:06:07.948 --> 00:06:13.552
+And then next I'm going to pull
+out the second column of this and
+
+92
+00:06:13.552 --> 00:06:16.948
+do the corresponding calculations.
+
+93
+00:06:16.948 --> 00:06:21.608
+So that's this matrix times this vector 1,
+2.
+
+94
+00:06:21.608 --> 00:06:24.731
+Let's also do this quickly, so
+
+95
+00:06:24.731 --> 00:06:30.150
+that's 1 x 1 + 3 x 2,
+so that was that row.
+
+96
+00:06:30.150 --> 00:06:31.168
+And let's do the other one.
+
+97
+00:06:31.168 --> 00:06:33.972
+So let's see,
+
+98
+00:06:33.972 --> 00:06:39.577
+that gives me 2 x 1 + 5 x 2 and
+
+99
+00:06:39.577 --> 00:06:45.184
+so that is going to be equal to,
+
+100
+00:06:45.184 --> 00:06:51.219
+lets see, 1 x 1 + 3 x 1 is 7 and
+
+101
+00:06:51.219 --> 00:06:55.570
+2 x 1 + 5 x 2 is 12.
+
+102
+00:06:55.570 --> 00:06:59.896
+So now I have these two and so my outcome,
+
+103
+00:06:59.896 --> 00:07:03.715
+the product of these two matrices,
+
+104
+00:07:03.715 --> 00:07:08.820
+is going to be this goes here and
+this goes here.
+
+105
+00:07:08.820 --> 00:07:13.937
+So I get 9, 15 and
+
+106
+00:07:13.937 --> 00:07:16.950
+4, 12.
+[It should be 7,12]
+
+107
+00:07:16.950 --> 00:07:22.547
+And you may notice also that the result of
+multiplying a 2x2 matrix with another 2x2
+
+108
+00:07:22.547 --> 00:07:27.930
+matrix, the resulting dimension is going
+to be that first 2 times that second 2.
+
+109
+00:07:27.930 --> 00:07:31.950
+So the result is itself also a 2x2 matrix.
+
+110
+00:07:34.900 --> 00:07:39.839
+Finally, let me show you one more neat
+trick that you can do with matrix-matrix
+
+111
+00:07:39.839 --> 00:07:41.040
+multiplication.
+
+112
+00:07:41.040 --> 00:07:47.019
+Let's say, as before, that we have four
+houses whose prices we wanna predict.
+
+113
+00:07:48.470 --> 00:07:53.780
+Only now, we have three competing
+hypotheses shown here on the right.
+
+114
+00:07:53.780 --> 00:07:56.380
+So if you want to apply all three
+
+115
+00:07:56.380 --> 00:07:59.480
+competing hypotheses to all four
+of your houses, it turns out you
+
+116
+00:07:59.480 --> 00:08:04.030
+can do that very efficiently using
+a matrix-matrix multiplication.
+
+117
+00:08:04.030 --> 00:08:09.050
+So here on the left is my usual matrix,
+same as from the last video
+
+118
+00:08:09.050 --> 00:08:15.620
+where these values are my housing prices
+[he means housing sizes]
+and I've put 1s here on the left as well.
+
+119
+00:08:15.620 --> 00:08:22.486
+And what I am going to do is
+construct another matrix where here,
+
+120
+00:08:22.486 --> 00:08:27.572
+the first column is this -40 and 0.25 and
+
+121
+00:08:27.572 --> 00:08:33.189
+the second column is this 200,
+0.1 and so on.
+
+122
+00:08:33.189 --> 00:08:37.930
+And it turns out that if you
+multiply these two matrices,
+
+123
+00:08:37.930 --> 00:08:44.560
+what you find is that this first column,
+I'll draw that in blue.
+
+124
+00:08:44.560 --> 00:08:46.160
+Well, how do you get this first column?
+
+125
+00:08:47.430 --> 00:08:51.080
+Our procedure for matrix-matrix
+multiplication is, the way you get this
+
+126
+00:08:51.080 --> 00:08:56.330
+first column is you take this matrix and
+you multiply it by this first column.
+
+127
+00:08:56.330 --> 00:09:01.970
+And we saw in the previous video that this
+is exactly the predicted housing prices
+
+128
+00:09:01.970 --> 00:09:07.540
+of the first hypothesis, right,
+of this first hypothesis here.
+
+129
+00:09:08.790 --> 00:09:10.810
+And how about the second column?
+
+130
+00:09:10.810 --> 00:09:13.040
+Well, [INAUDIBLE] second column.
+
+131
+00:09:13.040 --> 00:09:15.050
+The way you get the second column is,
+well,
+
+132
+00:09:15.050 --> 00:09:19.340
+you take this matrix and
+you multiply it by this second column.
+
+133
+00:09:19.340 --> 00:09:23.541
+And so the second column turns out to be
+
+134
+00:09:23.541 --> 00:09:29.319
+the predictions of the second
+hypothesis up there,
+
+135
+00:09:29.319 --> 00:09:33.400
+and similarly for the third column.
+
+136
+00:09:34.450 --> 00:09:36.890
+And so
+I didn't step through all the details, but
+
+137
+00:09:36.890 --> 00:09:41.600
+hopefully you can just feel free to pause
+the video and check the math yourself and
+
+138
+00:09:41.600 --> 00:09:44.120
+check that what I just
+claimed really is true.
+
+139
+00:09:44.120 --> 00:09:48.290
+But it turns out that by constructing
+these two matrices, what you can therefore
+
+140
+00:09:48.290 --> 00:09:54.000
+do is very quickly apply all 3
+hypotheses to all 4 house sizes
+
+141
+00:09:54.000 --> 00:09:59.860
+to get all 12 predicted prices output
+by your 3 hypotheses on your 4 houses.
+
+142
+00:10:00.930 --> 00:10:05.902
+So with just one matrix multiplication
+step you managed to make 12 predictions.
+
+143
+00:10:05.902 --> 00:10:10.760
+And even better, it turns out that in
+order to do that matrix multiplication,
+
+144
+00:10:10.760 --> 00:10:13.852
+there are lots of good
+linear algebra libraries in
+
+145
+00:10:13.852 --> 00:10:16.742
+order to do this multiplication step for
+you.
+
+146
+00:10:16.742 --> 00:10:21.518
+And so pretty much any reasonable
+programming language that you might be
+
+147
+00:10:21.518 --> 00:10:22.072
+using.
+
+148
+00:10:22.072 --> 00:10:25.436
+Certainly all the top ten most
+popular programming languages will
+
+149
+00:10:25.436 --> 00:10:27.935
+have great linear algebra libraries.
+
+150
+00:10:27.935 --> 00:10:31.295
+And there'll be good linear algebra
+libraries that are highly optimized in
+
+151
+00:10:31.295 --> 00:10:35.840
+order to do that matrix-matrix
+multiplication very efficiently.
+
+152
+00:10:35.840 --> 00:10:41.333
+Including taking advantage of any sort of
+parallel computation that your computer
+
+153
+00:10:41.333 --> 00:10:47.070
+may be capable of, whether your computer
+has multiple cores or multiple processors.
+
+154
+00:10:47.070 --> 00:10:51.685
+Or within a processor sometimes
+there's parallelism as well
+
+155
+00:10:51.685 --> 00:10:56.310
+called SIMD parallelism that
+your computer can take care of.
+
+156
+00:10:56.310 --> 00:10:59.410
+And there are very good
+free libraries that you
+
+157
+00:10:59.410 --> 00:11:03.720
+can use to do this matrix-matrix
+multiplication very efficiently, so
+
+158
+00:11:03.720 --> 00:11:08.440
+that you can very efficiently make lots
+of predictions with lots of hypotheses.

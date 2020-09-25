@@ -1,0 +1,130 @@
+WEBVTT
+
+1
+00:00:00.370 --> 00:00:01.740
+What is machine learning?
+
+2
+00:00:01.740 --> 00:00:05.090
+You probably use it dozens of times
+a day without even knowing it.
+
+3
+00:00:05.090 --> 00:00:08.790
+Each time you do a web search on Google or
+Bing, that works so well
+
+4
+00:00:08.790 --> 00:00:12.340
+because their machine learning software
+has figured out how to rank what pages.
+
+5
+00:00:12.340 --> 00:00:17.230
+When Facebook or Apple's photo application
+recognizes your friends in your pictures,
+
+6
+00:00:17.230 --> 00:00:18.850
+that's also machine learning.
+
+7
+00:00:18.850 --> 00:00:20.370
+Each time you read your email and
+
+8
+00:00:20.370 --> 00:00:24.490
+a spam filter saves you from having
+to wade through tons of spam, again,
+
+9
+00:00:24.490 --> 00:00:29.390
+that's because your computer has learned
+to distinguish spam from non-spam email.
+
+10
+00:00:29.390 --> 00:00:31.240
+So, that's machine learning.
+
+11
+00:00:31.240 --> 00:00:35.260
+There's a science of getting computers to
+learn without being explicitly programmed.
+
+12
+00:00:35.260 --> 00:00:38.660
+One of the research projects that I'm
+working on is getting robots to tidy
+
+13
+00:00:38.660 --> 00:00:39.780
+up the house.
+
+14
+00:00:39.780 --> 00:00:41.010
+How do you go about doing that?
+
+15
+00:00:41.010 --> 00:00:44.860
+Well what you can do is have the robot
+watch you demonstrate the task and
+
+16
+00:00:44.860 --> 00:00:46.000
+learn from that.
+
+17
+00:00:46.000 --> 00:00:49.690
+The robot can then watch what objects
+you pick up and where to put them and
+
+18
+00:00:49.690 --> 00:00:52.000
+try to do the same thing
+even when you aren't there.
+
+19
+00:00:52.000 --> 00:00:55.460
+For me, one of the reasons I'm
+excited about this is the AI, or
+
+20
+00:00:55.460 --> 00:00:57.530
+artificial intelligence problem.
+
+21
+00:00:57.530 --> 00:00:59.209
+Building truly intelligent machines,
+
+22
+00:00:59.209 --> 00:01:01.680
+we can do just about anything that you or
+I can do.
+
+23
+00:01:01.680 --> 00:01:04.920
+Many scientists think the best way to
+make progress on this is through learning
+
+24
+00:01:04.920 --> 00:01:09.630
+algorithms called neural networks,
+which mimic how the human brain works, and
+
+25
+00:01:09.630 --> 00:01:11.030
+I'll teach you about that, too.
+
+26
+00:01:11.030 --> 00:01:13.170
+In this class,
+you learn about machine learning and
+
+27
+00:01:13.170 --> 00:01:14.390
+get to implement them yourself.
+
+28
+00:01:14.390 --> 00:01:16.920
+I hope you sign up on our website and
+join us.

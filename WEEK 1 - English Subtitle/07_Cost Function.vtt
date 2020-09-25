@@ -1,0 +1,542 @@
+WEBVTT
+
+1
+00:00:00.620 --> 00:00:03.800
+In this video we'll define
+something called the cost function,
+
+2
+00:00:03.800 --> 00:00:07.480
+this will let us figure out how to fit the
+best possible straight line to our data.
+
+3
+00:00:10.310 --> 00:00:13.820
+In linear progression, we have a training
+set that I showed here remember on
+
+4
+00:00:13.820 --> 00:00:18.870
+notation M was the number of training
+examples, so maybe m equals 47.
+
+5
+00:00:18.870 --> 00:00:20.989
+And the form of our hypothesis,
+
+6
+00:00:22.210 --> 00:00:25.360
+which we use to make predictions
+is this linear function.
+
+7
+00:00:26.430 --> 00:00:31.240
+To introduce a little bit more
+terminology, these theta zero and
+
+8
+00:00:31.240 --> 00:00:37.260
+theta one, they stabilize what I
+call the parameters of the model.
+
+9
+00:00:37.260 --> 00:00:42.560
+And what we're going to do in
+this video is talk about how to
+
+10
+00:00:42.560 --> 00:00:47.550
+go about choosing these two parameter
+values, theta 0 and theta 1.
+
+11
+00:00:47.550 --> 00:00:51.100
+With different choices of
+the parameter's theta 0 and theta 1,
+
+12
+00:00:51.100 --> 00:00:55.250
+we get different hypothesis,
+different hypothesis functions.
+
+13
+00:00:55.250 --> 00:00:58.170
+I know some of you will probably
+be already familiar with
+
+14
+00:00:58.170 --> 00:01:02.110
+what I am going to do on the slide, but
+just for review, here are a few examples.
+
+15
+00:01:02.110 --> 00:01:05.990
+If theta 0 is 1.5 and theta 1 is 0,
+
+16
+00:01:05.990 --> 00:01:08.870
+then the hypothesis function
+will look like this.
+
+17
+00:01:10.070 --> 00:01:17.610
+Because your hypothesis function will
+be h of x equals 1.5 plus 0 times
+
+18
+00:01:17.610 --> 00:01:22.533
+x which is this constant value
+function which is phat at 1.5.
+
+19
+00:01:22.533 --> 00:01:26.600
+If theta0 = 0, theta1 = 0.5, then
+the hypothesis will look like this, and
+
+20
+00:01:26.600 --> 00:01:31.420
+it should pass through this point 2,1 so
+
+21
+00:01:31.420 --> 00:01:34.850
+that you now have h(x).
+
+22
+00:01:34.850 --> 00:01:40.150
+Or really h of theta(x), but sometimes
+I'll just omit theta for brevity.
+
+23
+00:01:40.150 --> 00:01:45.570
+So h(x) will be equal to just 0.5 times x,
+which looks like that.
+
+24
+00:01:45.570 --> 00:01:49.830
+And finally, if theta zero equals one,
+and theta one equals 0.5,
+
+25
+00:01:49.830 --> 00:01:53.280
+then we end up with a hypothesis
+that looks like this.
+
+26
+00:01:53.280 --> 00:01:59.670
+Let's see,
+it should pass through the two-two point.
+
+27
+00:01:59.670 --> 00:02:04.640
+Like so, and this is my new vector of x,
+or my new h subscript theta of x.
+
+28
+00:02:04.640 --> 00:02:08.618
+Whatever way you remember, I said that
+this is h subscript theta of x, but
+
+29
+00:02:08.618 --> 00:02:12.095
+that's a shorthand,
+sometimes I'll just write this as h of x.
+
+30
+00:02:13.917 --> 00:02:19.330
+In linear regression, we have a training
+set, like maybe the one I've plotted here.
+
+31
+00:02:19.330 --> 00:02:24.880
+What we want to do, is come up with
+values for the parameters theta zero and
+
+32
+00:02:24.880 --> 00:02:29.960
+theta one so that the straight line
+we get out of this, corresponds to
+
+33
+00:02:29.960 --> 00:02:33.500
+a straight line that somehow fits the data
+well, like maybe that line over there.
+
+34
+00:02:34.590 --> 00:02:37.190
+So, how do we come up with values,
+
+35
+00:02:37.190 --> 00:02:40.650
+theta zero, theta one, that
+corresponds to a good fit to the data?
+
+36
+00:02:42.540 --> 00:02:46.460
+The idea is we get to choose our
+parameters theta 0, theta 1 so
+
+37
+00:02:46.460 --> 00:02:51.190
+that h of x,
+meaning the value we predict on input x,
+
+38
+00:02:51.190 --> 00:02:55.730
+that this is at least
+close to the values y for
+
+39
+00:02:55.730 --> 00:02:59.908
+the examples in our training set,
+for our training examples.
+
+40
+00:02:59.908 --> 00:03:04.000
+So in our training set, we've given
+a number of examples where we know X
+
+41
+00:03:04.000 --> 00:03:07.350
+decides the wholes and
+we know the actual price is was sold for.
+
+42
+00:03:07.350 --> 00:03:11.100
+So, let's try to choose values for
+the parameters so that,
+
+43
+00:03:11.100 --> 00:03:13.830
+at least in the training set, given the X
+
+44
+00:03:13.830 --> 00:03:19.040
+in the training set we make reason of
+the active predictions for the Y values.
+
+45
+00:03:19.040 --> 00:03:20.980
+Let's formalize this.
+
+46
+00:03:20.980 --> 00:03:23.700
+So linear regression,
+what we're going to do is,
+
+47
+00:03:23.700 --> 00:03:27.430
+I'm going to want to solve
+a minimization problem.
+
+48
+00:03:27.430 --> 00:03:34.319
+So I'll write minimize over theta0 theta1.
+
+49
+00:03:34.319 --> 00:03:39.620
+And I want this to be small, right?
+
+50
+00:03:39.620 --> 00:03:42.960
+I want the difference between h(x) and
+y to be small.
+
+51
+00:03:42.960 --> 00:03:47.770
+And one thing I might do is try
+to minimize the square difference
+
+52
+00:03:47.770 --> 00:03:51.226
+between the output of the hypothesis and
+the actual price of a house.
+
+53
+00:03:51.226 --> 00:03:54.600
+Okay.
+So lets find some details.
+
+54
+00:03:54.600 --> 00:03:59.328
+You remember that I was using
+the notation (x(i),y(i))
+
+55
+00:03:59.328 --> 00:04:02.380
+to represent the ith training example.
+
+56
+00:04:02.380 --> 00:04:07.480
+So what I want really is to
+sum over my training set,
+
+57
+00:04:07.480 --> 00:04:10.666
+something i = 1 to m,
+
+58
+00:04:10.666 --> 00:04:16.040
+of the square difference between,
+this is the prediction
+
+59
+00:04:16.040 --> 00:04:21.261
+of my hypothesis when it is
+input to size of house number i.
+
+60
+00:04:22.560 --> 00:04:25.530
+Right?
+Minus the actual price that house number
+
+61
+00:04:25.530 --> 00:04:29.630
+I was sold for, and I want to
+minimize the sum of my training set,
+
+62
+00:04:29.630 --> 00:04:34.240
+sum from I equals one through M,
+of the difference of this squared error,
+
+63
+00:04:34.240 --> 00:04:37.160
+the square difference between
+the predicted price of a house, and
+
+64
+00:04:37.160 --> 00:04:40.550
+the price that it was actually sold for.
+
+65
+00:04:40.550 --> 00:04:46.950
+And just remind you of notation, m here
+was the size of my training set right?
+
+66
+00:04:46.950 --> 00:04:50.570
+So my m there is my number
+of training examples.
+
+67
+00:04:50.570 --> 00:04:57.750
+Right that hash sign is the abbreviation
+for number of training examples, okay?
+
+68
+00:04:57.750 --> 00:05:01.270
+And to make some of our,
+make the math a little bit easier,
+
+69
+00:05:01.270 --> 00:05:05.950
+I'm going to actually look at
+we are 1 over m times that so
+
+70
+00:05:05.950 --> 00:05:09.380
+let's try to minimize my
+average minimize one over 2m.
+
+71
+00:05:09.380 --> 00:05:14.450
+Putting the 2 at the constant one
+half in front, it may just sound
+
+72
+00:05:14.450 --> 00:05:18.730
+the math probably easier so minimizing
+one-half of something, right, should give
+
+73
+00:05:18.730 --> 00:05:23.130
+you the same values of the process, theta
+0 theta 1, as minimizing that function.
+
+74
+00:05:24.300 --> 00:05:27.640
+And just to be sure,
+this equation is clear, right?
+
+75
+00:05:27.640 --> 00:05:31.452
+This expression in here, h subscript
+
+76
+00:05:31.452 --> 00:05:36.560
+theta(x), this is our usual, right?
+
+77
+00:05:37.890 --> 00:05:42.668
+That is equal to this plus theta one xi.
+
+78
+00:05:42.668 --> 00:05:48.050
+And this notation,
+minimize over theta 0 theta 1, this means
+
+79
+00:05:48.050 --> 00:05:53.140
+you'll find me the values of theta 0 and
+theta 1 that causes this expression
+
+80
+00:05:53.140 --> 00:05:57.620
+to be minimized and this expression
+depends on theta 0 and theta 1, okay?
+
+81
+00:05:57.620 --> 00:05:58.710
+So just a recap.
+
+82
+00:05:58.710 --> 00:06:03.380
+We're closing this problem as, find me
+the values of theta zero and theta one so
+
+83
+00:06:03.380 --> 00:06:07.210
+that the average, the 1 over the 2m,
+
+84
+00:06:07.210 --> 00:06:11.240
+times the sum of square errors between
+my predictions on the training set
+
+85
+00:06:11.240 --> 00:06:15.250
+minus the actual values of the houses
+on the training set is minimized.
+
+86
+00:06:15.250 --> 00:06:20.709
+So this is going to be my overall
+objective function for linear regression.
+
+87
+00:06:22.080 --> 00:06:27.250
+And just to rewrite this out a little bit
+more cleanly, what I'm going to do is,
+
+88
+00:06:27.250 --> 00:06:29.790
+by convention we usually
+define a cost function,
+
+89
+00:06:31.240 --> 00:06:35.930
+which is going to be exactly this,
+that formula I have up here.
+
+90
+00:06:37.040 --> 00:06:45.289
+And what I want to do is
+minimize over theta0 and theta1.
+
+91
+00:06:45.289 --> 00:06:51.770
+My function j(theta0, theta1).
+
+92
+00:06:51.770 --> 00:06:52.430
+Just write this out.
+
+93
+00:06:53.730 --> 00:06:56.540
+This is my cost function.
+
+94
+00:06:59.380 --> 00:07:04.960
+So, this cost function is also
+called the squared error function.
+
+95
+00:07:06.850 --> 00:07:11.190
+When sometimes called the squared
+error cost function and
+
+96
+00:07:11.190 --> 00:07:15.730
+it turns out that why do we
+take the squares of the erros.
+
+97
+00:07:15.730 --> 00:07:19.660
+It turns out that these squared error
+cost function is a reasonable choice and
+
+98
+00:07:19.660 --> 00:07:22.990
+works well for problems for
+most regression programs.
+
+99
+00:07:22.990 --> 00:07:25.740
+There are other cost functions
+that will work pretty well.
+
+100
+00:07:25.740 --> 00:07:29.860
+But the square cost function is
+probably the most commonly used one for
+
+101
+00:07:29.860 --> 00:07:30.935
+regression problems.
+
+102
+00:07:30.935 --> 00:07:34.980
+Later in this class we'll talk about
+alternative cost functions as well,
+
+103
+00:07:34.980 --> 00:07:39.085
+but this choice that we just had should
+be a pretty reasonable thing to try for
+
+104
+00:07:39.085 --> 00:07:41.030
+most linear regression problems.
+
+105
+00:07:42.340 --> 00:07:43.030
+Okay.
+
+106
+00:07:43.030 --> 00:07:44.280
+So that's the cost function.
+
+107
+00:07:45.340 --> 00:07:50.840
+So far we've just seen a mathematical
+definition of this cost function.
+
+108
+00:07:50.840 --> 00:07:54.310
+In case this function j of theta zero,
+theta one.
+
+109
+00:07:54.310 --> 00:07:56.260
+In case this function seems
+a little bit abstract,
+
+110
+00:07:56.260 --> 00:07:58.885
+and you still don't have a good
+sense of what it's doing,
+
+111
+00:07:58.885 --> 00:08:03.210
+in the next video, in the next
+couple videos, I'm actually going
+
+112
+00:08:03.210 --> 00:08:07.930
+to go a little bit deeper into what
+the cause function "J" is doing and try to
+
+113
+00:08:07.930 --> 00:08:11.730
+give you better intuition about what
+is computing and why we want to use it...

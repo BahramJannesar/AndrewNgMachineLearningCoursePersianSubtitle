@@ -1,0 +1,651 @@
+WEBVTT
+
+1
+00:00:00.450 --> 00:00:03.210
+In this video,
+I want to give you more practical tips for
+
+2
+00:00:03.210 --> 00:00:05.070
+getting gradient descent to work.
+
+3
+00:00:05.070 --> 00:00:08.650
+The ideas in this video will center
+around the learning rate alpha.
+
+4
+00:00:09.860 --> 00:00:13.180
+Concretely, here's the gradient
+descent update rule.
+
+5
+00:00:13.180 --> 00:00:16.270
+And what I want to do in
+this video is tell you
+
+6
+00:00:16.270 --> 00:00:19.050
+about what I think of as debugging,
+and some tips for
+
+7
+00:00:19.050 --> 00:00:22.390
+making sure that gradient
+descent is working correctly.
+
+8
+00:00:22.390 --> 00:00:26.480
+And second, I wanna tell you how to
+choose the learning rate alpha or
+
+9
+00:00:26.480 --> 00:00:29.250
+at least how I go about choosing it.
+
+10
+00:00:29.250 --> 00:00:32.770
+Here's something that I often do to make
+sure that gradient descent is working
+
+11
+00:00:32.770 --> 00:00:34.150
+correctly.
+
+12
+00:00:34.150 --> 00:00:38.219
+The job of gradient descent is
+to find the value of theta for
+
+13
+00:00:38.219 --> 00:00:42.553
+you that hopefully minimizes
+the cost function J(theta).
+
+14
+00:00:42.553 --> 00:00:47.483
+What I often do is therefore plot
+the cost function J(theta) as
+
+15
+00:00:47.483 --> 00:00:49.750
+gradient descent runs.
+
+16
+00:00:49.750 --> 00:00:53.515
+So the x axis here is a number of
+iterations of gradient descent and
+
+17
+00:00:53.515 --> 00:00:58.659
+as gradient descent runs you hopefully
+get a plot that maybe looks like this.
+
+18
+00:00:59.720 --> 00:01:02.960
+Notice that the x axis
+is number of iterations.
+
+19
+00:01:02.960 --> 00:01:07.795
+Previously we where looking at plots
+of J(theta) where the x axis, where
+
+20
+00:01:07.795 --> 00:01:13.107
+the horizontal axis, was the parameter
+vector theta but this is not what this is.
+
+21
+00:01:13.107 --> 00:01:15.767
+Concretely, what this point is,
+
+22
+00:01:15.767 --> 00:01:20.570
+is I'm going to run gradient descent for
+100 iterations.
+
+23
+00:01:20.570 --> 00:01:25.240
+And whatever value I get for
+theta after 100 iterations,
+
+24
+00:01:25.240 --> 00:01:28.770
+I'm going to get some value of
+theta after 100 iterations.
+
+25
+00:01:28.770 --> 00:01:32.630
+And I'm going to evaluate
+the cost function J(theta).
+
+26
+00:01:32.630 --> 00:01:35.630
+For the value of theta I
+get after 100 iterations,
+
+27
+00:01:35.630 --> 00:01:39.760
+and this vertical height
+is the value of J(theta).
+
+28
+00:01:39.760 --> 00:01:43.630
+For the value of theta I got after
+100 iterations of gradient descent.
+
+29
+00:01:43.630 --> 00:01:49.620
+And this point here that corresponds
+to the value of J(theta) for
+
+30
+00:01:49.620 --> 00:01:53.810
+the theta that I get after I've run
+gradient descent for 200 iterations.
+
+31
+00:01:55.230 --> 00:01:59.353
+So what this plot is showing is, is it's
+showing the value of your cost function
+
+32
+00:01:59.353 --> 00:02:02.020
+after each iteration of gradient decent.
+
+33
+00:02:02.020 --> 00:02:07.392
+And if gradient is working
+properly then J(theta)
+
+34
+00:02:07.392 --> 00:02:11.671
+should decrease after every iteration.
+
+35
+00:02:17.058 --> 00:02:21.774
+And one useful thing that this sort of
+plot can tell you also is that if you look
+
+36
+00:02:21.774 --> 00:02:26.783
+at the specific figure that I've drawn,
+it looks like by the time you've gotten
+
+37
+00:02:26.783 --> 00:02:31.350
+out to maybe 300 iterations,
+between 300 and 400 iterations,
+
+38
+00:02:31.350 --> 00:02:35.720
+in this segment it looks like
+J(theta) hasn't gone down much more.
+
+39
+00:02:35.720 --> 00:02:38.540
+So by the time you get to 400 iterations,
+
+40
+00:02:38.540 --> 00:02:41.520
+it looks like this curve
+has flattened out here.
+
+41
+00:02:41.520 --> 00:02:46.090
+And so way out here 400 iterations,
+it looks like gradient descent has more or
+
+42
+00:02:46.090 --> 00:02:50.510
+less converged because your cost
+function isn't going down much more.
+
+43
+00:02:50.510 --> 00:02:53.800
+So looking at this figure can
+also help you judge whether or
+
+44
+00:02:53.800 --> 00:02:55.829
+not gradient descent has converged.
+
+45
+00:02:57.580 --> 00:03:01.630
+By the way, the number of iterations
+the gradient descent takes to converge for
+
+46
+00:03:01.630 --> 00:03:04.850
+a physical application can vary a lot,
+so maybe for
+
+47
+00:03:04.850 --> 00:03:09.220
+one application, gradient descent may
+converge after just thirty iterations.
+
+48
+00:03:09.220 --> 00:03:15.110
+For a different application, gradient
+descent may take 3,000 iterations,
+
+49
+00:03:15.110 --> 00:03:20.110
+for another learning algorithm,
+it may take 3 million iterations.
+
+50
+00:03:20.110 --> 00:03:24.048
+It turns out to be very difficult to tell
+in advance how many iterations gradient
+
+51
+00:03:24.048 --> 00:03:25.476
+descent needs to converge.
+
+52
+00:03:25.476 --> 00:03:30.026
+And is usually by plotting this sort of
+plot, plotting the cost function as we
+
+53
+00:03:30.026 --> 00:03:34.430
+increase in number in iterations,
+is usually by looking at these plots.
+
+54
+00:03:34.430 --> 00:03:37.725
+But I try to tell if gradient
+descent has converged.
+
+55
+00:03:37.725 --> 00:03:42.430
+It's also possible to come up
+with automatic convergence test,
+
+56
+00:03:42.430 --> 00:03:47.560
+namely to have a algorithm try to tell
+you if gradient descent has converged.
+
+57
+00:03:47.560 --> 00:03:52.310
+And here's maybe a pretty typical example
+of an automatic convergence test.
+
+58
+00:03:52.310 --> 00:03:57.100
+And such a test may declare convergence
+if your cost function J(theta)
+
+59
+00:03:57.100 --> 00:04:01.220
+decreases by less than
+some small value epsilon,
+
+60
+00:04:01.220 --> 00:04:05.340
+some small value 10 to
+the minus 3 in one iteration.
+
+61
+00:04:05.340 --> 00:04:10.460
+But I find that usually choosing what
+this threshold is is pretty difficult.
+
+62
+00:04:10.460 --> 00:04:13.840
+And so in order to check your
+gradient descent's converge
+
+63
+00:04:13.840 --> 00:04:18.110
+I actually tend to look at plots like
+these, like this figure on the left,
+
+64
+00:04:18.110 --> 00:04:21.740
+rather than rely on
+an automatic convergence test.
+
+65
+00:04:21.740 --> 00:04:25.370
+Looking at this sort of figure can also
+tell you, or give you an advance warning,
+
+66
+00:04:25.370 --> 00:04:28.730
+if maybe gradient descent
+is not working correctly.
+
+67
+00:04:28.730 --> 00:04:33.600
+Concretely, if you plot J(theta) as
+a function of the number of iterations.
+
+68
+00:04:33.600 --> 00:04:38.280
+Then if you see a figure like this
+where J(theta) is actually increasing,
+
+69
+00:04:38.280 --> 00:04:43.110
+then that gives you a clear sign that
+gradient descent is not working.
+
+70
+00:04:43.110 --> 00:04:47.250
+And a theta like this usually means that
+you should be using learning rate alpha.
+
+71
+00:04:48.320 --> 00:04:52.885
+If J(theta) is actually increasing,
+the most common cause for
+
+72
+00:04:52.885 --> 00:04:58.370
+that is if you're trying to minimize
+a function, that maybe looks like this.
+
+73
+00:04:59.380 --> 00:05:02.545
+But if your learning rate is too
+big then if you start off there,
+
+74
+00:05:02.545 --> 00:05:06.090
+gradient descent may overshoot
+the minimum and send you there.
+
+75
+00:05:06.090 --> 00:05:07.450
+And if the learning rate is too big,
+
+76
+00:05:07.450 --> 00:05:11.525
+you may overshoot again and
+it sends you there, and so on.
+
+77
+00:05:11.525 --> 00:05:15.075
+So that, what you really wanted was for
+it to start here and for
+
+78
+00:05:15.075 --> 00:05:17.975
+it to slowly go downhill, right?
+
+79
+00:05:17.975 --> 00:05:20.096
+But if the learning rate is too big,
+
+80
+00:05:20.096 --> 00:05:24.284
+then gradient descent can instead
+keep on overshooting the minimum.
+
+81
+00:05:24.284 --> 00:05:26.617
+So that you actually end
+up getting worse and
+
+82
+00:05:26.617 --> 00:05:30.690
+worse instead of getting to higher
+values of the cost function J(theta).
+
+83
+00:05:30.690 --> 00:05:34.140
+So you end up with a plot like this and
+if you see a plot like this,
+
+84
+00:05:34.140 --> 00:05:38.660
+the fix is usually just to
+use a smaller value of alpha.
+
+85
+00:05:38.660 --> 00:05:41.820
+Oh, and also, of course, make sure
+your code doesn't have a bug of it.
+
+86
+00:05:41.820 --> 00:05:46.700
+But usually too large a value of
+alpha could be a common problem.
+
+87
+00:05:49.020 --> 00:05:53.090
+Similarly sometimes you may also see
+J(theta) do something like this,
+
+88
+00:05:53.090 --> 00:05:56.890
+it may go down for a while then go up then
+go down for a while then go up go down for
+
+89
+00:05:56.890 --> 00:05:58.850
+a while go up and so on.
+
+90
+00:05:58.850 --> 00:06:03.130
+And a fix for something like this is
+also to use a smaller value of alpha.
+
+91
+00:06:04.150 --> 00:06:05.400
+I'm not going to prove it here,
+
+92
+00:06:05.400 --> 00:06:09.560
+but under other assumptions about the cost
+function J, that does hold true for
+
+93
+00:06:09.560 --> 00:06:14.180
+linear regression, mathematicians
+have shown that if your learning rate
+
+94
+00:06:14.180 --> 00:06:19.030
+alpha is small enough, then J(theta)
+should decrease on every iteration.
+
+95
+00:06:19.030 --> 00:06:21.979
+So if this doesn't happen probably
+means the alpha's too big,
+
+96
+00:06:21.979 --> 00:06:23.810
+you should set it smaller.
+
+97
+00:06:23.810 --> 00:06:26.430
+But of course, you also don't want
+your learning rate to be too small
+
+98
+00:06:26.430 --> 00:06:30.830
+because if you do that then the gradient
+descent can be slow to converge.
+
+99
+00:06:31.930 --> 00:06:36.760
+And if alpha were too small,
+you might end up starting out here, say,
+
+100
+00:06:36.760 --> 00:06:40.930
+and end up taking just
+minuscule baby steps.
+
+101
+00:06:40.930 --> 00:06:47.100
+And just taking a lot of iterations
+before you finally get to the minimum,
+
+102
+00:06:47.100 --> 00:06:50.990
+and so if alpha is too small, gradient
+descent can make very slow progress and
+
+103
+00:06:50.990 --> 00:06:52.360
+be slow to converge.
+
+104
+00:06:52.360 --> 00:06:55.510
+To summarize,
+if the learning rate is too small,
+
+105
+00:06:55.510 --> 00:06:59.845
+you can have a slow convergence problem,
+and if the learning rate is too large,
+
+106
+00:06:59.845 --> 00:07:05.640
+J(theta) may not decrease on every
+iteration and it may not even converge.
+
+107
+00:07:05.640 --> 00:07:11.490
+In some cases if the learning rate is too
+large, slow convergence is also possible.
+
+108
+00:07:11.490 --> 00:07:15.220
+But the more common problem you see is
+
+109
+00:07:15.220 --> 00:07:19.040
+just that J(theta) may not
+decrease on every iteration.
+
+110
+00:07:19.040 --> 00:07:23.810
+And in order to debug all of these things,
+often plotting that J(theta)
+
+111
+00:07:23.810 --> 00:07:27.810
+as a function of the number of iterations
+can help you figure out what's going on.
+
+112
+00:07:27.810 --> 00:07:31.620
+Concretely, what I actually do
+when I run gradient descent
+
+113
+00:07:31.620 --> 00:07:33.500
+is I would try a range of values.
+
+114
+00:07:33.500 --> 00:07:36.460
+So just try running gradient
+descent with a range of values for
+
+115
+00:07:36.460 --> 00:07:38.670
+alpha, like 0.001 and 0.01.
+
+116
+00:07:38.670 --> 00:07:41.550
+So these are factor of ten differences.
+
+117
+00:07:41.550 --> 00:07:45.250
+And for these different values of alpha
+are just plot J(theta) as a function of
+
+118
+00:07:45.250 --> 00:07:47.290
+number of iterations, and
+
+119
+00:07:47.290 --> 00:07:54.160
+then pick the value of alpha that seems to
+be causing J(theta) to decrease rapidly.
+
+120
+00:07:54.160 --> 00:07:57.180
+In fact, what I do actually
+isn't these steps of ten.
+
+121
+00:07:57.180 --> 00:08:00.970
+So this is a scale factor
+of ten of each step up.
+
+122
+00:08:00.970 --> 00:08:03.679
+What I actually do is try
+this range of values.
+
+123
+00:08:06.827 --> 00:08:09.985
+And so on, where this is 0.001.
+
+124
+00:08:09.985 --> 00:08:13.613
+I'll then increase the learning
+rate threefold to get 0.003.
+
+125
+00:08:13.613 --> 00:08:15.232
+And then this step up,
+
+126
+00:08:15.232 --> 00:08:20.627
+this is another roughly threefold
+increase from 0.003 to 0.01.
+
+127
+00:08:20.627 --> 00:08:25.512
+And so these are, roughly,
+trying out gradient descents with each
+
+128
+00:08:25.512 --> 00:08:30.640
+value I try being about 3x
+bigger than the previous value.
+
+129
+00:08:30.640 --> 00:08:33.316
+So what I'll do is try a range
+of values until I've found one
+
+130
+00:08:33.316 --> 00:08:37.078
+value that's too small and made sure that
+I've found one value that's too large.
+
+131
+00:08:37.078 --> 00:08:40.966
+And then I'll sort of try to pick
+the largest possible value, or
+
+132
+00:08:40.966 --> 00:08:45.943
+just something slightly smaller than
+the largest reasonable value that I found.
+
+133
+00:08:45.943 --> 00:08:51.780
+And when I do that usually it just gives
+me a good learning rate for my problem.
+
+134
+00:08:51.780 --> 00:08:55.910
+And if you do this too, maybe you'll be
+able to choose a good learning rate for
+
+135
+00:08:55.910 --> 00:08:58.010
+your implementation of gradient descent.

@@ -1,0 +1,921 @@
+WEBVTT
+
+1
+00:00:01.020 --> 00:00:05.100
+In the last video, we talked about
+the hypothesis representation for
+
+2
+00:00:05.100 --> 00:00:06.200
+logistic regression.
+
+3
+00:00:06.200 --> 00:00:10.840
+What Id like to do now is tell you about
+something called the decision boundary,
+
+4
+00:00:10.840 --> 00:00:15.070
+and this will give us a better sense
+of what the logistic regressions
+
+5
+00:00:15.070 --> 00:00:16.740
+hypothesis function is computing.
+
+6
+00:00:17.740 --> 00:00:22.510
+To recap, this is what we wrote
+out last time, where we said that
+
+7
+00:00:22.510 --> 00:00:27.780
+the hypothesis is represented as h
+of x equals g of theta transpose x,
+
+8
+00:00:27.780 --> 00:00:32.810
+where g is this function called the
+sigmoid function, which looks like this.
+
+9
+00:00:32.810 --> 00:00:37.400
+It slowly increases from zero to one,
+asymptoting at one.
+
+10
+00:00:38.930 --> 00:00:42.160
+What I want to do now is
+try to understand better
+
+11
+00:00:42.160 --> 00:00:45.080
+when this hypothesis will
+make predictions that y
+
+12
+00:00:45.080 --> 00:00:49.670
+is equal to 1 versus when it might
+make predictions that y is equal to 0.
+
+13
+00:00:49.670 --> 00:00:53.260
+And understand better what
+hypothesis function looks like
+
+14
+00:00:53.260 --> 00:00:56.470
+particularly when we have
+more than one feature.
+
+15
+00:00:56.470 --> 00:01:00.610
+Concretely, this hypothesis
+is outputting estimates
+
+16
+00:01:00.610 --> 00:01:05.560
+of the probability that y is equal to one,
+given x and parameterized by theta.
+
+17
+00:01:05.560 --> 00:01:08.750
+So if we wanted to predict
+is y equal to one or
+
+18
+00:01:08.750 --> 00:01:12.230
+is y equal to zero,
+here's something we might do.
+
+19
+00:01:12.230 --> 00:01:16.360
+Whenever the hypothesis outputs
+that the probability of y being one
+
+20
+00:01:16.360 --> 00:01:21.170
+is greater than or equal to 0.5, so
+this means that if there is more likely to
+
+21
+00:01:21.170 --> 00:01:25.740
+be y equals 1 than y equals 0,
+then let's predict y equals 1.
+
+22
+00:01:25.740 --> 00:01:30.870
+And otherwise, if the probability,
+the estimated probability of y being
+
+23
+00:01:30.870 --> 00:01:34.820
+over 1 is less than 0.5,
+then let's predict y equals 0.
+
+24
+00:01:34.820 --> 00:01:40.080
+And I chose a greater than or
+equal to here and less than here If
+
+25
+00:01:40.080 --> 00:01:45.080
+h of x is equal to 0.5 exactly, then
+you could predict positive or negative,
+
+26
+00:01:45.080 --> 00:01:50.960
+but I probably created a loophole here, so
+we default maybe to predicting positive
+
+27
+00:01:50.960 --> 00:01:54.830
+if h of x is 0.5, but that's a detail
+that really doesn't matter that much.
+
+28
+00:01:56.690 --> 00:02:01.750
+What I want to do is understand better
+when is it exactly that h of x will
+
+29
+00:02:01.750 --> 00:02:08.420
+be greater than or equal to 0.5, so that
+we'll end up predicting y is equal to 1.
+
+30
+00:02:08.420 --> 00:02:13.350
+If we look at this plot
+of the sigmoid function,
+
+31
+00:02:13.350 --> 00:02:19.040
+we'll notice that the sigmoid function,
+g of z is greater than or
+
+32
+00:02:19.040 --> 00:02:26.050
+equal to 0.5 whenever z is greater than or
+equal to zero.
+
+33
+00:02:26.050 --> 00:02:32.580
+So is in this half of the figure that g
+takes on values that are 0.5 and higher.
+
+34
+00:02:32.580 --> 00:02:37.980
+This notch here, that's 0.5, and
+so when z is positive, g of z,
+
+35
+00:02:37.980 --> 00:02:41.534
+the sigmoid function is greater than or
+equal to 0.5.
+
+36
+00:02:42.550 --> 00:02:48.168
+Since the hypothesis for logistic
+regression is h of x equals g of theta and
+
+37
+00:02:48.168 --> 00:02:53.966
+transpose x, this is therefore going
+to be greater than or equal to 0.5,
+
+38
+00:02:53.966 --> 00:03:00.240
+whenever theta transpose x is
+greater than or equal to 0.
+
+39
+00:03:00.240 --> 00:03:06.670
+So what we're shown, right, because here
+theta transpose x takes the role of z.
+
+40
+00:03:08.230 --> 00:03:13.150
+So what we're shown is that a hypothesis
+is gonna predict y equals 1
+
+41
+00:03:13.150 --> 00:03:17.920
+whenever theta transpose x is
+greater than or equal to 0.
+
+42
+00:03:17.920 --> 00:03:24.700
+Let's now consider the other case of when
+a hypothesis will predict y is equal to 0.
+
+43
+00:03:24.700 --> 00:03:29.946
+Well, by similar argument,
+h(x) is going to be less than 0.5
+
+44
+00:03:29.946 --> 00:03:35.598
+whenever g(z) is less than 0.5
+because the range of values of z
+
+45
+00:03:35.598 --> 00:03:41.568
+that cause g(z) to take on values less
+than 0.5, well, that's when z is negative.
+
+46
+00:03:41.568 --> 00:03:44.940
+So when g(z) is less than 0.5,
+
+47
+00:03:44.940 --> 00:03:48.370
+a hypothesis will predict
+that y is equal to 0.
+
+48
+00:03:48.370 --> 00:03:51.345
+And by similar argument
+to what we had earlier,
+
+49
+00:03:51.345 --> 00:03:56.880
+h(x) is equal to g of
+theta transpose x and
+
+50
+00:03:56.880 --> 00:04:03.864
+so we'll predict y equals 0 whenever this
+quantity theta transpose x is less than 0.
+
+51
+00:04:04.980 --> 00:04:10.237
+To summarize what we just worked out, we
+saw that if we decide to predict whether
+
+52
+00:04:10.237 --> 00:04:15.571
+y=1 or y=0 depending on whether the
+estimated probability is greater than or
+
+53
+00:04:15.571 --> 00:04:21.064
+equal to 0.5, or whether less than 0.5,
+then that's the same as saying that
+
+54
+00:04:21.064 --> 00:04:26.720
+when we predict y=1 whenever theta
+transpose x is greater than or equal to 0.
+
+55
+00:04:26.720 --> 00:04:31.050
+And we'll predict y is equal to 0 whenever
+theta transpose x is less than 0.
+
+56
+00:04:31.050 --> 00:04:35.320
+Let's use this to better understand
+
+57
+00:04:35.320 --> 00:04:40.090
+how the hypothesis of logistic
+regression makes those predictions.
+
+58
+00:04:40.090 --> 00:04:44.510
+Now, let's suppose we have a training
+set like that shown on the slide.
+
+59
+00:04:44.510 --> 00:04:47.100
+And suppose a hypothesis is
+
+60
+00:04:47.100 --> 00:04:51.860
+h of x equals g of theta zero plus
+theta one x one plus theta two x two.
+
+61
+00:04:52.860 --> 00:04:56.740
+We haven't talked yet about how to
+fit the parameters of this model.
+
+62
+00:04:56.740 --> 00:04:59.340
+We'll talk about that in the next video.
+
+63
+00:04:59.340 --> 00:05:03.230
+But suppose that via
+a procedure to specified.
+
+64
+00:05:03.230 --> 00:05:06.200
+We end up choosing the following
+values for the parameters.
+
+65
+00:05:06.200 --> 00:05:12.930
+Let's say we choose theta 0 equals 3,
+theta 1 equals 1, theta 2 equals 1.
+
+66
+00:05:12.930 --> 00:05:18.106
+So this means that my parameter
+vector is going to be theta
+
+67
+00:05:18.106 --> 00:05:23.011
+equals minus 3, 1, 1.
+
+68
+00:05:24.110 --> 00:05:30.130
+So, when given this choice
+of my hypothesis parameters,
+
+69
+00:05:30.130 --> 00:05:35.550
+let's try to figure out where a hypothesis
+would end up predicting y equals one and
+
+70
+00:05:35.550 --> 00:05:37.980
+where it would end up
+predicting y equals zero.
+
+71
+00:05:39.170 --> 00:05:42.340
+Using the formulas that we were
+taught on the previous slide,
+
+72
+00:05:42.340 --> 00:05:46.960
+we know that y equals one is more likely,
+that is the probability that y
+
+73
+00:05:46.960 --> 00:05:51.806
+equals one is greater than or
+equal to 0.5,
+
+74
+00:05:51.806 --> 00:05:57.230
+whenever theta transpose
+x is greater than zero.
+
+75
+00:05:57.230 --> 00:06:01.710
+And this formula that I just underlined,
+-3 + x1 + x2,
+
+76
+00:06:01.710 --> 00:06:06.560
+is, of course,
+theta transpose x when theta
+
+77
+00:06:06.560 --> 00:06:11.160
+is equal to this value of
+the parameters that we just chose.
+
+78
+00:06:12.420 --> 00:06:16.900
+So for any example, for
+any example which features x1 and
+
+79
+00:06:16.900 --> 00:06:20.100
+x2 that satisfy this equation,
+
+80
+00:06:20.100 --> 00:06:25.290
+that minus 3 plus x1 plus x2 is
+greater than or equal to 0, our
+
+81
+00:06:25.290 --> 00:06:30.994
+hypothesis will think that y equals 1, the
+small x will predict that y is equal to 1.
+
+82
+00:06:32.460 --> 00:06:36.426
+We can also take -3 and
+bring this to the right and
+
+83
+00:06:36.426 --> 00:06:41.055
+rewrite this as x1+x2 is greater than or
+equal to 3, so
+
+84
+00:06:41.055 --> 00:06:45.873
+equivalently, we found that
+this hypothesis would predict
+
+85
+00:06:45.873 --> 00:06:50.329
+y=1 whenever x1+x2 is greater than or
+equal to 3.
+
+86
+00:06:51.930 --> 00:06:56.816
+Let's see what that means on the figure,
+if I write down the equation,
+
+87
+00:06:56.816 --> 00:07:03.510
+X1 + X2 = 3, this defines
+the equation of a straight line and
+
+88
+00:07:03.510 --> 00:07:08.680
+if I draw what that straight line looks
+like, it gives me the following line
+
+89
+00:07:08.680 --> 00:07:13.699
+which passes through 3 and
+3 on the x1 and the x2 axis.
+
+90
+00:07:16.250 --> 00:07:19.930
+So the part of the infospace,
+the part of the X1 X2
+
+91
+00:07:19.930 --> 00:07:24.650
+plane that corresponds to when X1 plus
+X2 is greater than or equal to 3,
+
+92
+00:07:24.650 --> 00:07:29.680
+that's going to be this right half thing,
+that is everything to the up and
+
+93
+00:07:29.680 --> 00:07:34.080
+everything to the upper right portion
+of this magenta line that I just drew.
+
+94
+00:07:34.080 --> 00:07:39.670
+And so, the region where our hypothesis
+will predict y = 1, is this region,
+
+95
+00:07:39.670 --> 00:07:44.410
+just really this huge region,
+this half space over to the upper right.
+
+96
+00:07:44.410 --> 00:07:49.710
+And let me just write that down,
+I'm gonna call this the y = 1 region.
+
+97
+00:07:49.710 --> 00:07:56.530
+And, in contrast,
+the region where x1 + x2 is less than 3,
+
+98
+00:07:56.530 --> 00:08:01.200
+that's when we will predict
+that y is equal to 0.
+
+99
+00:08:01.200 --> 00:08:03.830
+And that corresponds to this region.
+
+100
+00:08:03.830 --> 00:08:06.638
+And there's really a half plane, but
+
+101
+00:08:06.638 --> 00:08:12.480
+that region on the left is the region
+where our hypothesis will predict y = 0.
+
+102
+00:08:12.480 --> 00:08:16.475
+I wanna give this line,
+this magenta line that I drew a name.
+
+103
+00:08:16.475 --> 00:08:22.335
+This line, there,
+is called the decision boundary.
+
+104
+00:08:24.570 --> 00:08:28.760
+And concretely, this straight line,
+X1 plus X equals 3.
+
+105
+00:08:28.760 --> 00:08:33.830
+That corresponds to the set of points, so
+that corresponds to the region where H of
+
+106
+00:08:33.830 --> 00:08:40.350
+X is equal to 0.5 exactly and the decision
+boundary that is this straight line,
+
+107
+00:08:40.350 --> 00:08:45.370
+that's the line that separates the region
+where the hypothesis predicts Y equals 1
+
+108
+00:08:45.370 --> 00:08:50.210
+from the region where the hypothesis
+predicts that y is equal to zero.
+
+109
+00:08:50.210 --> 00:08:55.940
+And just to be clear, the decision
+boundary is a property of the hypothesis
+
+110
+00:08:57.470 --> 00:09:00.870
+including the parameters theta zero,
+theta one, theta two.
+
+111
+00:09:00.870 --> 00:09:03.280
+And in the figure I drew a training set,
+
+112
+00:09:03.280 --> 00:09:06.520
+I drew a data set,
+in order to help the visualization.
+
+113
+00:09:06.520 --> 00:09:11.590
+But even if we take away the data set
+this decision boundary and the region
+
+114
+00:09:11.590 --> 00:09:16.650
+where we predict y =1 versus y = 0,
+that's a property of the hypothesis and
+
+115
+00:09:16.650 --> 00:09:20.710
+of the parameters of the hypothesis and
+not a property of the data set.
+
+116
+00:09:22.190 --> 00:09:25.800
+Later on, of course, we'll talk
+about how to fit the parameters and
+
+117
+00:09:25.800 --> 00:09:29.670
+there we'll end up using the training set,
+using our data.
+
+118
+00:09:29.670 --> 00:09:32.510
+To determine the value of the parameters.
+
+119
+00:09:32.510 --> 00:09:36.620
+But once we have particular values for
+the parameters theta0, theta1,
+
+120
+00:09:36.620 --> 00:09:41.700
+theta2 then that completely defines
+the decision boundary and we
+
+121
+00:09:41.700 --> 00:09:46.610
+don't actually need to plot a training set
+in order to plot the decision boundary.
+
+122
+00:09:49.500 --> 00:09:53.450
+Let's now look at a more complex
+example where as usual, I have
+
+123
+00:09:53.450 --> 00:09:58.920
+crosses to denote my positive examples and
+Os to denote my negative examples.
+
+124
+00:09:58.920 --> 00:10:00.760
+Given a training set like this,
+
+125
+00:10:00.760 --> 00:10:04.441
+how can I get logistic regression
+to fit the sort of data?
+
+126
+00:10:05.560 --> 00:10:08.540
+Earlier when we were talking
+about polynomial regression or
+
+127
+00:10:08.540 --> 00:10:11.920
+when we're talking about linear
+regression, we talked about how we could
+
+128
+00:10:11.920 --> 00:10:15.650
+add extra higher order polynomial
+terms to the features.
+
+129
+00:10:15.650 --> 00:10:18.960
+And we can do the same for
+logistic regression.
+
+130
+00:10:18.960 --> 00:10:22.810
+Concretely, let's say my hypothesis
+looks like this where I've
+
+131
+00:10:22.810 --> 00:10:27.760
+added two extra features, x1 squared and
+x2 squared, to my features.
+
+132
+00:10:27.760 --> 00:10:31.550
+So that I now have five parameters,
+theta zero through theta four.
+
+133
+00:10:32.810 --> 00:10:37.610
+As before, we'll defer to the next video,
+our discussion on
+
+134
+00:10:37.610 --> 00:10:43.010
+how to automatically choose values for the
+parameters theta zero through theta four.
+
+135
+00:10:43.010 --> 00:10:46.760
+But let's say that varied
+procedure to be specified,
+
+136
+00:10:46.760 --> 00:10:51.890
+I end up choosing theta zero equals
+minus one, theta one equals zero,
+
+137
+00:10:51.890 --> 00:10:58.090
+theta two equals zero, theta three
+equals one and theta four equals one.
+
+138
+00:10:59.470 --> 00:11:03.570
+What this means is that with this
+particular choose of parameters,
+
+139
+00:11:03.570 --> 00:11:08.100
+my parameter effect theta theta looks
+like minus one, zero, zero, one, one.
+
+140
+00:11:10.590 --> 00:11:14.543
+Following our earlier discussion, this
+means that my hypothesis will predict that
+
+141
+00:11:14.543 --> 00:11:20.940
+y=1 whenever -1 + x1 squared + x2
+squared is greater than or equal to 0.
+
+142
+00:11:20.940 --> 00:11:26.380
+This is whenever theta transpose
+times my theta transfers,
+
+143
+00:11:26.380 --> 00:11:29.780
+my features is greater than or
+equal to zero.
+
+144
+00:11:29.780 --> 00:11:33.830
+And if I take minus 1 and
+just bring this to the right,
+
+145
+00:11:33.830 --> 00:11:39.460
+I'm saying that my hypothesis will
+predict that y is equal to 1 whenever x1
+
+146
+00:11:39.460 --> 00:11:44.480
+squared plus x2 squared is greater than or
+equal to 1.
+
+147
+00:11:44.480 --> 00:11:47.310
+So what does this decision
+boundary look like?
+
+148
+00:11:47.310 --> 00:11:53.140
+Well, if you were to plot the curve for
+x1 squared plus x2 squared
+
+149
+00:11:53.140 --> 00:11:58.360
+equals 1 Some of you will recognize that,
+that is the equation for
+
+150
+00:11:58.360 --> 00:12:04.140
+circle of radius one,
+centered around the origin.
+
+151
+00:12:04.140 --> 00:12:06.790
+So that is my decision boundary.
+
+152
+00:12:10.490 --> 00:12:14.900
+And everything outside the circle,
+I'm going to predict as y=1.
+
+153
+00:12:14.900 --> 00:12:19.300
+So out here is my y equals 1 region,
+
+154
+00:12:19.300 --> 00:12:22.810
+we'll predict y equals 1 out here and
+
+155
+00:12:22.810 --> 00:12:27.150
+inside the circle is where
+I'll predict y is equal to 0.
+
+156
+00:12:27.150 --> 00:12:33.240
+So by adding these more complex, or these
+polynomial terms to my features as well,
+
+157
+00:12:33.240 --> 00:12:36.520
+I can get more complex decision
+boundaries that don't just
+
+158
+00:12:36.520 --> 00:12:39.540
+try to separate the positive and
+negative examples in a straight line
+
+159
+00:12:39.540 --> 00:12:43.220
+that I can get in this example,
+a decision boundary that's a circle.
+
+160
+00:12:44.280 --> 00:12:49.230
+Once again, the decision boundary is
+a property, not of the trading set, but
+
+161
+00:12:49.230 --> 00:12:51.690
+of the hypothesis under the parameters.
+
+162
+00:12:51.690 --> 00:12:55.400
+So, so long as we're given
+my parameter vector theta,
+
+163
+00:12:55.400 --> 00:12:58.614
+that defines the decision boundary,
+which is the circle.
+
+164
+00:12:58.614 --> 00:13:03.070
+But the training set is not what we
+use to define the decision boundary.
+
+165
+00:13:03.070 --> 00:13:06.560
+The training set may be used
+to fit the parameters theta.
+
+166
+00:13:06.560 --> 00:13:08.650
+We'll talk about how to do that later.
+
+167
+00:13:08.650 --> 00:13:11.110
+But, once you have the parameters theta,
+
+168
+00:13:11.110 --> 00:13:13.540
+that is what defines
+the decisions boundary.
+
+169
+00:13:14.650 --> 00:13:17.450
+Let me put back the training set just for
+visualization.
+
+170
+00:13:18.540 --> 00:13:21.260
+And finally let's look at
+a more complex example.
+
+171
+00:13:22.350 --> 00:13:26.580
+So can we come up with even more
+complex decision boundaries then this?
+
+172
+00:13:26.580 --> 00:13:31.480
+If I have even higher polynomial terms so
+things like
+
+173
+00:13:32.990 --> 00:13:37.810
+X1 squared, X1 squared X2,
+X1 squared equals squared and so on.
+
+174
+00:13:37.810 --> 00:13:42.620
+And have much higher polynomials,
+then it's possible to show that you can
+
+175
+00:13:42.620 --> 00:13:47.010
+get even more complex decision
+boundaries and the regression can be
+
+176
+00:13:47.010 --> 00:13:51.960
+used to find decision boundaries that may,
+for example, be an ellipse like that or
+
+177
+00:13:51.960 --> 00:13:56.150
+maybe a little bit different setting of
+the parameters maybe you can get instead
+
+178
+00:13:56.150 --> 00:14:00.720
+a different decision boundary which may
+even look like some funny shape like that.
+
+179
+00:14:03.990 --> 00:14:08.391
+Or for even more complete examples
+maybe you can also get this decision
+
+180
+00:14:08.391 --> 00:14:13.387
+boundaries that could look like more
+complex shapes like that where everything
+
+181
+00:14:13.387 --> 00:14:17.730
+in here you predict y = 1 and
+everything outside you predict y = 0.
+
+182
+00:14:17.730 --> 00:14:23.100
+So this higher autopolynomial features you
+can a very complex decision boundaries.
+
+183
+00:14:23.100 --> 00:14:27.960
+So, with these visualizations, I hope that
+gives you a sense of what's the range of
+
+184
+00:14:27.960 --> 00:14:32.640
+hypothesis functions we can represent
+using the representation that we have for
+
+185
+00:14:32.640 --> 00:14:33.570
+logistic regression.
+
+186
+00:14:34.930 --> 00:14:39.680
+Now that we know what h(x) can represent,
+what I'd like to do next in the following
+
+187
+00:14:39.680 --> 00:14:44.650
+video is talk about how to automatically
+choose the parameters theta so that
+
+188
+00:14:44.650 --> 00:14:48.690
+given a training set we can automatically
+fit the parameters to our data.

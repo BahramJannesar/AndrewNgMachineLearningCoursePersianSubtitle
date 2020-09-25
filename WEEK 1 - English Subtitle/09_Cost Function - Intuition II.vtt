@@ -1,0 +1,479 @@
+WEBVTT
+
+1
+00:00:00.960 --> 00:00:05.684
+In this video, lets delve deeper and get
+even better intuition about what the cost
+
+2
+00:00:05.684 --> 00:00:10.523
+function is doing. This video assumes that
+you're familiar with contour plots. If you
+
+3
+00:00:10.523 --> 00:00:15.189
+are not familiar with contour plots or
+contour figures some of the illustrations
+
+4
+00:00:15.189 --> 00:00:20.144
+in this video may or may not make sense to
+you but is okay and if you end up skipping
+
+5
+00:00:20.144 --> 00:00:24.522
+this video or some of it does not quite
+make sense because you haven't seen
+
+6
+00:00:24.522 --> 00:00:29.246
+contour plots before. That's okay and you will
+still understand the rest of this course
+
+7
+00:00:29.246 --> 00:00:34.935
+without those parts of this. Here's our
+problem formulation as usual, with the
+
+8
+00:00:34.935 --> 00:00:39.882
+hypothesis parameters, cost function, and
+our optimization objective. Unlike
+
+9
+00:00:39.882 --> 00:00:45.163
+before, unlike the last video, I'm
+going to keep both of my parameters, theta
+
+10
+00:00:45.163 --> 00:00:50.573
+zero, and theta one, as we generate our
+visualizations for the cost function. So, same
+
+11
+00:00:50.573 --> 00:00:57.204
+as last time, we want to understand the
+hypothesis H and the cost function J. So,
+
+12
+00:00:57.204 --> 00:01:04.167
+here's my training set of housing prices
+and let's make some hypothesis. You know,
+
+13
+00:01:04.167 --> 00:01:10.219
+like that one, this is not a particularly
+good hypothesis. But, if I set theta
+
+14
+00:01:10.219 --> 00:01:16.270
+zero=50 and theta one=0.06, then I end up
+with this hypothesis down here and that
+
+15
+00:01:16.270 --> 00:01:22.190
+corresponds to that straight line. Now given
+these value of theta zero and theta one,
+
+16
+00:01:22.190 --> 00:01:27.511
+we want to plot the corresponding, you
+know, cost function on the right. What we
+
+17
+00:01:27.511 --> 00:01:33.150
+did last time was, right, when we only had
+theta one. In other words, drawing plots
+
+18
+00:01:33.150 --> 00:01:37.814
+that look like this as a function of theta
+one. But now we have two parameters, theta
+
+19
+00:01:37.814 --> 00:01:42.340
+zero, and theta one, and so the plot gets
+a little more complicated. It turns out
+
+20
+00:01:42.340 --> 00:01:47.699
+that when we have only one parameter, that
+the parts we drew had this sort of bow
+
+21
+00:01:47.699 --> 00:01:52.925
+shaped function. Now, when we have two
+parameters, it turns out the cost function
+
+22
+00:01:52.925 --> 00:01:58.218
+also has a similar sort of bow shape. And,
+in fact, depending on your training set,
+
+23
+00:01:58.218 --> 00:02:03.511
+you might get a cost function that maybe
+looks something like this. So, this is a
+
+24
+00:02:03.511 --> 00:02:09.404
+3-D surface plot, where the axes
+are labeled theta zero and theta one. So
+
+25
+00:02:09.404 --> 00:02:15.326
+as you vary theta zero and theta one, the two
+parameters, you get different values of the
+
+26
+00:02:15.326 --> 00:02:20.964
+cost function J (theta zero, theta one)
+and the height of this surface above a
+
+27
+00:02:20.964 --> 00:02:26.347
+particular point of theta zero, theta one.
+Right, that's, that's the vertical axis. The
+
+28
+00:02:26.347 --> 00:02:31.200
+height of the surface of the points
+indicates the value of J of theta zero, J
+
+29
+00:02:31.200 --> 00:02:36.471
+of theta one. And you can see it sort of
+has this bow like shape. Let me show you
+
+30
+00:02:36.471 --> 00:02:46.351
+the same plot in 3D. So here's the same
+figure in 3D, horizontal axis theta one and
+
+31
+00:02:46.351 --> 00:02:52.122
+vertical axis J(theta zero, theta one), and if I rotate
+this plot around. You kinda of a
+
+32
+00:02:52.122 --> 00:02:57.608
+get a sense, I hope, of this bowl
+shaped surface as that's what the cost
+
+33
+00:02:57.608 --> 00:03:03.592
+function J looks like. Now for the purpose
+of illustration in the rest of this video
+
+34
+00:03:03.592 --> 00:03:09.077
+I'm not actually going to use these sort
+of 3D surfaces to show you the cost
+
+35
+00:03:09.077 --> 00:03:16.475
+function J, instead I'm going to use
+contour plots. Or what I also call contour
+
+36
+00:03:16.475 --> 00:03:24.748
+figures. I guess they mean the same thing.
+To show you these surfaces. So here's an
+
+37
+00:03:24.748 --> 00:03:31.135
+example of a contour figure, shown on the
+right, where the axis are theta zero and
+
+38
+00:03:31.135 --> 00:03:37.602
+theta one. And what each of these ovals,
+what each of these ellipsis shows is a set
+
+39
+00:03:37.602 --> 00:03:43.757
+of points that takes on the same value for
+J(theta zero, theta one). So
+
+40
+00:03:43.757 --> 00:03:50.514
+concretely, for example this, you'll take
+that point and that point and that point.
+
+41
+00:03:50.514 --> 00:03:55.583
+All three of these points that I just
+drew in magenta, they have the same value
+
+42
+00:03:55.583 --> 00:03:59.730
+for J (theta zero, theta one). Okay.
+Where, right, these, this is the theta
+
+43
+00:03:59.730 --> 00:04:04.774
+zero, theta one axis but those three have
+the same Value for J (theta zero, theta one)
+
+44
+00:04:04.774 --> 00:04:10.218
+and if you haven't seen contour
+plots much before think of, imagine if you
+
+45
+00:04:10.218 --> 00:04:14.992
+will. A bow shaped function that's coming
+out of my screen. So that the minimum, so
+
+46
+00:04:14.992 --> 00:04:19.668
+the bottom of the bow is this point right
+there, right? This middle, the middle of
+
+47
+00:04:19.668 --> 00:04:24.285
+these concentric ellipses. And imagine a
+bow shape that sort of grows out of my
+
+48
+00:04:24.285 --> 00:04:28.786
+screen like this, so that each of these
+ellipses, you know, has the same height
+
+49
+00:04:28.786 --> 00:04:33.345
+above my screen. And the minimum with the
+bow, right, is right down there. And so
+
+50
+00:04:33.345 --> 00:04:37.787
+the contour figures is a, is way to,
+is maybe a more convenient way to
+
+51
+00:04:37.787 --> 00:04:45.185
+visualize my function J. [sound] So, let's
+look at some examples. Over here, I have a
+
+52
+00:04:45.185 --> 00:04:53.275
+particular point, right? And so this is,
+with, you know, theta zero equals maybe
+
+53
+00:04:53.275 --> 00:05:01.964
+about 800, and theta one equals maybe a
+-0.15 . And so this point, right, this
+
+54
+00:05:01.964 --> 00:05:07.322
+point in red corresponds to one
+set of pair values of theta zero, theta one
+
+55
+00:05:07.322 --> 00:05:12.092
+and the corresponding, in fact, to that
+hypothesis, right, theta zero is
+
+56
+00:05:12.092 --> 00:05:17.189
+about 800, that is, where it intersects
+the vertical axis is around 800, and this is
+
+57
+00:05:17.189 --> 00:05:21.763
+slope of about -0.15. Now this line is
+really not such a good fit to the
+
+58
+00:05:21.763 --> 00:05:26.859
+data, right. This hypothesis, h(x), with these values of theta zero,
+
+59
+00:05:26.859 --> 00:05:32.283
+theta one, it's really not such a good fit
+to the data. And so you find that, it's
+
+60
+00:05:32.283 --> 00:05:37.531
+cost. Is a value that's out here that's
+you know pretty far from the minimum right
+
+61
+00:05:37.531 --> 00:05:42.901
+it's pretty far this is a pretty high cost
+because this is just not that good a fit
+
+62
+00:05:42.901 --> 00:05:47.247
+to the data. Let's look at some more
+examples. Now here's a different
+
+63
+00:05:47.247 --> 00:05:52.489
+hypothesis that's you know still not a
+great fit for the data but may be slightly
+
+64
+00:05:52.489 --> 00:05:57.986
+better so here right that's my point that
+those are my parameters theta zero theta
+
+65
+00:05:57.986 --> 00:06:07.387
+one and so my theta zero value. Right?
+That's bout 360 and my value for theta
+
+66
+00:06:07.387 --> 00:06:14.047
+one. Is equal to zero. So, you know, let's
+break it out. Let's take theta zero equals
+
+67
+00:06:14.047 --> 00:06:20.063
+360 theta one equals zero. And this pair
+of parameters corresponds to that
+
+68
+00:06:20.063 --> 00:06:26.161
+hypothesis, corresponds to flat line, that is, h(x) equals 360 plus zero
+
+69
+00:06:26.161 --> 00:06:32.421
+times x. So that's the hypothesis. And
+this hypothesis again has some cost, and
+
+70
+00:06:32.421 --> 00:06:38.600
+that cost is, you know, plotted as the
+height of the J function at that point.
+
+71
+00:06:38.791 --> 00:06:44.886
+Let's look at just a couple of examples.
+Here's one more, you know, at this value
+
+72
+00:06:44.886 --> 00:06:52.231
+of theta zero, and at that value of theta
+one, we end up with this hypothesis, h(x)
+
+73
+00:06:52.231 --> 00:06:58.599
+and again, not a great fit to the data,
+and is actually further away from the minimum. Last example, this is
+
+74
+00:06:58.599 --> 00:07:03.450
+actually not quite at the minimum, but
+it's pretty close to the minimum. So this
+
+75
+00:07:03.450 --> 00:07:08.486
+is not such a bad fit to the, to the data,
+where, for a particular value, of, theta
+
+76
+00:07:08.486 --> 00:07:13.337
+zero. Which, one of them has value, as in
+for a particular value for theta one. We
+
+77
+00:07:13.337 --> 00:07:18.004
+get a particular h(x). And this is, this
+is not quite at the minimum, but it's
+
+78
+00:07:18.004 --> 00:07:23.039
+pretty close. And so the sum of squares
+errors is sum of squares distances between
+
+79
+00:07:23.039 --> 00:07:28.259
+my, training samples and my hypothesis.
+Really, that's a sum of square distances,
+
+80
+00:07:28.259 --> 00:07:32.548
+right? Of all of these errors. This is
+pretty close to the minimum even though
+
+81
+00:07:32.548 --> 00:07:37.096
+it's not quite the minimum. So with these
+figures I hope that gives you a better
+
+82
+00:07:37.096 --> 00:07:41.869
+understanding of what values of the cost
+function J, how they are and how that
+
+83
+00:07:41.869 --> 00:07:47.324
+corresponds to different hypothesis and so as
+how better hypotheses may corresponds to points
+
+84
+00:07:47.324 --> 00:07:52.983
+that are closer to the minimum of this cost
+function J. Now of course what we really
+
+85
+00:07:52.983 --> 00:07:57.619
+want is an efficient algorithm, right, a
+efficient piece of software for
+
+86
+00:07:57.619 --> 00:08:02.218
+automatically finding The value of theta
+zero and theta one, that minimizes the
+
+87
+00:08:02.218 --> 00:08:06.566
+cost function J, right? And what we, what
+we don't wanna do is to, you know, how to
+
+88
+00:08:06.566 --> 00:08:10.697
+write software, to plot out this point,
+and then try to manually read off the
+
+89
+00:08:10.697 --> 00:08:15.263
+numbers, that this is not a good way to do
+it. And, in fact, we'll see it later, that
+
+90
+00:08:15.426 --> 00:08:19.938
+when we look at more complicated examples,
+we'll have high dimensional figures with
+
+91
+00:08:19.938 --> 00:08:23.906
+more parameters, that, it turns out,
+we'll see in a few, we'll see later in
+
+92
+00:08:23.906 --> 00:08:28.091
+this course, examples where this figure,
+you know, cannot really be plotted, and
+
+93
+00:08:28.091 --> 00:08:33.664
+this becomes much harder to visualize. And
+so, what we want is to have software
+
+94
+00:08:33.664 --> 00:08:37.729
+to find the value of theta zero, theta one
+that minimizes this function and
+
+95
+00:08:37.916 --> 00:08:42.914
+in the next video we start to talk about
+an algorithm for automatically finding
+
+96
+00:08:42.914 --> 00:08:47.600
+that value of theta zero and theta one
+that minimizes the cost function J.

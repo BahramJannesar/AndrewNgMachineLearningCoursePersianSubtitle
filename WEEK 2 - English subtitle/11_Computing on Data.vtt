@@ -1,0 +1,894 @@
+WEBVTT
+
+1
+00:00:00.280 --> 00:00:02.820
+Now that you know how to load and
+save data in Octave,
+
+2
+00:00:02.820 --> 00:00:05.100
+put your data into matrices and so on.
+
+3
+00:00:05.100 --> 00:00:10.028
+In this video, I'd like to show you how
+to do computational operations on data.
+
+4
+00:00:10.028 --> 00:00:14.880
+And later on, we'll be using these source
+of computational operations to implement
+
+5
+00:00:14.880 --> 00:00:15.870
+our learning algorithms.
+
+6
+00:00:17.130 --> 00:00:17.810
+Let's get started.
+
+7
+00:00:19.650 --> 00:00:21.040
+Here's my Octave window.
+
+8
+00:00:21.040 --> 00:00:25.900
+Let me just quickly initialize some
+variables to use for our example.
+
+9
+00:00:25.900 --> 00:00:33.470
+So set A to be a three by two matrix,
+and set B to a three by two matrix,
+
+10
+00:00:33.470 --> 00:00:37.855
+and let's set C to a two
+by two matrix like so.
+
+11
+00:00:39.195 --> 00:00:42.235
+Now let's say I want to
+multiply two of my matrices.
+
+12
+00:00:42.235 --> 00:00:47.195
+So let's say I want to compute A*C, I just
+type A*C, so it's a three by two matrix
+
+13
+00:00:47.195 --> 00:00:52.215
+times a two by two matrix,
+this gives me this three by two matrix.
+
+14
+00:00:52.215 --> 00:00:57.145
+You can also do element wise operations
+and do A.* B and what this will do is
+
+15
+00:00:57.145 --> 00:01:02.580
+it'll take each element of A and multiply
+it by the corresponding elements B,
+
+16
+00:01:02.580 --> 00:01:06.208
+so that's A, that's B, that's A .* B.
+
+17
+00:01:06.208 --> 00:01:11.230
+So for example, the first element
+gives 1 times 11, which gives 11.
+
+18
+00:01:11.230 --> 00:01:17.140
+The second element gives 2 time
+12 Which gives 24, and so on.
+
+19
+00:01:17.140 --> 00:01:20.840
+So this is element-wise
+multiplication of two matrices.
+
+20
+00:01:20.840 --> 00:01:23.200
+And in general, the period tends to,
+
+21
+00:01:23.200 --> 00:01:27.440
+is usually used to denote
+element-wise operations in Octave.
+
+22
+00:01:27.440 --> 00:01:31.494
+So here's a matrix A, and if I do A .^ 2,
+
+23
+00:01:31.494 --> 00:01:36.500
+this gives me the element
+wise squaring of A.
+
+24
+00:01:36.500 --> 00:01:39.440
+So 1 squared is 1,
+2 squared is 4, and so on.
+
+25
+00:01:41.100 --> 00:01:42.560
+Let's set v as a vector.
+
+26
+00:01:42.560 --> 00:01:46.230
+Let's set v as one, two,
+three as a column vector.
+
+27
+00:01:46.230 --> 00:01:52.010
+You can also do one dot over v to do
+the element-wise reciprocal of v,
+
+28
+00:01:52.010 --> 00:01:56.040
+so this gives me one over one, one over
+two, and one over three, and this is where
+
+29
+00:01:56.040 --> 00:02:00.610
+I do the matrices, so one dot over
+a gives me the element wise inverse of a.
+
+30
+00:02:02.760 --> 00:02:08.173
+And once again, the period here gives us a
+clue that this an element-wise operation.
+
+31
+00:02:08.173 --> 00:02:15.080
+We can also do things like log(v),
+this is a element-wise logarithm of the v
+
+32
+00:02:15.080 --> 00:02:20.300
+E to the V is base E
+exponentiation of these elements,
+
+33
+00:02:20.300 --> 00:02:25.600
+so this is E, this is E squared EQ,
+because this was V, and
+
+34
+00:02:25.600 --> 00:02:31.040
+I can also do abs V to take
+the element-wise absolute value of V.
+
+35
+00:02:31.040 --> 00:02:36.660
+So here, V was our positive,
+abs, minus one, two minus 3,
+
+36
+00:02:36.660 --> 00:02:42.973
+the element-wise absolute value gives
+me back these non-negative values.
+
+37
+00:02:42.973 --> 00:02:45.930
+And negative v gives me the minus of v.
+
+38
+00:02:45.930 --> 00:02:48.720
+This is the same as negative one times v,
+but
+
+39
+00:02:48.720 --> 00:02:54.024
+usually you just write
+negative v instead of -1*v.
+
+40
+00:02:54.024 --> 00:02:56.050
+And what else can you do?
+
+41
+00:02:56.050 --> 00:02:57.240
+Here's another neat trick.
+
+42
+00:02:57.240 --> 00:02:58.360
+So, let's see.
+
+43
+00:02:58.360 --> 00:03:01.700
+Let's say I want to take v an increment
+each of its elements by one.
+
+44
+00:03:01.700 --> 00:03:06.590
+Well one way to do it is
+by constructing a three
+
+45
+00:03:06.590 --> 00:03:11.430
+by one vector that's all ones and
+adding that to v.
+
+46
+00:03:11.430 --> 00:03:14.590
+So if I do that, this increments
+v by from 1, 2, 3 to 2, 3, 4.
+
+47
+00:03:14.590 --> 00:03:21.520
+The way I did that was, length(v) is 3,
+
+48
+00:03:21.520 --> 00:03:27.260
+so ones(length(v),1),
+this is ones of 3 by 1, so
+
+49
+00:03:27.260 --> 00:03:33.620
+that's ones(3,1) on the right and
+what I did was v plus ones v by one,
+
+50
+00:03:33.620 --> 00:03:38.950
+which is adding this vector of our ones
+to v, and so this increments v by one,
+
+51
+00:03:40.000 --> 00:03:44.190
+and another simpler way to do
+that is to type v plus one.
+
+52
+00:03:44.190 --> 00:03:45.450
+So she has v, and
+
+53
+00:03:45.450 --> 00:03:50.840
+v plus one also means to add one element
+wise to each of my elements of v.
+
+54
+00:03:52.470 --> 00:03:55.490
+Now, let's talk about more operations.
+
+55
+00:03:55.490 --> 00:03:59.520
+So here's my matrix A, if you want to
+buy A transposed, the way to do that
+
+56
+00:03:59.520 --> 00:04:03.720
+is to write A prime, that's the apostrophe
+symbol, it's the left quote,
+
+57
+00:04:03.720 --> 00:04:08.350
+so it's on your keyboard,
+you have a left quote and a right quote.
+
+58
+00:04:08.350 --> 00:04:11.260
+So this is actually
+the standard quotation mark.
+
+59
+00:04:11.260 --> 00:04:18.330
+Just type A transpose, this gives
+me the transpose of my matrix A.
+
+60
+00:04:18.330 --> 00:04:19.700
+And, of course, A transpose,
+
+61
+00:04:19.700 --> 00:04:22.970
+if I transpose that again,
+then I should get back my matrix A.
+
+62
+00:04:25.160 --> 00:04:27.570
+Some more useful functions.
+
+63
+00:04:27.570 --> 00:04:34.300
+Let's say lower case a is 1 15 2 0.5,
+so it's 1 by 4 matrix.
+
+64
+00:04:34.300 --> 00:04:38.880
+Let's say val equals max of A this
+returns the maximum value of
+
+65
+00:04:38.880 --> 00:04:42.970
+A which in this case is 15 and
+I can do val,
+
+66
+00:04:42.970 --> 00:04:48.430
+ind max(a) and this returns val and ind
+
+67
+00:04:48.430 --> 00:04:52.940
+which are going to be the maximum value
+of A which is 15, as well as the index.
+
+68
+00:04:52.940 --> 00:04:58.790
+So it was the element number two of A that
+was 15 so ind is my index into this.
+
+69
+00:04:58.790 --> 00:05:03.230
+Just as a warning, if you do max(A),
+where A is a matrix,
+
+70
+00:05:03.230 --> 00:05:07.920
+what this does is this actually
+does the column wise maximum.
+
+71
+00:05:07.920 --> 00:05:09.860
+But say a little more
+about this in a second.
+
+72
+00:05:11.610 --> 00:05:14.760
+Still using this example that there for
+lowercase a.
+
+73
+00:05:14.760 --> 00:05:19.630
+If I do a < 3,
+this does the element wise operation.
+
+74
+00:05:19.630 --> 00:05:24.030
+Element wise comparison, so the first
+element of A is less than three so
+
+75
+00:05:24.030 --> 00:05:24.970
+this one.
+
+76
+00:05:24.970 --> 00:05:29.970
+Second element of A is not less than three
+so this value says zero cuz it's false.
+
+77
+00:05:29.970 --> 00:05:36.590
+The third and fourth elements of
+A are less than three, so that's just 1 1.
+
+78
+00:05:36.590 --> 00:05:42.970
+So that's the element-wise comparison of
+all four elements of the variable a < 3.
+
+79
+00:05:42.970 --> 00:05:47.440
+And it returns true or false depending on
+whether or not there's less than three.
+
+80
+00:05:47.440 --> 00:05:53.615
+Now, if I do find(a < 3), this will
+tell me which are the elements of a,
+
+81
+00:05:53.615 --> 00:05:55.235
+the variable a, that are less than 3,
+
+82
+00:05:55.235 --> 00:05:59.545
+and in this case, the first, third and
+fourth elements are less than 3.
+
+83
+00:05:59.545 --> 00:06:05.205
+For our next example,
+let me set a to be equal to magic(3).
+
+84
+00:06:05.205 --> 00:06:08.985
+The magic function returns,
+let's type help magic.
+
+85
+00:06:08.985 --> 00:06:15.370
+The magic function returns these
+matrices called magic squares.
+
+86
+00:06:15.370 --> 00:06:20.830
+They have this, you know, mathematical
+property that all of their rows and
+
+87
+00:06:20.830 --> 00:06:23.690
+columns and
+diagonals sum up to the same thing.
+
+88
+00:06:23.690 --> 00:06:28.830
+So, you know, it's not actually useful for
+machine learning as far as I know, but
+
+89
+00:06:28.830 --> 00:06:34.450
+I'm just using this as a convenient way
+to generate a three by three matrix.
+
+90
+00:06:34.450 --> 00:06:38.788
+And these magic squares have
+the property that each row, each column,
+
+91
+00:06:38.788 --> 00:06:41.751
+and the diagonals all add
+up to the same thing, so
+
+92
+00:06:41.751 --> 00:06:44.300
+it's kind of a mathematical construct.
+
+93
+00:06:44.300 --> 00:06:48.820
+I use this magic function only when I'm
+doing demos or when I'm teaching octave
+
+94
+00:06:48.820 --> 00:06:53.760
+like those in, I don't actually use it for
+any useful machine learning application.
+
+95
+00:06:53.760 --> 00:06:58.886
+But let's see,
+if I type RC = find(A > 7) this finds
+
+96
+00:06:58.886 --> 00:07:04.231
+All the elements of A that
+are greater than equal to seven,
+
+97
+00:07:04.231 --> 00:07:07.740
+and so r, c stands for row and column.
+
+98
+00:07:07.740 --> 00:07:11.750
+So the 1,1 element is greater than 7,
+the 3,2 element is greater than 7, and
+
+99
+00:07:11.750 --> 00:07:13.270
+the 2,3 element is greater than 7.
+
+100
+00:07:13.270 --> 00:07:14.360
+So let's see.
+
+101
+00:07:14.360 --> 00:07:17.740
+The 2,3 element, for example, is A(2,3),
+
+102
+00:07:17.740 --> 00:07:24.270
+is 7 is this element out here, and
+that is indeed greater than equal seven.
+
+103
+00:07:24.270 --> 00:07:28.820
+By the way, I actually don't even memorize
+myself what these find functions do and
+
+104
+00:07:28.820 --> 00:07:30.220
+what all of these things do myself.
+
+105
+00:07:30.220 --> 00:07:34.180
+And whenever I use the find function,
+sometimes I forget myself exactly what it
+
+106
+00:07:34.180 --> 00:07:38.020
+does, and now I would type help
+find to look at the document.
+
+107
+00:07:38.020 --> 00:07:40.130
+Okay, just two more things
+that I'll quickly show you.
+
+108
+00:07:40.130 --> 00:07:44.270
+One is the sum function, so
+here's my a, and then type sum(a).
+
+109
+00:07:44.270 --> 00:07:48.140
+This adds up all the elements of a, and
+if I want to multiply them together,
+
+110
+00:07:48.140 --> 00:07:50.940
+I type prod(a) prod sends the product, and
+
+111
+00:07:50.940 --> 00:07:54.225
+this returns the product of
+these four elements of A.
+
+112
+00:07:54.225 --> 00:08:01.630
+Floor(a) rounds down these elements of A,
+so 0.5 gets rounded down to 0.
+
+113
+00:08:01.630 --> 00:08:06.600
+And ceil, or ceiling(A) gets
+rounded up to the nearest integer,
+
+114
+00:08:06.600 --> 00:08:10.900
+so 0.5 gets rounded up to 1.
+
+115
+00:08:10.900 --> 00:08:13.330
+You can also, let's see.
+
+116
+00:08:13.330 --> 00:08:16.720
+Let me type rand(3),
+this generates a three by three matrix.
+
+117
+00:08:16.720 --> 00:08:21.790
+If i type max(rand(3),
+what this does is it takes
+
+118
+00:08:21.790 --> 00:08:27.000
+the element-wise maximum of
+3 random 3 by 3 matrices.
+
+119
+00:08:27.000 --> 00:08:30.680
+So you notice all of these numbers tend
+to be a bit on the large side because
+
+120
+00:08:30.680 --> 00:08:33.150
+each of these is actually
+the max of a element
+
+121
+00:08:34.490 --> 00:08:37.515
+wise max of two randomly
+generated matrices.
+
+122
+00:08:37.515 --> 00:08:38.280
+This is my magic number.
+
+123
+00:08:38.280 --> 00:08:43.050
+This is my magic square, three by three A.
+
+124
+00:08:43.050 --> 00:08:48.270
+Let's say I type max A, and
+then this will be a [],
+
+125
+00:08:48.270 --> 00:08:53.580
+1, what this does is this
+texts the column wise maximum.
+
+126
+00:08:53.580 --> 00:08:58.260
+So the max of the first column is 8,
+max of second column is 9,
+
+127
+00:08:58.260 --> 00:08:59.960
+the max of the third column is 7.
+
+128
+00:08:59.960 --> 00:09:04.194
+This 1 means to take the max
+among the first dimension of 8.
+
+129
+00:09:05.200 --> 00:09:08.780
+In contrast, if I were to type max A,
+this funny notation,
+
+130
+00:09:08.780 --> 00:09:12.480
+two, then this takes the per row maximum.
+
+131
+00:09:12.480 --> 00:09:17.210
+So the max of the first row is eight, max
+of second row is seven, max of the third
+
+132
+00:09:17.210 --> 00:09:23.570
+row is nine, and so this allows you to
+take maxes either per row or per column.
+
+133
+00:09:24.760 --> 00:09:30.050
+And remember the default's
+to a column wise element.
+
+134
+00:09:30.050 --> 00:09:34.880
+So if you want to find the maximum
+element in the entire matrix A,
+
+135
+00:09:34.880 --> 00:09:39.660
+you can type max(max(A)) like so,
+which is 9.
+
+136
+00:09:39.660 --> 00:09:45.130
+Or you can turn A into a vector and
+type max(A(:)) like so and
+
+137
+00:09:45.130 --> 00:09:50.160
+this treats this as a vector and
+takes the max element of that vector.
+
+138
+00:09:52.130 --> 00:09:56.220
+Finally let's set A to be
+a 9 by 9 magic square.
+
+139
+00:09:56.220 --> 00:10:00.700
+So remember the magic square has
+this property that every column and
+
+140
+00:10:00.700 --> 00:10:03.650
+every row sums the same thing,
+and also the diagonals, so
+
+141
+00:10:03.650 --> 00:10:06.280
+just a nine by nine matrix square.
+
+142
+00:10:06.280 --> 00:10:07.470
+So let me just sum(A, 1).
+
+143
+00:10:07.470 --> 00:10:12.050
+So this does a per column sum, so
+we'll take each column of A and
+
+144
+00:10:12.050 --> 00:10:15.550
+add them up and
+this is verified that indeed for
+
+145
+00:10:15.550 --> 00:10:20.150
+a nine by nine matrix square, every column
+adds up to 369, adds up to the same thing.
+
+146
+00:10:20.150 --> 00:10:21.978
+Now let's do the row wide sum.
+
+147
+00:10:21.978 --> 00:10:26.870
+So the sum(A,2), and
+
+148
+00:10:26.870 --> 00:10:32.950
+this sums up each row of A, and
+indeed each row of A also sums up to 369.
+
+149
+00:10:32.950 --> 00:10:36.110
+Now, let's sum the diagonal
+elements of A and
+
+150
+00:10:36.110 --> 00:10:39.800
+make sure that also sums
+up to the same thing.
+
+151
+00:10:39.800 --> 00:10:45.558
+So what I'm gonna do is construct a nine
+by nine identity matrix, that's eye nine.
+
+152
+00:10:45.558 --> 00:10:52.330
+And let me take A and construct, multiply
+A element wise, so here's my matrix A.
+
+153
+00:10:52.330 --> 00:10:56.290
+I'm going to do A .^ eye(9).
+
+154
+00:10:56.290 --> 00:11:00.970
+What this will do is take the element wise
+product of these two matrices, and so
+
+155
+00:11:00.970 --> 00:11:05.820
+this should Wipe out everything in A,
+except for the diagonal entries.
+
+156
+00:11:05.820 --> 00:11:11.130
+And now,
+I'm gonna do sum sum of A of that and
+
+157
+00:11:11.130 --> 00:11:17.830
+this gives me the sum of these diagonal
+elements, and indeed that is 369.
+
+158
+00:11:17.830 --> 00:11:20.260
+You can sum up the other
+diagonals as well.
+
+159
+00:11:20.260 --> 00:11:22.340
+So this top left to bottom left,
+
+160
+00:11:22.340 --> 00:11:27.410
+you can sum up the opposite diagonal
+from bottom left to top right.
+
+161
+00:11:27.410 --> 00:11:29.791
+The commands for
+this is somewhat more cryptic,
+
+162
+00:11:29.791 --> 00:11:31.600
+you don't really need to know this.
+
+163
+00:11:31.600 --> 00:11:34.790
+I'm just showing you this in
+case any of you are curious.
+
+164
+00:11:34.790 --> 00:11:38.390
+But let's see.
+
+165
+00:11:38.390 --> 00:11:40.685
+Flipud stands for flip up down.
+
+166
+00:11:40.685 --> 00:11:45.760
+But if you do that, that turns out to
+sum up the elements in the opposite.
+
+167
+00:11:45.760 --> 00:11:50.090
+So the other diagram,
+that also sums up to 369.
+
+168
+00:11:50.090 --> 00:11:52.020
+Here, let me show you.
+
+169
+00:11:52.020 --> 00:11:54.262
+Whereas eye(9) is this matrix.
+
+170
+00:11:54.262 --> 00:11:59.470
+Flipup(eye(9)), takes the identity matrix,
+
+171
+00:11:59.470 --> 00:12:02.890
+and flips it vertically, so
+you end up with, excuse me,
+
+172
+00:12:02.890 --> 00:12:06.480
+flip UD, end up with ones on
+this opposite diagonal as well.
+
+173
+00:12:08.780 --> 00:12:12.750
+Just one last command and then that's it,
+and then that'll be it for this video.
+
+174
+00:12:12.750 --> 00:12:16.820
+Let's set A to be the three
+by three magic square game.
+
+175
+00:12:16.820 --> 00:12:20.340
+If you want to invert a matrix,
+you type pinv(A).
+
+176
+00:12:20.340 --> 00:12:23.120
+This is typically called
+the pseudo-inverse, but it does matter.
+
+177
+00:12:23.120 --> 00:12:27.830
+Just think of it as basically the inverse
+of A, and that's the inverse of A.
+
+178
+00:12:27.830 --> 00:12:34.130
+And so I can set temp = pinv(A) and
+temp times A,
+
+179
+00:12:34.130 --> 00:12:38.110
+this is indeed the identity matrix, where
+it's essentially ones on the diagonals,
+
+180
+00:12:38.110 --> 00:12:41.650
+and zeroes on the off-diagonals,
+up to a numeric round off.
+
+181
+00:12:44.210 --> 00:12:45.596
+So, that's it for
+
+182
+00:12:45.596 --> 00:12:50.630
+how to do different computational
+operations on data and matrices.
+
+183
+00:12:50.630 --> 00:12:55.548
+And after running a learning algorithm,
+often one of the most useful things is to
+
+184
+00:12:55.548 --> 00:12:59.760
+be able to look at your results, so
+to plot or visualize your result.
+
+185
+00:12:59.760 --> 00:13:04.342
+And in the next video, I'm going to very
+quickly show you how again with one or
+
+186
+00:13:04.342 --> 00:13:06.260
+two lines of code using Octave.
+
+187
+00:13:06.260 --> 00:13:09.255
+You can quickly visualize your data or
+plot your data and
+
+188
+00:13:09.255 --> 00:13:13.340
+use that to better understand what
+you're learning algorithms are doing.

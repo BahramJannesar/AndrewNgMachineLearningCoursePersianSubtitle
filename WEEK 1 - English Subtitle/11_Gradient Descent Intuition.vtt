@@ -1,0 +1,837 @@
+WEBVTT
+
+1
+00:00:00.190 --> 00:00:01.190
+In the previous video,
+
+2
+00:00:01.190 --> 00:00:04.960
+we gave a mathematical
+definition of gradient descent.
+
+3
+00:00:04.960 --> 00:00:08.830
+Let's delve deeper and in this video get
+better intuition about what the algorithm
+
+4
+00:00:08.830 --> 00:00:12.580
+is doing and why the steps of the gradient
+descent algorithm might make sense.
+
+5
+00:00:15.430 --> 00:00:19.580
+Here's a gradient descent algorithm
+that we saw last time and
+
+6
+00:00:19.580 --> 00:00:25.800
+just to remind you this parameter, or this
+term alpha is called the learning rate.
+
+7
+00:00:25.800 --> 00:00:30.620
+And it controls how big a step we take
+when updating my parameter theory j.
+
+8
+00:00:31.660 --> 00:00:36.406
+And this second term here
+is the derivative term
+
+9
+00:00:39.147 --> 00:00:43.904
+And what I wanna do in this video is give
+you that intuition about what each of
+
+10
+00:00:43.904 --> 00:00:49.281
+these two terms is doing and why when put
+together, this entire update makes sense.
+
+11
+00:00:49.281 --> 00:00:55.054
+In order to convey these intuitions, what
+I want to do is use a slightly simpler
+
+12
+00:00:55.054 --> 00:01:00.403
+example, where we want to minimize
+the function of just one parameter.
+
+13
+00:01:00.403 --> 00:01:03.930
+So say we have a cost function,
+j of just one parameter,
+
+14
+00:01:03.930 --> 00:01:09.410
+theta one, like we did a few videos back,
+where theta one is a real number.
+
+15
+00:01:09.410 --> 00:01:14.410
+So we can have one d plots,
+which are a little bit simpler to look at.
+
+16
+00:01:14.410 --> 00:01:17.360
+Let's try to understand what gradient
+decent would do on this function.
+
+17
+00:01:20.850 --> 00:01:26.980
+So let's say, here's my function,
+J of theta 1.
+
+18
+00:01:26.980 --> 00:01:28.550
+And so that's mine.
+
+19
+00:01:28.550 --> 00:01:31.505
+And where theta 1 is a real number.
+
+20
+00:01:32.635 --> 00:01:33.755
+All right?
+
+21
+00:01:33.755 --> 00:01:39.605
+Now, let's have in this slide its grade in
+descent with theta one at this location.
+
+22
+00:01:39.605 --> 00:01:43.085
+So imagine that we start off
+at that point on my function.
+
+23
+00:01:44.495 --> 00:01:48.105
+What grade in descent would
+do is it will update.
+
+24
+00:01:49.570 --> 00:01:54.719
+Theta one gets updated as
+theta one minus alpha times
+
+25
+00:01:54.719 --> 00:02:01.940
+d d theta one J of theta one, right?
+
+26
+00:02:01.940 --> 00:02:09.140
+And as an aside, this derivative term,
+right, if you're
+
+27
+00:02:09.140 --> 00:02:13.170
+wondering why I changed the notation
+from these partial derivative symbols.
+
+28
+00:02:13.170 --> 00:02:16.280
+If you don't know what the difference is
+between these partial derivative symbols
+
+29
+00:02:16.280 --> 00:02:18.490
+and the dd theta, don't worry about it.
+
+30
+00:02:18.490 --> 00:02:22.000
+Technically in mathematics you
+call this a partial derivative and
+
+31
+00:02:22.000 --> 00:02:27.170
+call this a derivative, depending on the
+number of parameters in the function J.
+
+32
+00:02:27.170 --> 00:02:28.690
+But that's a mathematical technicality.
+
+33
+00:02:28.690 --> 00:02:32.000
+And so for the purpose of this lecture,
+
+34
+00:02:32.000 --> 00:02:36.430
+think of these partial symbols and d,
+d theta 1, as exactly the same thing.
+
+35
+00:02:36.430 --> 00:02:38.650
+And don't worry about what
+the real difference is.
+
+36
+00:02:38.650 --> 00:02:42.340
+I'm gonna try to use the mathematically
+precise notation, but for
+
+37
+00:02:42.340 --> 00:02:46.550
+our purposes these two notations
+are really the same thing.
+
+38
+00:02:46.550 --> 00:02:48.890
+And so
+let's see what this equation will do.
+
+39
+00:02:48.890 --> 00:02:53.470
+So we're going to compute this derivative,
+not sure if you've seen derivatives in
+
+40
+00:02:53.470 --> 00:02:57.460
+calculus before, but what the derivative
+at this point does, is basically saying,
+
+41
+00:02:57.460 --> 00:03:02.380
+now let's take the tangent to that point,
+like that straight line, that red line,
+
+42
+00:03:02.380 --> 00:03:06.480
+is just touching this function, and
+let's look at the slope of this red line.
+
+43
+00:03:06.480 --> 00:03:07.870
+That's what the derivative is,
+
+44
+00:03:07.870 --> 00:03:11.890
+it's saying what's the slope of the line
+that is just tangent to the function.
+
+45
+00:03:11.890 --> 00:03:17.278
+Okay, the slope of a line is just this
+height divided by this horizontal thing.
+
+46
+00:03:17.278 --> 00:03:22.780
+Now, this line has a positive slope,
+
+47
+00:03:22.780 --> 00:03:26.690
+so it has a positive derivative.
+
+48
+00:03:26.690 --> 00:03:30.370
+And so
+my update to theta is going to be theta 1,
+
+49
+00:03:30.370 --> 00:03:35.813
+it gets updated as theta 1,
+minus alpha times some positive number.
+
+50
+00:03:39.296 --> 00:03:40.271
+Okay.
+
+51
+00:03:40.271 --> 00:03:43.300
+Alpha the the learning,
+is always a positive number.
+
+52
+00:03:43.300 --> 00:03:47.220
+And, so we're going to take theta one is
+updated as theta one minus something.
+
+53
+00:03:47.220 --> 00:03:49.910
+So I'm gonna end up moving
+theta one to the left.
+
+54
+00:03:49.910 --> 00:03:53.350
+I'm gonna decrease theta one,
+and we can see this is the right
+
+55
+00:03:53.350 --> 00:03:55.810
+thing to do cuz I actually
+wanna head in this direction.
+
+56
+00:03:55.810 --> 00:03:59.490
+You know, to get me closer
+to the minimum over there.
+
+57
+00:04:00.810 --> 00:04:04.060
+So, gradient descent so
+far says we're going the right thing.
+
+58
+00:04:04.060 --> 00:04:06.120
+Let's look at another example.
+
+59
+00:04:06.120 --> 00:04:10.330
+So let's take my same function J,
+let's try to draw from the same function,
+
+60
+00:04:10.330 --> 00:04:11.530
+J of theta 1.
+
+61
+00:04:11.530 --> 00:04:16.140
+And now, let's say I had to say initialize
+my parameter over there on the left.
+
+62
+00:04:16.140 --> 00:04:17.740
+So theta 1 is here.
+
+63
+00:04:17.740 --> 00:04:19.240
+I glare at that point on the surface.
+
+64
+00:04:20.650 --> 00:04:25.680
+Now my derivative term DV theta one
+J of theta one when you value into
+
+65
+00:04:25.680 --> 00:04:31.420
+that this point, we're gonna look
+at right the slope of that line,
+
+66
+00:04:31.420 --> 00:04:34.580
+so this derivative term
+is a slope of this line.
+
+67
+00:04:34.580 --> 00:04:37.644
+But this line is slanting down,
+so this line has negative slope.
+
+68
+00:04:41.021 --> 00:04:41.990
+Right.
+
+69
+00:04:41.990 --> 00:04:45.880
+Or alternatively, I say that this
+function has negative derivative,
+
+70
+00:04:45.880 --> 00:04:48.220
+just means negative slope at that point.
+
+71
+00:04:48.220 --> 00:04:54.690
+So this is less than equals to 0, so
+when I update theta, I'm gonna have theta.
+
+72
+00:04:54.690 --> 00:04:59.100
+Just update this theta of minus
+alpha times a negative number.
+
+73
+00:05:02.380 --> 00:05:07.460
+And so I have theta 1 minus a negative
+number which means I'm actually going to
+
+74
+00:05:07.460 --> 00:05:11.210
+increase theta,
+because it's minus of a negative number,
+
+75
+00:05:11.210 --> 00:05:12.840
+means I'm adding something to theta.
+
+76
+00:05:12.840 --> 00:05:16.640
+And what that means is that I'm
+going to end up increasing theta
+
+77
+00:05:16.640 --> 00:05:21.110
+until it's not here, and increase theta
+wish again seems like the thing I wanted
+
+78
+00:05:21.110 --> 00:05:24.270
+to do to try to get me
+closer to the minimum.
+
+79
+00:05:26.430 --> 00:05:31.600
+So this whole theory of intuition
+behind what a derivative is doing,
+
+80
+00:05:31.600 --> 00:05:36.250
+let's take a look at the rate term
+alpha and see what that's doing.
+
+81
+00:05:38.090 --> 00:05:42.330
+So here's my gradient descent
+update mural, that's this equation.
+
+82
+00:05:43.890 --> 00:05:48.440
+And let's look at what could happen
+if alpha is either too small or
+
+83
+00:05:48.440 --> 00:05:50.740
+if alpha is too large.
+
+84
+00:05:50.740 --> 00:05:54.200
+So this first example,
+what happens if alpha is too small?
+
+85
+00:05:54.200 --> 00:05:59.228
+So here's my function J, J of theta.
+
+86
+00:05:59.228 --> 00:06:02.460
+Let's all start here.
+
+87
+00:06:02.460 --> 00:06:06.920
+If alpha is too small, then what
+I'm gonna do is gonna multiply my
+
+88
+00:06:06.920 --> 00:06:11.220
+update by some small number, so
+end up taking a baby step like that.
+
+89
+00:06:11.220 --> 00:06:13.350
+Okay, so this one step.
+
+90
+00:06:13.350 --> 00:06:16.520
+Then from this new point,
+I'm gonna have to take another step.
+
+91
+00:06:16.520 --> 00:06:19.690
+But if alpha's too small,
+I take another little baby step.
+
+92
+00:06:19.690 --> 00:06:26.530
+And so if my learning rate is
+too small I'm gonna end up
+
+93
+00:06:26.530 --> 00:06:31.770
+taking these tiny tiny baby steps
+as you try to get to the minimum.
+
+94
+00:06:31.770 --> 00:06:35.380
+And I'm gonna need a lot of steps
+to get to the minimum and so
+
+95
+00:06:35.380 --> 00:06:38.980
+if alpha is too small gradient
+descent can be slow because it's gonna
+
+96
+00:06:38.980 --> 00:06:40.880
+take these tiny tiny baby steps and so
+
+97
+00:06:40.880 --> 00:06:44.830
+it's gonna need a lot of steps before it
+gets anywhere close to the global minimum.
+
+98
+00:06:46.750 --> 00:06:49.460
+Now how about if our alpha is too large?
+
+99
+00:06:49.460 --> 00:06:54.880
+So, here's my function Jf filter,
+turns out that alpha's too large,
+
+100
+00:06:54.880 --> 00:06:59.180
+then gradient descent can overshoot the
+minimum and may even fail to convert or
+
+101
+00:06:59.180 --> 00:07:00.910
+even divert, so here's what I mean.
+
+102
+00:07:00.910 --> 00:07:04.170
+Let's say it's all our data there,
+it's actually close to minimum.
+
+103
+00:07:04.170 --> 00:07:07.430
+So the derivative points to the right,
+but if alpha is too big,
+
+104
+00:07:07.430 --> 00:07:09.060
+I want to take a huge step.
+
+105
+00:07:09.060 --> 00:07:10.820
+Remember, take a huge step like that.
+
+106
+00:07:10.820 --> 00:07:14.980
+So it ends up taking a huge step, and
+now my cost functions have strong roots.
+
+107
+00:07:14.980 --> 00:07:19.390
+Cuz it starts off with this value, and
+now, my values are strong in verse.
+
+108
+00:07:19.390 --> 00:07:22.872
+Now my derivative points to the left,
+it says I should decrease data.
+
+109
+00:07:22.872 --> 00:07:25.070
+But if my learning is too big,
+
+110
+00:07:25.070 --> 00:07:27.930
+I may take a huge step going from
+here all the way to out there.
+
+111
+00:07:27.930 --> 00:07:31.560
+So we end up being over there, right?
+
+112
+00:07:31.560 --> 00:07:35.020
+And if my is too big, we can take another
+huge step on the next elevation and
+
+113
+00:07:35.020 --> 00:07:39.950
+kind of overshoot and overshoot and
+so on, until you already notice
+
+114
+00:07:39.950 --> 00:07:44.170
+I'm actually getting further and
+further away from the minimum.
+
+115
+00:07:44.170 --> 00:07:49.530
+So if alpha is to large,
+it can fail to converge or even diverge.
+
+116
+00:07:49.530 --> 00:07:52.170
+Now, I have another question for you.
+
+117
+00:07:52.170 --> 00:07:55.870
+So this a tricky one and when I was first
+learning this stuff it actually took me
+
+118
+00:07:55.870 --> 00:07:57.020
+a long time to figure this out.
+
+119
+00:07:57.020 --> 00:08:00.740
+What if your parameter theta 1
+is already at a local minimum,
+
+120
+00:08:00.740 --> 00:08:03.420
+what do you think one step
+of gradient descent will do?
+
+121
+00:08:06.520 --> 00:08:10.260
+So let's suppose you initialize
+theta 1 at a local minimum.
+
+122
+00:08:10.260 --> 00:08:15.580
+So, suppose this is your initial
+value of theta 1 over here and
+
+123
+00:08:15.580 --> 00:08:18.630
+is already at a local optimum or
+the local minimum.
+
+124
+00:08:19.960 --> 00:08:23.280
+It turns out the local optimum,
+your derivative will be equal to zero.
+
+125
+00:08:23.280 --> 00:08:29.070
+So for that slope, that tangent point,
+so the slope of this line
+
+126
+00:08:29.070 --> 00:08:36.370
+will be equal to zero and thus this
+derivative term is equal to zero.
+
+127
+00:08:36.370 --> 00:08:38.430
+And so your gradient descent update,
+
+128
+00:08:38.430 --> 00:08:43.970
+you have theta one cuz I updated this
+theta one minus alpha times zero.
+
+129
+00:08:43.970 --> 00:08:48.780
+And so what this means is that if you're
+already at the local optimum it leaves
+
+130
+00:08:48.780 --> 00:08:54.680
+theta 1 unchanged cause its
+updates as theta 1 equals theta 1.
+
+131
+00:08:54.680 --> 00:08:57.830
+So if your parameters are already
+at a local minimum one
+
+132
+00:08:57.830 --> 00:09:00.980
+step with gradient descent does absolutely
+nothing it doesn't your parameter
+
+133
+00:09:00.980 --> 00:09:04.830
+which is what you want because it keeps
+your solution at the local optimum.
+
+134
+00:09:05.970 --> 00:09:09.860
+This also explains why gradient
+descent can converse the local minimum
+
+135
+00:09:09.860 --> 00:09:13.110
+even with the learning rate alpha fixed.
+
+136
+00:09:13.110 --> 00:09:15.570
+Here's what I mean by that
+let's look in the example.
+
+137
+00:09:15.570 --> 00:09:20.570
+So here's a cost function J of theta
+
+138
+00:09:20.570 --> 00:09:24.750
+that maybe I want to minimize and
+let's say I initialize my algorithm,
+
+139
+00:09:24.750 --> 00:09:29.040
+my gradient descent algorithm,
+out there at that magenta point.
+
+140
+00:09:29.040 --> 00:09:33.060
+If I take one step in gradient descent,
+maybe it will take me to that point,
+
+141
+00:09:33.060 --> 00:09:34.770
+because my derivative's
+pretty steep out there.
+
+142
+00:09:34.770 --> 00:09:36.020
+Right?
+
+143
+00:09:36.020 --> 00:09:41.130
+Now, I'm at this green point, and if I
+take another step in gradient descent,
+
+144
+00:09:41.130 --> 00:09:45.740
+you notice that my derivative,
+meaning the slope, is less steep at
+
+145
+00:09:45.740 --> 00:09:49.470
+the green point than compared to
+at the magenta point out there.
+
+146
+00:09:49.470 --> 00:09:54.060
+Because as I approach the minimum, my
+derivative gets closer and closer to zero,
+
+147
+00:09:54.060 --> 00:09:57.570
+as I approach the minimum.
+
+148
+00:09:57.570 --> 00:10:02.350
+So after one step of descent,
+my new derivative is a little bit smaller.
+
+149
+00:10:02.350 --> 00:10:04.890
+So I wanna take another step
+in the gradient descent.
+
+150
+00:10:04.890 --> 00:10:08.910
+I will naturally take a somewhat smaller
+step from this green point right
+
+151
+00:10:08.910 --> 00:10:11.290
+there from the magenta point.
+
+152
+00:10:11.290 --> 00:10:15.030
+Now with a new point, a red point, and
+I'm even closer to global minimum so
+
+153
+00:10:15.030 --> 00:10:19.390
+the derivative here will be even
+smaller than it was at the green point.
+
+154
+00:10:19.390 --> 00:10:21.050
+So I'm gonna another step
+in the gradient descent.
+
+155
+00:10:22.280 --> 00:10:26.560
+Now, my derivative term is even
+smaller and so the magnitude of
+
+156
+00:10:26.560 --> 00:10:31.700
+the update to theta one is even smaller,
+so take a small step like so.
+
+157
+00:10:31.700 --> 00:10:36.630
+And as gradient descent runs, you
+
+158
+00:10:36.630 --> 00:10:40.870
+will automatically take smaller and
+smaller steps.
+
+159
+00:10:41.880 --> 00:10:45.230
+Until eventually you're taking
+very small steps, you know, and
+
+160
+00:10:45.230 --> 00:10:48.990
+you finally converge to
+the to the local minimum.
+
+161
+00:10:50.270 --> 00:10:55.580
+So just to recap, in gradient descent
+as we approach a local minimum,
+
+162
+00:10:55.580 --> 00:10:58.290
+gradient descent will
+automatically take smaller steps.
+
+163
+00:10:58.290 --> 00:11:01.060
+And that's because as we
+approach the local minimum,
+
+164
+00:11:01.060 --> 00:11:06.110
+by definition the local minimum is
+when the derivative is equal to zero.
+
+165
+00:11:06.110 --> 00:11:10.450
+As we approach local minimum, this
+derivative term will automatically get
+
+166
+00:11:10.450 --> 00:11:16.720
+smaller, and so gradient descent will
+automatically take smaller steps.
+
+167
+00:11:16.720 --> 00:11:21.140
+This is what so
+no need to decrease alpha or the time.
+
+168
+00:11:22.810 --> 00:11:27.840
+So that's the gradient descent algorithm
+and you can use it to try to minimize
+
+169
+00:11:27.840 --> 00:11:32.940
+any cost function J, not the cost function
+J that we defined for linear regression.
+
+170
+00:11:32.940 --> 00:11:35.720
+In the next video,
+we're going to take the function J and
+
+171
+00:11:35.720 --> 00:11:39.350
+set that back to be exactly linear
+regression's cost function,
+
+172
+00:11:39.350 --> 00:11:42.140
+the square cost function that
+we came up with earlier.
+
+173
+00:11:42.140 --> 00:11:46.210
+And taking gradient descent and this great
+cause function and putting them together.
+
+174
+00:11:46.210 --> 00:11:48.830
+That will give us our
+first learning algorithm,
+
+175
+00:11:48.830 --> 00:11:50.750
+that'll give us a linear
+regression algorithm.

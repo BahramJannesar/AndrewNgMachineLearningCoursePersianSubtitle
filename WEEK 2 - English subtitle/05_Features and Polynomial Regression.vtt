@@ -1,0 +1,929 @@
+WEBVTT
+
+1
+00:00:00.200 --> 00:00:03.878
+You now know about linear regression with multiple variables.
+
+2
+00:00:03.910 --> 00:00:05.185
+In this video, I wanna tell
+
+3
+00:00:05.185 --> 00:00:06.369
+you a bit about the choice
+
+4
+00:00:06.380 --> 00:00:07.830
+of features that you have and
+
+5
+00:00:07.830 --> 00:00:09.742
+how you can get different learning
+
+6
+00:00:09.750 --> 00:00:11.477
+algorithm, sometimes very powerful
+
+7
+00:00:11.477 --> 00:00:13.803
+ones by choosing appropriate features.
+
+8
+00:00:13.810 --> 00:00:15.229
+And in particular I also want
+
+9
+00:00:15.229 --> 00:00:17.826
+to tell you about polynomial regression allows
+
+10
+00:00:17.826 --> 00:00:19.535
+you to use the machinery of
+
+11
+00:00:19.535 --> 00:00:21.247
+linear regression to fit very
+
+12
+00:00:21.247 --> 00:00:25.060
+complicated, even very non-linear functions.
+
+13
+00:00:25.690 --> 00:00:28.827
+Let's take the example of predicting the price of the house.
+
+14
+00:00:29.300 --> 00:00:31.147
+Suppose you have two features,
+
+15
+00:00:31.147 --> 00:00:33.805
+the frontage of house and the depth of the house.
+
+16
+00:00:33.805 --> 00:00:35.428
+So, here's the picture of the house we're trying to sell.
+
+17
+00:00:35.428 --> 00:00:37.264
+So, the frontage is
+
+18
+00:00:37.264 --> 00:00:40.103
+defined as this distance
+
+19
+00:00:40.103 --> 00:00:43.009
+is basically the width
+
+20
+00:00:43.009 --> 00:00:44.949
+or the length of
+
+21
+00:00:44.960 --> 00:00:46.652
+how wide your lot
+
+22
+00:00:46.652 --> 00:00:47.994
+is if this that you
+
+23
+00:00:48.020 --> 00:00:49.468
+own, and the depth
+
+24
+00:00:49.500 --> 00:00:53.120
+of the house is how
+
+25
+00:00:53.130 --> 00:00:54.758
+deep your property is, so
+
+26
+00:00:54.770 --> 00:00:57.992
+there's a frontage, there's a depth.
+
+27
+00:00:57.992 --> 00:00:59.858
+called frontage and depth.
+
+28
+00:00:59.858 --> 00:01:01.355
+You might build a linear regression
+
+29
+00:01:01.360 --> 00:01:04.163
+model like this where frontage
+
+30
+00:01:04.180 --> 00:01:06.062
+is your first feature x1 and
+
+31
+00:01:06.062 --> 00:01:07.535
+and depth is your second
+
+32
+00:01:07.535 --> 00:01:10.169
+feature x2, but when you're
+
+33
+00:01:10.169 --> 00:01:11.772
+applying linear regression, you don't
+
+34
+00:01:11.772 --> 00:01:13.342
+necessarily have to use
+
+35
+00:01:13.342 --> 00:01:16.607
+just the features x1 and x2 that you're given.
+
+36
+00:01:16.610 --> 00:01:20.531
+What you can do is actually create new features by yourself.
+
+37
+00:01:20.531 --> 00:01:21.709
+So, if I want to predict
+
+38
+00:01:21.710 --> 00:01:22.895
+the price of a house, what I
+
+39
+00:01:22.895 --> 00:01:24.840
+might do instead is decide
+
+40
+00:01:24.850 --> 00:01:27.468
+that what really determines
+
+41
+00:01:27.490 --> 00:01:29.133
+the size of the house is
+
+42
+00:01:29.133 --> 00:01:32.164
+the area or the land area that I own.
+
+43
+00:01:32.190 --> 00:01:33.365
+So, I might create a new feature.
+
+44
+00:01:33.380 --> 00:01:34.609
+I'm just gonna call this feature
+
+45
+00:01:34.609 --> 00:01:40.409
+x which is frontage, times depth.
+
+46
+00:01:40.440 --> 00:01:42.404
+This is a multiplication symbol.
+
+47
+00:01:42.404 --> 00:01:44.334
+It's a frontage x depth because
+
+48
+00:01:44.334 --> 00:01:46.040
+this is the land area
+
+49
+00:01:46.090 --> 00:01:48.035
+that I own and I might
+
+50
+00:01:48.035 --> 00:01:50.651
+then select my hypothesis
+
+51
+00:01:50.710 --> 00:01:53.327
+as that using just
+
+52
+00:01:53.350 --> 00:01:54.785
+one feature which is my
+
+53
+00:01:54.785 --> 00:01:57.430
+land area, right?
+
+54
+00:01:57.580 --> 00:01:58.939
+Because the area of a
+
+55
+00:01:58.940 --> 00:02:00.345
+rectangle is you know,
+
+56
+00:02:00.345 --> 00:02:01.432
+the product of the length
+
+57
+00:02:01.460 --> 00:02:03.822
+of the size So, depending
+
+58
+00:02:03.822 --> 00:02:05.253
+on what insight you might have
+
+59
+00:02:05.280 --> 00:02:07.481
+into a particular problem, rather than
+
+60
+00:02:07.490 --> 00:02:09.604
+just taking the features [xx]
+
+61
+00:02:09.620 --> 00:02:11.103
+that we happen to have started
+
+62
+00:02:11.130 --> 00:02:13.489
+off with, sometimes by defining
+
+63
+00:02:13.489 --> 00:02:16.771
+new features you might actually get a better model.
+
+64
+00:02:16.790 --> 00:02:18.163
+Closely related to the
+
+65
+00:02:18.163 --> 00:02:19.745
+idea of choosing your features
+
+66
+00:02:19.745 --> 00:02:22.973
+is this idea called polynomial regression.
+
+67
+00:02:23.010 --> 00:02:26.868
+Let's say you have a housing price data set that looks like this.
+
+68
+00:02:26.880 --> 00:02:29.646
+Then there are a few different models you might fit to this.
+
+69
+00:02:29.660 --> 00:02:32.587
+One thing you could do is fit a quadratic model like this.
+
+70
+00:02:32.600 --> 00:02:35.598
+It doesn't look like a straight line fits this data very well.
+
+71
+00:02:35.598 --> 00:02:36.788
+So maybe you want to fit
+
+72
+00:02:36.788 --> 00:02:38.408
+a quadratic model like this
+
+73
+00:02:38.420 --> 00:02:40.248
+where you think the size, where
+
+74
+00:02:40.248 --> 00:02:42.017
+you think the price is a quadratic
+
+75
+00:02:42.020 --> 00:02:43.956
+function and maybe that'll
+
+76
+00:02:43.970 --> 00:02:45.018
+give you, you know, a fit
+
+77
+00:02:45.020 --> 00:02:47.070
+to the data that looks like that.
+
+78
+00:02:47.280 --> 00:02:48.560
+But then you may decide that your
+
+79
+00:02:48.570 --> 00:02:50.013
+quadratic model doesn't make sense
+
+80
+00:02:50.013 --> 00:02:52.582
+because of a quadratic function, eventually
+
+81
+00:02:52.582 --> 00:02:53.858
+this function comes back down
+
+82
+00:02:53.858 --> 00:02:55.591
+and well, we don't think housing
+
+83
+00:02:55.600 --> 00:02:58.899
+prices should go down when the size goes up too high.
+
+84
+00:02:58.970 --> 00:03:00.649
+So then maybe we might
+
+85
+00:03:00.650 --> 00:03:02.700
+choose a different polynomial model
+
+86
+00:03:02.700 --> 00:03:04.274
+and choose to use instead a
+
+87
+00:03:04.290 --> 00:03:07.480
+cubic function, and where
+
+88
+00:03:07.480 --> 00:03:09.225
+we have now a third-order term
+
+89
+00:03:09.225 --> 00:03:10.764
+and we fit that, maybe
+
+90
+00:03:10.800 --> 00:03:12.367
+we get this sort of
+
+91
+00:03:12.390 --> 00:03:13.907
+model, and maybe the
+
+92
+00:03:13.910 --> 00:03:15.278
+green line is a somewhat better fit
+
+93
+00:03:15.278 --> 00:03:18.052
+to the data cause it doesn't eventually come back down.
+
+94
+00:03:18.052 --> 00:03:21.992
+So how do we actually fit a model like this to our data?
+
+95
+00:03:22.020 --> 00:03:23.868
+Using the machinery of multivariant
+
+96
+00:03:23.868 --> 00:03:27.059
+linear regression, we can
+
+97
+00:03:27.059 --> 00:03:30.692
+do this with a pretty simple modification to our algorithm.
+
+98
+00:03:30.692 --> 00:03:32.632
+The form of the hypothesis we,
+
+99
+00:03:32.632 --> 00:03:34.217
+we know how the fit
+
+100
+00:03:34.217 --> 00:03:35.782
+looks like this, where we say
+
+101
+00:03:35.782 --> 00:03:37.612
+H of x is theta zero
+
+102
+00:03:37.612 --> 00:03:41.608
+plus theta one x one plus x two theta X3.
+
+103
+00:03:41.608 --> 00:03:42.775
+And if we want to
+
+104
+00:03:42.775 --> 00:03:45.220
+fit this cubic model that
+
+105
+00:03:45.250 --> 00:03:47.239
+I have boxed in green,
+
+106
+00:03:47.239 --> 00:03:48.940
+what we're saying is that
+
+107
+00:03:48.940 --> 00:03:49.825
+to predict the price of a
+
+108
+00:03:49.825 --> 00:03:51.364
+house, it's theta 0 plus theta
+
+109
+00:03:51.364 --> 00:03:53.056
+1 times the size of the house
+
+110
+00:03:53.056 --> 00:03:55.905
+plus theta 2 times the square size of the house.
+
+111
+00:03:55.910 --> 00:03:58.974
+So this term is equal to that term.
+
+112
+00:03:58.974 --> 00:04:00.885
+And then plus theta 3
+
+113
+00:04:00.890 --> 00:04:02.343
+times the cube of the
+
+114
+00:04:02.350 --> 00:04:05.302
+size of the house raises that third term.
+
+115
+00:04:05.470 --> 00:04:06.967
+In order to map these
+
+116
+00:04:06.990 --> 00:04:08.668
+two definitions to each other,
+
+117
+00:04:08.668 --> 00:04:10.339
+well, the natural way
+
+118
+00:04:10.339 --> 00:04:12.128
+to do that is to set
+
+119
+00:04:12.150 --> 00:04:13.568
+the first feature x one to
+
+120
+00:04:13.568 --> 00:04:15.320
+be the size of the house, and
+
+121
+00:04:15.320 --> 00:04:16.721
+set the second feature x two
+
+122
+00:04:16.721 --> 00:04:17.766
+to be the square of the size
+
+123
+00:04:17.766 --> 00:04:20.400
+of the house, and set the third feature x three to
+
+124
+00:04:20.400 --> 00:04:22.780
+be the cube of the size of the house.
+
+125
+00:04:22.800 --> 00:04:24.292
+And, just by choosing my
+
+126
+00:04:24.292 --> 00:04:26.311
+three features this way and
+
+127
+00:04:26.311 --> 00:04:27.720
+applying the machinery of linear
+
+128
+00:04:27.720 --> 00:04:30.540
+regression, I can fit this
+
+129
+00:04:30.540 --> 00:04:31.901
+model and end up with
+
+130
+00:04:31.901 --> 00:04:34.374
+a cubic fit to my data.
+
+131
+00:04:34.374 --> 00:04:35.523
+I just want to point out one
+
+132
+00:04:35.523 --> 00:04:36.799
+more thing, which is that
+
+133
+00:04:36.800 --> 00:04:38.610
+if you choose your features
+
+134
+00:04:38.610 --> 00:04:40.925
+like this, then feature scaling
+
+135
+00:04:40.925 --> 00:04:43.688
+becomes increasingly important.
+
+136
+00:04:44.130 --> 00:04:45.254
+So if the size of the
+
+137
+00:04:45.254 --> 00:04:46.794
+house ranges from one to
+
+138
+00:04:46.800 --> 00:04:47.992
+a thousand, so, you know,
+
+139
+00:04:47.992 --> 00:04:49.300
+from one to a thousand square
+
+140
+00:04:49.310 --> 00:04:50.918
+feet, say, then the size
+
+141
+00:04:50.930 --> 00:04:52.175
+squared of the house will
+
+142
+00:04:52.175 --> 00:04:54.519
+range from one to one
+
+143
+00:04:54.520 --> 00:04:55.953
+million, the square of
+
+144
+00:04:55.953 --> 00:04:58.468
+a thousand, and your third
+
+145
+00:04:58.490 --> 00:05:01.335
+feature x cubed, excuse me
+
+146
+00:05:01.360 --> 00:05:03.106
+you, your third feature x
+
+147
+00:05:03.120 --> 00:05:04.732
+three, which is the size
+
+148
+00:05:04.732 --> 00:05:05.941
+cubed of the house, will range
+
+149
+00:05:05.950 --> 00:05:07.478
+from one two ten to
+
+150
+00:05:07.478 --> 00:05:09.311
+the nine, and so these
+
+151
+00:05:09.330 --> 00:05:10.955
+three features take on very
+
+152
+00:05:10.955 --> 00:05:13.459
+different ranges of values, and
+
+153
+00:05:13.490 --> 00:05:15.105
+it's important to apply feature
+
+154
+00:05:15.110 --> 00:05:16.509
+scaling if you're using gradient
+
+155
+00:05:16.509 --> 00:05:18.554
+descent to get them into
+
+156
+00:05:18.554 --> 00:05:21.139
+comparable ranges of values.
+
+157
+00:05:21.140 --> 00:05:23.243
+Finally, here's one last example
+
+158
+00:05:23.250 --> 00:05:25.138
+of how you really have
+
+159
+00:05:25.150 --> 00:05:29.056
+broad choices in the features you use.
+
+160
+00:05:29.090 --> 00:05:30.446
+Earlier we talked about how a
+
+161
+00:05:30.446 --> 00:05:31.559
+quadratic model like this might
+
+162
+00:05:31.559 --> 00:05:33.122
+not be ideal because, you know,
+
+163
+00:05:33.122 --> 00:05:34.408
+maybe a quadratic model fits the
+
+164
+00:05:34.408 --> 00:05:35.952
+data okay, but the quadratic
+
+165
+00:05:35.952 --> 00:05:37.514
+function goes back down
+
+166
+00:05:37.514 --> 00:05:39.065
+and we really don't want, right,
+
+167
+00:05:39.070 --> 00:05:40.352
+housing prices that go down,
+
+168
+00:05:40.352 --> 00:05:43.567
+to predict that, as the size of housing freezes.
+
+169
+00:05:43.567 --> 00:05:45.388
+But rather than going to
+
+170
+00:05:45.388 --> 00:05:46.938
+a cubic model there, you
+
+171
+00:05:46.938 --> 00:05:48.389
+have, maybe, other choices of
+
+172
+00:05:48.389 --> 00:05:50.798
+features and there are many possible choices.
+
+173
+00:05:50.800 --> 00:05:52.313
+But just to give you another
+
+174
+00:05:52.313 --> 00:05:53.691
+example of a reasonable
+
+175
+00:05:53.691 --> 00:05:55.620
+choice, another reasonable choice
+
+176
+00:05:55.620 --> 00:05:57.263
+might be to say that the
+
+177
+00:05:57.263 --> 00:05:58.832
+price of a house is theta
+
+178
+00:05:58.850 --> 00:05:59.992
+zero plus theta one times
+
+179
+00:05:59.992 --> 00:06:01.264
+the size, and then plus theta
+
+180
+00:06:01.320 --> 00:06:03.625
+two times the square root of the size, right?
+
+181
+00:06:03.630 --> 00:06:05.364
+So the square root function is
+
+182
+00:06:05.364 --> 00:06:08.110
+this sort of function, and maybe
+
+183
+00:06:08.110 --> 00:06:09.318
+there will be some value of theta
+
+184
+00:06:09.318 --> 00:06:11.355
+one, theta two, theta three, that
+
+185
+00:06:11.355 --> 00:06:14.049
+will let you take this model
+
+186
+00:06:14.080 --> 00:06:15.445
+and, for the curve that looks
+
+187
+00:06:15.445 --> 00:06:16.952
+like that, and, you know,
+
+188
+00:06:16.952 --> 00:06:19.500
+goes up, but sort of flattens
+
+189
+00:06:19.520 --> 00:06:21.529
+out a bit and doesn't ever
+
+190
+00:06:21.540 --> 00:06:23.877
+come back down.
+
+191
+00:06:24.154 --> 00:06:26.584
+And, so, by having insight into, in
+
+192
+00:06:26.584 --> 00:06:27.630
+this case, the shape of a
+
+193
+00:06:27.630 --> 00:06:30.952
+square root function, and, into
+
+194
+00:06:30.990 --> 00:06:32.555
+the shape of the data, by choosing
+
+195
+00:06:32.555 --> 00:06:36.469
+different features, you can sometimes get better models.
+
+196
+00:06:36.469 --> 00:06:39.026
+In this video, we talked about polynomial regression.
+
+197
+00:06:39.026 --> 00:06:40.672
+That is, how to fit a
+
+198
+00:06:40.672 --> 00:06:42.298
+polynomial, like a quadratic function,
+
+199
+00:06:42.298 --> 00:06:43.868
+or a cubic function, to your data.
+
+200
+00:06:43.868 --> 00:06:45.112
+Was also throw out this idea,
+
+201
+00:06:45.112 --> 00:06:46.640
+that you have a choice in what
+
+202
+00:06:46.640 --> 00:06:47.732
+features to use, such as
+
+203
+00:06:47.748 --> 00:06:48.804
+that instead of using
+
+204
+00:06:48.804 --> 00:06:50.078
+the frontish and the depth
+
+205
+00:06:50.078 --> 00:06:51.092
+of the house, maybe, you can
+
+206
+00:06:51.092 --> 00:06:53.133
+multiply them together to get
+
+207
+00:06:53.133 --> 00:06:55.317
+a feature that captures the land area of a house.
+
+208
+00:06:55.317 --> 00:06:57.551
+In case this seems a little
+
+209
+00:06:57.551 --> 00:06:58.895
+bit bewildering, that with all
+
+210
+00:06:58.896 --> 00:07:03.265
+these different feature choices, so how do I decide what features to use.
+
+211
+00:07:03.265 --> 00:07:04.594
+Later in this class, we'll talk
+
+212
+00:07:04.594 --> 00:07:06.622
+about some algorithms were automatically
+
+213
+00:07:06.622 --> 00:07:08.083
+choosing what features are used,
+
+214
+00:07:08.083 --> 00:07:09.466
+so you can have an
+
+215
+00:07:09.466 --> 00:07:10.611
+algorithm look at the data
+
+216
+00:07:10.611 --> 00:07:12.040
+and automatically choose for you
+
+217
+00:07:12.040 --> 00:07:13.357
+whether you want to fit a
+
+218
+00:07:13.357 --> 00:07:15.528
+quadratic function, or a cubic function, or something else.
+
+219
+00:07:15.528 --> 00:07:17.164
+But, until we get to
+
+220
+00:07:17.164 --> 00:07:18.764
+those algorithms now I just
+
+221
+00:07:18.764 --> 00:07:20.295
+want you to be aware that
+
+222
+00:07:20.295 --> 00:07:21.582
+you have a choice in
+
+223
+00:07:21.582 --> 00:07:23.094
+what features to use, and
+
+224
+00:07:23.094 --> 00:07:25.256
+by designing different features
+
+225
+00:07:25.256 --> 00:07:26.888
+you can fit more complex functions
+
+226
+00:07:26.888 --> 00:07:28.156
+your data then just fitting a
+
+227
+00:07:28.156 --> 00:07:30.471
+straight line to the data and
+
+228
+00:07:30.471 --> 00:07:32.092
+in particular you can put polynomial
+
+229
+00:07:32.092 --> 00:07:35.065
+functions as well and sometimes
+
+230
+00:07:35.065 --> 00:07:36.072
+by appropriate insight into the
+
+231
+00:07:36.072 --> 00:07:37.564
+feature simply get a much
+
+232
+00:07:37.564 --> 00:07:40.020
+better model for your data.
