@@ -25,4 +25,8 @@ Machine Learning Quran ( قرآن )
 
 [لینک دوره](https://www.coursera.org/learn/machine-learning)
 
+البته که این رپو خوب رو از یکی از دوستان دیدم و کارش خیلی کامل و خوب هست می تونین توی کامل کردن این پروژه به این لینک برین 
+
+[لینک پروژه](https://mehrdad-dev.github.io/ml-andrew-ng/)
+
 ![](https://github.com/BahramJannesar/AndrewNgMachineLearningCoursePersianSubtitle/blob/master/image/1_FGGge_GilZ_KJYaoryaxkA.png)
